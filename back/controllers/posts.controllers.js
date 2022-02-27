@@ -98,9 +98,7 @@ exports.updatePost = async (req, res, next) => {
       });
       res.status(200).json({ newPost: newPost, message: "Message edited" });
     } else {
-      return res
-        .status(403)
-        .send({ message: "Vous n'avez pas les droits pour ... " });
+      return res.status(403).send({ message: "Not authorized ... " });
     }
   } catch (error) {
     return res.status(500).send({ error });
@@ -123,9 +121,7 @@ exports.deletePost = async (req, res, next) => {
         res.status(200).json({ message: "Your message has been deleted" });
       }
     } else {
-      return res
-        .status(403)
-        .send({ message: "Vous n'avez pas les droits pour ... " });
+      return res.status(403).send({ message: "Not authorized ... " });
     }
   } catch (error) {
     res.status(500).json({ error });
@@ -163,9 +159,7 @@ exports.deleteComment = async (req, res, next) => {
       Comment.destroy({ where: { id: req.params.id } });
       res.status(200).json({ message: "Comment has been deleted" });
     } else {
-      return res
-        .status(403)
-        .send({ message: "Vous n'avez pas les droits pour ... " });
+      return res.status(403).send({ message: "Not authorized ... " });
     }
   } catch (error) {
     res.status(400).json({ message: "Bad request" });
