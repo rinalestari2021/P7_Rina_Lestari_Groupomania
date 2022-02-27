@@ -40,8 +40,6 @@ fs.readdirSync(__dirname)
   });
 
 // Associate each key in models
-// More informations :
-// https://sequelize.org/master/class/lib/associations/base.js~Association.html
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
