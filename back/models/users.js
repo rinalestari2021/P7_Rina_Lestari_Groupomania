@@ -1,3 +1,4 @@
+//Schema or tables to set inside Db with Sequelize
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define("User", {
     first_name: {

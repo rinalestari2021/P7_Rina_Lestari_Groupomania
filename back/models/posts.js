@@ -1,3 +1,4 @@
+//Schema or tables to set inside Db with Sequelize
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define("Post", {
     message: {
@@ -11,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // FOREIGN KEY
+  //a reference to a column of another table
   // One-to-peer (un à plusieur)
   Post.associate = (models) => {
     Post.belongsTo(models.User, {

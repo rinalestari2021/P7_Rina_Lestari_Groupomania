@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // FOREIGN KEY
+  //a reference to a column of another table
   // Peer-to-peer
   Comment.associate = (models) => {
     Comment.belongsTo(models.User, {

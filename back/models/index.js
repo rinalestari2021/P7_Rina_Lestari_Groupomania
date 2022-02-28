@@ -1,4 +1,6 @@
 // Restricted JavaScript
+// Defines that JavaScript code should be executed in "strict mode"
+// It helps you to write cleaner code, like preventing you from using undeclared variables
 "use strict";
 
 const fs = require("fs");
