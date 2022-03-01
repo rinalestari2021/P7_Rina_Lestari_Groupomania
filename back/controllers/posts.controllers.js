@@ -62,7 +62,7 @@ exports.createPost = async (req, res, next) => {
       });
       res.status(201).json({ post: post, message: "Message have been send" });
     } else {
-      res.status(400).send({ error: "Erreur " });
+      res.status(400).send({ error: "User is null " });
     }
   } catch (error) {
     return res.status(500).send({ error });
@@ -101,7 +101,7 @@ exports.updatePost = async (req, res, next) => {
       return res.status(403).send({ message: "Not authorized ... " });
     }
   } catch (error) {
-    return res.status(500).send({ error });
+    return res.status(500).json({ error });
   }
 };
 
