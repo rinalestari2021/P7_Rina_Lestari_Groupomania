@@ -21,7 +21,7 @@ exports.signup = async (req, res, next) => {
     res.status(201).json({
       UserId: user.id,
       token: jwt.sign({ UserId: user.id }, `${process.env.JWT_RAND_SECRET}`, {
-        expiresIn: "24h",
+        expiresIn: "365days",
       }),
     });
   } catch (error) {
@@ -51,7 +51,7 @@ exports.login = async (req, res, next) => {
         { UserId: user.id, isAdmin: user.isAdmin },
         `${process.env.JWT_RAND_SECRET}`,
         {
-          expiresIn: "24h",
+          expiresIn: "365days",
         }
       ),
       user,
