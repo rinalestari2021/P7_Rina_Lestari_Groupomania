@@ -6,7 +6,6 @@ document.getElementById("btnlogin").onclick = function () {
   location.href = "/login.vue";
 };
 </script>
-
 <template>
   <header>
     <img
@@ -19,12 +18,16 @@ document.getElementById("btnlogin").onclick = function () {
   </header>
   <main>
     <div class="homepage">
-      <button onclick="" id="btnsignup" class="submitbtnleft"></button>
-      <button onclick="" id="btnlogin" class="submitbtnright"></button>
+      <input
+        type="button"
+        onclick="/signup.vue"
+        id="btnsignup"
+        value="Signup"
+      />
+      <input type="button" onclick="/login.vue" id="btnlogin" value="Login" />
     </div>
     <div class="greetings">
       <h1>"Welcome to Groupomania<br />Messenger"</h1>
-      >
     </div>
   </main>
 </template>

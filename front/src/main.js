@@ -26,7 +26,7 @@ export default new Router({
     {
       path: "/login/chatroom", //splitting route
       name: "chatroom",
-      component: () => import("./login/chatroom.vue"),
+      component: () => import("../login/chatroom.vue"),
     },
   ],
 });
