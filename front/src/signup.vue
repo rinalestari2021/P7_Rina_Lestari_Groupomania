@@ -88,5 +88,6 @@ input[type="submit"] {
 
 .signupbtn:hover {
   background-color: #5adfe2;
+  cursor: pointer;
 }
 </style>

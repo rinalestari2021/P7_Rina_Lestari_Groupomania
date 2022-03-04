@@ -6,6 +6,7 @@ document.getElementById("btnlogin").onclick = function () {
   location.href = "/login.vue";
 };
 </script>
+
 <template>
   <header>
     <img
@@ -29,7 +30,7 @@ document.getElementById("btnlogin").onclick = function () {
     <div class="sidebar">
       <a href="./home.vue" class="returnhome">Home</a>
       <a href="./userlist.vue" class="contactlist">Contact</a>
-      <a href="" clas="exit">Logout</a>
+      <button class="exit">Logout</button>
     </div>
   </main>
 </template>
@@ -53,8 +54,10 @@ body {
 .returnhome,
 .contactlist,
 .exit {
+  text-align: left;
   font-size: 6pt;
   color: black;
+  margin-left: 10px;
 }
 
 img {
@@ -62,5 +65,27 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.newfeedblock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: #5adfe2;
+  width: 657 px;
+  height: auto;
+}
+a hover {
+  cursor: pointer;
+}
+
+.sidebar {
+  float: right;
+  margin: 0 1.5%;
+  background-color: #5adfe2;
+  width: 150px;
+  height: auto;
 }
 </style>

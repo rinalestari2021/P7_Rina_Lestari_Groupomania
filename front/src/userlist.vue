@@ -4,17 +4,19 @@
   <header>
     <img
       alt="Groupomania logo"
-      class="white"
+      class="logowhite"
       src="./assets/icon-left-font-monochrome-white.png"
     />
   </header>
   <main>
     <div class="userlist">
       <a href="./userprofile.vue"><img src="./assets/pp1.png" class="pp" /> </a>
-      <div class="prof-name">Username</div>
+      <div class="prof-name">
+        <a href="./userprofile.vue">Username></a>
+      </div>
     </div>
     <div>
-      <input type="button" onclick="/home.vue" id="btnhome" value="Home" />
+      <input type="button" onclick="./home.vue" id="btnhome" value="Home" />
     </div>
   </main>
 </template>
@@ -44,9 +46,15 @@ img:hover {
 }
 .prof-name {
   font-size: 6pt;
+  color: white;
+}
+
+#homebtn {
+  font-size: 6pt;
+  color: white;
 }
 
 #homebtn:hover {
-  background-color: #5adfe2;
+  color: #5adfe2;
 }
 </style>

@@ -76,5 +76,6 @@ input[type="text"] {
 
 .loginbtn:hover {
   background-color: #5adfe2;
+  cursor: pointer;
 }
 </style>
