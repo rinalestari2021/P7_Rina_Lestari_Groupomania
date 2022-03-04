@@ -1,77 +1,84 @@
-<script setup>
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
+<script>
+export default {
+  data() {
+    return {
+      homepage,
+      greetings,
+    };
+  },
+};
 </script>
 
 <template>
-  <div class="homepage">
-    <input type="button" onclick="/signup.vue" id="btnsignup" value="Signup" />
-    <input type="button" onclick="/login.vue" id="btnlogin" value="Login" />
-  </div>
-  <div class="greetings">
-    <h1>"Welcome to Groupomania<br />Messenger"</h1>
-  </div>
+  <header>
+    <img
+      alt="Groupomania logo"
+      class="logowhite"
+      src="./assets/icon-left-font-monochrome-white.png"
+    />
+  </header>
+
+  <main>
+    <div class="homepage">
+      <input
+        type="button"
+        onclick="/signup.vue"
+        id="btnsignup"
+        value="Signup"
+      />
+      <input type="button" onclick="/login.vue" id="btnlogin" value="Login" />
+    </div>
+    <div class="greetings">
+      <h1>"Welcome to Groupomania<br />Messenger"</h1>
+    </div>
+  </main>
 </template>
 
-<style>
-@import "./assets/base.css";
-
-#app {
-  max-width: 1280px;
+<style lang="scss">
+.body {
+  width: 90%;
   margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+}
+.background {
+  color: #011f48;
 }
 
-header {
-  line-height: 1.5;
+.logowhite {
+  margin-top: 219px;
+  margin-right: 500px;
+  width: 362px;
+  height: 60px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.homepage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-a,
-.green {
+#btnsignup,
+#btnlogin {
+  font-size: 8pt;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 12px;
+  padding: 5px;
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+  display: inline-block;
+  margin: 4px 2px;
+  font-family: "Arial Narrow Bold";
+  color: #011f48;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+.greetings {
+  font-family: "Verdana";
+  font-weight: bold;
+  color: white;
+  margin-top: 510px;
+  font-size: 9pt;
+  text-align: center;
 }
 </style>

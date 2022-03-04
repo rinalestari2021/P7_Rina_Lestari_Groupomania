@@ -37,7 +37,6 @@
 
       <div class="panelmenu">
         <p><a href="">Home</a></p>
-        <p><a href="">Newsfeed</a></p>
         <p><a href="">Contact</a></p>
         <p><a href="">Logout</a></p>
       </div>
@@ -49,7 +48,7 @@
 import { ref } from "vue";
 
 export default {
-  name: "app",
+  name: "chatroom",
   setup() {
     const Username = ref((value = "FirstnameLastname"));
     const CN = ref((value = "Complete-Name"));
@@ -72,4 +71,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.background {
+  color: #011f48;
+  width: 445px;
+  height: 668px;
+}
+</style>
