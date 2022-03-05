@@ -18,7 +18,13 @@ document.getElementById("btnlogin").onclick = function () {
   <main>
     <div class="newfeedblock">
       <div class="user">Username</div>
-      <img src="" class="uploadimage" />
+      <picture>
+        <source srcset="" class="uploadimage" media="(min-width: 1000px)" />
+        /**must respect our media queries and will swap images at our exact
+        breakpoints */
+        <source srcset="" class="uploadimage" media="(min-width: 600px)" />
+        <img src="" alt="" />
+      </picture>
       <form @submit.prevent="submit">
         <input
           class="form-control"
@@ -39,6 +45,11 @@ document.getElementById("btnlogin").onclick = function () {
 body {
   margin: 0;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.user {
+  text-align: left;
+  font-size: 6pt;
+  color: black;
 }
 
 .logoblack {
@@ -64,7 +75,7 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  max-width: 100%;
 }
 
 .newfeedblock {
@@ -79,6 +90,13 @@ img {
 }
 a hover {
   cursor: pointer;
+}
+
+a,
+.form-control {
+  font-size: 6pt;
+  color: black;
+  text-align: left;
 }
 
 .sidebar {

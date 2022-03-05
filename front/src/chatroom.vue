@@ -46,7 +46,11 @@ export default {
 
   <main>
     <div class="container" v-for="message in messages" :key="message">
-      <img src="./image.png" />
+      <picture>
+        <source srcset="" class="uploadimage" media="(min-width: 1000px)" />
+        <source srcset="" class="uploadimage" media="(min-width: 600px)" />
+        <img src="./image.png" />
+      </picture>
       <p class="CN">{{ message.Complete - name }}</p>
       <form @submit.prevent="submit">
         <input
@@ -93,6 +97,7 @@ body {
   display: flex;
   align-content: flex-start;
   gap: 5px 20px;
+  border-bottom-style: solid 2px #011f48;
 }
 
 .lefttop {
@@ -118,6 +123,12 @@ body {
   margin-left: 10px;
 }
 
+.form-control {
+  font-size: 6pt;
+  color: black;
+  text-align: left;
+}
+
 .panelmenu {
   float: right;
   margin: 0 1.5%;
@@ -141,5 +152,12 @@ img {
 }
 a hover {
   cursor: pointer;
+}
+
+.container,
+.c_sendnewmessage,
+.form-control {
+  border: #011f48 solid 1 px;
+  background-color: white;
 }
 </style>

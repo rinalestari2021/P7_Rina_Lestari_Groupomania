@@ -10,7 +10,13 @@
   </header>
   <main>
     <div class="userlist">
-      <a href="./userprofile.vue"><img src="./assets/pp1.png" class="pp" /> </a>
+      <a href="./userprofile.vue">
+        <picture>
+          <source srcset="" class="uploadimage" media="(min-width: 1000px)" />
+          <source srcset="" class="uploadimage" media="(min-width: 600px)" />
+          <img src="./assets/pp1.png" class="pp" />
+        </picture>
+      </a>
       <div class="prof-name">
         <a href="./userprofile.vue">Username></a>
       </div>
