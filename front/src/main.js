@@ -9,29 +9,39 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: "/App",
-      name: "home",
-      component: home,
-    },
-    {
       path: "/",
       name: "App",
-      component: home,
+      component: () => import("./src/App.vue"),
+    },
+    {
+      path: "/home",
+      name: "home",
+      component: () => import("./src/home.vue"),
     },
     {
       path: "/signup", //splitting route
       name: "signup",
-      component: () => import("../signup.vue"),
+      component: () => import("./src/signup.vue"),
     },
     {
       path: "/login", //splitting route
       name: "signup",
-      component: () => import("../login.vue"),
+      component: () => import("./src/login.vue"),
     },
     {
       path: "/login/chatroom", //splitting route
       name: "chatroom",
-      component: () => import("../login/chatroom.vue"),
+      component: () => import("./src/login/chatroom.vue"),
+    },
+    {
+      path: "/login/userprofile", //splitting route
+      name: "userprofile",
+      component: () => import("./src/login/userprofile.vue"),
+    },
+    {
+      path: "/login/userlist", //splitting route
+      name: "userlist",
+      component: () => import("./src/login/userlist.vue"),
     },
   ],
 });

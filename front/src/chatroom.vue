@@ -59,6 +59,7 @@ export default {
           v-model="message"
         />
       </form>
+      <button class="delbtn">delete</button>
     </div>
     <div class="c_sendnewmessage">
       <form @submit.prevent="submit">
@@ -68,6 +69,7 @@ export default {
           v-model="message"
         />
       </form>
+      <button class="delbtn">delete</button>
     </div>
 
     <div class="panelmenu">

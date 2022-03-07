@@ -32,6 +32,7 @@ document.getElementById("btnlogin").onclick = function () {
           v-model="message"
         />
       </form>
+      <button class="delbtn">delete</button>
     </div>
     <div class="sidebar">
       <a href="./home.vue" class="returnhome">Home</a>
