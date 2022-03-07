@@ -20,4 +20,20 @@ const router = createRouter({
   ]
 })
 
+const myPlugin = {
+  async requestDidStart(requestContext) {
+    console.log('Request started!');
+
+    return {
+      async parsingDidStart(requestContext) {
+        console.log('Parsing started!');
+      },
+
+      async validationDidStart(requestContext) {
+        console.log('Validation started!');
+      }
+    }
+  },
+};
+
 export default router

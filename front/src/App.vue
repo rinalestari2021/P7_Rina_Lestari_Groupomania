@@ -1,12 +1,10 @@
 <script>
-export default {
-  data() {
-    return {
-      homepage,
-      greetings,
-    };
+const app = new Vue({
+  el: "#app",
+  data: {
+    message: "Welcome to Groupomania<br />Messenger",
   },
-};
+});
 </script>
 
 <template>
@@ -29,7 +27,7 @@ export default {
       <input type="button" onclick="/login.vue" id="btnlogin" value="Login" />
     </div>
     <div class="greetings">
-      <h1>"Welcome to Groupomania<br />Messenger"</h1>
+      <h1>{{ message }}</h1>
     </div>
   </main>
 </template>
