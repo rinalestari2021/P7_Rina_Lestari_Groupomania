@@ -30,6 +30,14 @@ const App = new Vue({
     btnlogin: "",
     greetings: "",
   },
+  methods: {
+    redirectToSignup() {
+      this.$router.push({ path: "/signup" });
+    },
+    redirectToLogin() {
+      this.$router.push({ path: "/login" });
+    },
+  },
 }).mount("#app");
 </script>
 
@@ -41,13 +49,8 @@ const App = new Vue({
       src="./assets/icon-left-font-monochrome-white.png"
     />
     <div class="homepage">
-      <input
-        type="button"
-        onclick="/signup.vue"
-        id="btnsignup"
-        value="Signup"
-      />
-      <input type="button" onclick="/login.vue" id="btnlogin" value="Login" />
+      <button @click="redirectToSignup()" id="btnsignup">Signup</button>
+      <button @click="redirectToLogin()" id="btnsignup">Login</button>
     </div>
     <div class="greetings">
       <h1>{{ message }}</h1>
