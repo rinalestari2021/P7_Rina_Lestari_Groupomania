@@ -2,9 +2,9 @@
 export default {
   name: "SignUp",
   data() {
-    return {};
-  },
-};
+    return {}
+  }
+}
 </script>
 
 <template>
@@ -16,6 +16,7 @@ export default {
     />
   </header>
   <main>
+    <h1>SignUp</h1>
     <div class="containerform">
       <form class="ins">
         <label for="fname">Firstname:</label><br />

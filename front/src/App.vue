@@ -1,29 +1,15 @@
 <script>
-import App from "./views/home.vue";
-
 export default {
-  components: {
-    App,
-  },
-};
-
-const App = new Vue({
-  el: "#app",
-  data: {
-    logowhite: "",
-    btnsigup: "",
-    btnlogin: "",
-    greetings: "",
-  },
-  methods: {
-    redirectToSignup() {
-      this.$router.push({ path: "/signup" });
-    },
-    redirectToLogin() {
-      this.$router.push({ path: "/login" });
-    },
-  },
-}).mount("#app");
+  data() {
+    return {
+      message: "COUCOU",
+      logowhite: "",
+      btnsigup: "",
+      btnlogin: "",
+      greetings: ""
+    }
+  }
+}
 </script>
 
 <template>
@@ -34,9 +20,14 @@ const App = new Vue({
       src="./assets/icon-left-font-monochrome-white.png"
     />
     <div class="homepage">
-      <router-view name="Home" />
-      <button @click="redirectToSignup()" id="btnsignup">SignUp</button>
-      <button @click="redirectToLogin()" id="btnsignup">Login</button>
+      <router-view></router-view>
+      <router-link to="SignUp">Go to SignUp</router-link>
+      <button id="btnsignup">SignUp</button>
+      <button id="btnsignup">Login</button>
+      <router-link to="SignUp">Go to SignUp</router-link>
+      <router-link to="SignUp">Go to SignUp</router-link>
+      <router-link to="SignUp">Go to SignUp</router-link>
+      <router-link to="SignUp">Go to SignUp</router-link>
     </div>
     <div class="greetings">
       <h1>{{ message }}</h1>

@@ -2,15 +2,9 @@
 export default {
   name: "Home",
   data() {
-    return {};
-  },
-};
-document.getElementById("btnsignup").onclick = function () {
-  location.href = "/signup.vue";
-};
-document.getElementById("btnlogin").onclick = function () {
-  location.href = "/login.vue";
-};
+    return {}
+  }
+}
 </script>
 
 <template>
@@ -22,6 +16,7 @@ document.getElementById("btnlogin").onclick = function () {
     />
   </header>
   <main>
+    <h1 class="red">HOME</h1>
     <div class="newfeedblock">
       <div class="user">Username</div>
       <picture>
