@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "userprofile",
+  name: "Profile",
   data() {
     return {};
   },
@@ -16,7 +16,7 @@ export default {
     />
   </header>
   <main>
-    <div class="profilepage">
+    <div class="profile">
       <picture class="profpic">
         <source srcset="" class="uploadimage" media="(min-width: 1000px)" />
         /**must respect our media queries and will swap images at our exact
@@ -75,7 +75,7 @@ body {
   margin-right: auto;
 }
 
-.profilepage {
+.profile {
   display: flex;
   flex-direction: row;
   justify-content: center;

@@ -22,7 +22,8 @@ export default {
         <input type="text" id="mail" name="mail" />
         <label for="pass">Password:</label><br />
         <input type="password" id="passcode" name="passcode" />
-        <input type="submit" value="Login" class="loginbtn" />
+        <input type="submit" value="Login" class="loginbtn" /> /**need to
+        connect direct to home afterlogin */
       </form>
     </div>
   </main>

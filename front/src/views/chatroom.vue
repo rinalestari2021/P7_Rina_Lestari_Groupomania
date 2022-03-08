@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "chatroom",
+  name: "Forum",
   data() {
     return {};
   },

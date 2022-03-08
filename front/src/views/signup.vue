@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "signup",
+  name: "SignUp",
   data() {
     return {};
   },
@@ -26,7 +26,7 @@ export default {
         <input type="text" id="mail" name="mail" />
         <label for="pass">Password:</label><br />
         <input type="password" id="passcode" name="passcode" />
-        <input type="submit" value="Signup" class="signupbtn" />
+        <input type="submit" value="SignUp" class="signupbtn" />
       </form>
     </div>
   </main>

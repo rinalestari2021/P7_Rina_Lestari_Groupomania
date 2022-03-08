@@ -5,12 +5,12 @@ import router from "./router";
 const app = createApp(App);
 
 Vue.use(router);
-import home from "./src/home.vue";
-import signup from "./src/signup.vue";
-import login from "./src/login.vue";
-import userprofile from "./src/userprofile.vue";
-import userlist from "./src/userlist.vue";
-import chatroom from "./src/chatroom.vue";
+import home from "./views/home.vue";
+import signup from "./views/signup.vue";
+import login from "./views/login.vue";
+import userprofile from "./views/userprofile.vue";
+import userlist from "./views/userlist.vue";
+import chatroom from "./views/chatroom.vue";
 
 const router = new VueRouter({
   mode: "history",

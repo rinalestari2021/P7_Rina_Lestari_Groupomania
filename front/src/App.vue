@@ -1,10 +1,10 @@
 <script>
-import signup from "./signup.vue";
-import login from "./login.vue";
-import home from "./home.vue";
-import userprofile from "./userprofile.vue";
-import userlist from "./userlist.vue";
-import chatroom from "./chatroom.vue";
+import signup from "./views/signup.vue";
+import login from "./views/login.vue";
+import home from "./views/home.vue";
+import userprofile from "./views/userprofile.vue";
+import userlist from "./views/userlist.vue";
+import chatroom from "./views/chatroom.vue";
 
 export default {
   name: "App",
@@ -50,7 +50,7 @@ const App = new Vue({
       src="./assets/icon-left-font-monochrome-white.png"
     />
     <div class="homepage">
-      <button @click="redirectToSignup()" id="btnsignup">Signup</button>
+      <button @click="redirectToSignup()" id="btnsignup">SignUp</button>
       <button @click="redirectToLogin()" id="btnsignup">Login</button>
     </div>
     <div class="greetings">

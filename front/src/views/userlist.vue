@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "userlist",
+  name: "Contact",
   data() {
     return {};
   },
