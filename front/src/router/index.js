@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Router from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Signup from "../views/signup.vue";
 import Login from "../views/login.vue";
@@ -6,39 +7,46 @@ import home from "../views/home.vue";
 import Profile from "../views/userprofile.vue";
 import Contact from "../views/userlist.vue";
 import Forum from "../views/chatroom.vue";
+import { VueElement } from "vue";
 
-const routes = [
-  {
-    path: "/app",
-    name: "Home",
-    component: "Home",
-  },
-  {
-    path: "/signup",
-    name: "SignUp",
-    component: "SignUp",
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: "Login",
-  },
-  {
-    path: "/userprofile",
-    name: "Profile",
-    component: "userprofile",
-  },
-  {
-    path: "/userlist",
-    name: "Contact",
-    component: "Contact",
-  },
-  {
-    path: "/chatroom",
-    name: "Forum",
-    component: "Forum",
-  },
-];
+Vue.use(Router);
+
+const Router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: "/",
+      name: "App",
+      component: "App",
+      children: [{ path: "/", component: home }],
+    },
+    {
+      path: "/signup",
+      name: "SignUp",
+      component: "SignUp",
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: "Login",
+    },
+    {
+      path: "/userprofile",
+      name: "Profile",
+      component: "userprofile",
+    },
+    {
+      path: "/userlist",
+      name: "Contact",
+      component: "Contact",
+    },
+    {
+      path: "/chatroom",
+      name: "Forum",
+      component: "Forum",
+    },
+  ],
+});
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
