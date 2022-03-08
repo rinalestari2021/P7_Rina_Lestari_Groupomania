@@ -7,16 +7,17 @@ import userlist from "./userlist.vue";
 import chatroom from "./chatroom.vue";
 
 export default {
-  components: {
-    signup: signup,
-    login: login,
-    home: home,
-    userprofile: userprofile,
-    userlist: userlist,
-    chatroom: chatroom,
-  },
+  name: "App",
   data() {
     return {
+      components: {
+        signup: signup,
+        login: login,
+        home: home,
+        userprofile: userprofile,
+        userlist: userlist,
+        chatroom: chatroom,
+      },
       message: "Groupomania Messenger ",
     };
   },

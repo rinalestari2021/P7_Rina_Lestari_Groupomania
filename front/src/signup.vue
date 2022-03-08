@@ -1,4 +1,11 @@
-<script setup></script>
+<script>
+export default {
+  name: "signup",
+  data() {
+    return {};
+  },
+};
+</script>
 
 <template>
   <header>

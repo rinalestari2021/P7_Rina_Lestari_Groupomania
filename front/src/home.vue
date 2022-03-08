@@ -1,4 +1,10 @@
 <script>
+export default {
+  name: "home",
+  data() {
+    return {};
+  },
+};
 document.getElementById("btnsignup").onclick = function () {
   location.href = "/signup.vue";
 };

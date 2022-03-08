@@ -1,4 +1,11 @@
-<script></script>
+<script>
+export default {
+  name: "chatroom",
+  data() {
+    return {};
+  },
+};
+</script>
 
 <template>
   <header>

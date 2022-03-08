@@ -1,4 +1,11 @@
-<script setup></script>
+<script>
+export default {
+  name: "userlist",
+  data() {
+    return {};
+  },
+};
+</script>
 
 <template>
   <header>

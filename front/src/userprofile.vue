@@ -1,4 +1,11 @@
-<script></script>
+<script>
+export default {
+  name: "userprofile",
+  data() {
+    return {};
+  },
+};
+</script>
 
 <template>
   <header>
