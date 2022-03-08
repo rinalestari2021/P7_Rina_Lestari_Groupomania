@@ -1,4 +1,13 @@
-<script setup></script>
+<script>
+export default {
+  data() {
+    return {
+      login: "",
+    };
+  },
+  methods: {},
+};
+</script>
 
 <template>
   <header>

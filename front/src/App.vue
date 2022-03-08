@@ -1,22 +1,45 @@
 <script>
-const app = new Vue({
+import signup from "./signup.vue";
+import login from "./login.vue";
+import home from "./home.vue";
+import userprofile from "./userprofile.vue";
+import userlist from "./userlist.vue";
+import chatroom from "./chatroom.vue";
+
+export default {
+  components: {
+    signup: signup,
+    login: login,
+    home: home,
+    userprofile: userprofile,
+    userlist: userlist,
+    chatroom: chatroom,
+  },
+  data() {
+    return {
+      message: "Groupomania Messenger ",
+    };
+  },
+};
+
+const App = new Vue({
   el: "#app",
   data: {
-    message: "Welcome to Groupomania<br />Messenger",
+    logowhite: "",
+    btnsigup: "",
+    btnlogin: "",
+    greetings: "",
   },
-});
+}).mount("#app");
 </script>
 
 <template>
-  <header>
+  <div id="app">
     <img
       alt="Groupomania logo"
       class="logowhite"
       src="./assets/icon-left-font-monochrome-white.png"
     />
-  </header>
-
-  <main>
     <div class="homepage">
       <input
         type="button"
@@ -29,7 +52,7 @@ const app = new Vue({
     <div class="greetings">
       <h1>{{ message }}</h1>
     </div>
-  </main>
+  </div>
 </template>
 
 <style lang="scss">

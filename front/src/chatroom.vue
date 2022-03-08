@@ -1,29 +1,4 @@
-<script>
-import { ref } from "vue";
-
-export default {
-  name: "chatroom",
-  setup() {
-    const Username = ref((value = "FirstnameLastname"));
-    const CN = ref((value = "Complete-Name"));
-    const personnel = ref((value = "Staff"));
-    const statusline = ref((value = "Online/Offline"));
-    const messages = ref((value = "[]"));
-    const message = ref((value = ""));
-
-    const submit = () => {}; // need to fill the submit function
-    return {
-      Username,
-      CN,
-      personnel,
-      statusline,
-      messages,
-      message,
-      submit,
-    };
-  },
-};
-</script>
+<script></script>
 
 <template>
   <header>
@@ -35,39 +10,31 @@ export default {
     <div class="profileheader">
       <div class="lefttop">
         <img src="./image.png" alt="profilepicture" class="prof-pic" />
-        <div class="position">{{ message.personnel }}</div>
+        <div class="position">Staff</div>
       </div>
       <div class="righttop">
-        <div class="completename">{{ message.Username }}</div>
-        <div class="status">{{ message.statusline }}</div>
+        <div class="completename">FirstnameLastname</div>
+        <div class="statusline">Online/Offline</div>
       </div>
     </div>
   </header>
 
   <main>
-    <div class="container" v-for="message in messages" :key="message">
+    <div class="container">
       <picture>
         <source srcset="" class="uploadimage" media="(min-width: 1000px)" />
         <source srcset="" class="uploadimage" media="(min-width: 600px)" />
         <img src="./image.png" />
       </picture>
-      <p class="CN">{{ message.Complete - name }}</p>
+      <p class="CN">Complete-Name</p>
       <form @submit.prevent="submit">
-        <input
-          class="form-control"
-          placeholder="Write a message"
-          v-model="message"
-        />
+        <input class="form-control" placeholder="Write a message" />
       </form>
       <button class="delbtn">delete</button>
     </div>
     <div class="c_sendnewmessage">
       <form @submit.prevent="submit">
-        <input
-          class="form-control"
-          placeholder="Write a message"
-          v-model="message"
-        />
+        <input class="form-control" placeholder="Write a message" />
       </form>
       <button class="delbtn">delete</button>
     </div>
