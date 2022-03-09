@@ -1,10 +1,11 @@
-import { createRouter, createWebHistory } from "vue-router"
-import SignUp from "../views/signup.vue"
-import Login from "../views/login.vue"
-import home from "../views/home.vue"
-import Profile from "../views/userprofile.vue"
-import Contact from "../views/userlist.vue"
-import Forum from "../views/chatroom.vue"
+import { createRouter, createWebHistory } from "vue-router";
+import SignUp from "../views/signup.vue";
+import Login from "../views/login.vue";
+import Home from "../views/home.vue";
+import Homepage from "../views/homepage.vue";
+import Profile from "../views/userprofile.vue";
+import Contact from "../views/userlist.vue";
+import Forum from "../views/chatroom.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,35 +13,40 @@ const router = createRouter({
     {
       path: "/",
       name: "App",
-      component: home
+      component: Homepage,
+    },
+    {
+      path: "/home",
+      name: "Home",
+      component: Home,
     },
     {
       path: "/signup",
       name: "SignUp",
-      component: SignUp
+      component: SignUp,
     },
     {
       path: "/login",
       name: "Login",
-      component: Login
+      component: Login,
     },
     {
       path: "/userprofile",
       name: "Profile",
-      component: Profile
+      component: Profile,
     },
     {
       path: "/userlist",
       name: "Contact",
-      component: Contact
+      component: Contact,
     },
     {
       path: "/chatroom",
       name: "Forum",
-      component: Forum
-    }
-  ]
-})
+      component: Forum,
+    },
+  ],
+});
 
 // const router = createRouter({
 //   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,4 +83,4 @@ const router = createRouter({
 //   },
 // };
 
-export default router
+export default router;

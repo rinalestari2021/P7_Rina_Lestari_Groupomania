@@ -19,8 +19,8 @@ export default {
     <div class="profile">
       <picture class="profpic">
         <source srcset="" class="uploadimage" media="(min-width: 1000px)" />
-        /**must respect our media queries and will swap images at our exact
-        breakpoints */
+        <!--must respect our media queries and will swap images at our exact
+        breakpoints-->
         <source srcset="" class="uploadimage" media="(min-width: 600px)" />
         <img src="" alt="" />
       </picture>
@@ -32,8 +32,8 @@ export default {
       <div class="user">Username</div>
       <picture>
         <source srcset="" class="uploadimage" media="(min-width: 1000px)" />
-        /**must respect our media queries and will swap images at our exact
-        breakpoints */
+        <!--must respect our media queries and will swap images at our exact
+        breakpoints-->
         <source srcset="" class="uploadimage" media="(min-width: 600px)" />
         <img src="" alt="" />
       </picture>
@@ -106,7 +106,6 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  max-width: 100%;
 }
 
 .newfeedblock {

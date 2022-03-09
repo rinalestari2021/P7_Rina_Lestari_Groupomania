@@ -8,25 +8,23 @@ export default {
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Groupomania logo"
-      class="logosignup"
-      src="./assets/icon-left-font-monochrome-white.png"
-    />
-  </header>
-  <main>
-    <div class="containerform">
-      <form class="log">
-        <label for="mail">Email:</label><br />
-        <input type="text" id="mail" name="mail" />
-        <label for="pass">Password:</label><br />
-        <input type="password" id="passcode" name="passcode" />
-        <input type="submit" value="Login" class="loginbtn" /> /**need to
-        connect direct to home afterlogin */
-      </form>
-    </div>
-  </main>
+  <img
+    alt="Groupomania logo"
+    class="logosignup"
+    src="./assets/icon-left-font-monochrome-white.png"
+  />
+
+  <div class="containerform">
+    <form class="log">
+      <label for="mail">Email:</label><br />
+      <input type="text" id="mail" name="mail" />
+      <label for="pass">Password:</label><br />
+      <input type="password" id="passcode" name="passcode" />
+      <input type="submit" value="Login" class="loginbtn" />
+      <!--need to
+        connect direct to home afterlogin-->
+    </form>
+  </div>
 </template>
 
 <style lang="scss">
@@ -36,9 +34,6 @@ body {
 }
 
 .logowhite {
-  margin-top: 219px;
-  width: 362px;
-  height: 60px;
   display: block;
   margin-left: auto;
   margin-right: auto;

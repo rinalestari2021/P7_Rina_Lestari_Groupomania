@@ -2,35 +2,32 @@
 export default {
   name: "SignUp",
   data() {
-    return {}
-  }
-}
+    return {};
+  },
+};
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Groupomania logo"
-      class="logowhite"
-      src="./assets/icon-left-font-monochrome-white.png"
-    />
-  </header>
-  <main>
-    <h1>SignUp</h1>
-    <div class="containerform">
-      <form class="ins">
-        <label for="fname">Firstname:</label><br />
-        <input type="text" id="fname" name="fname" /><br />
-        <label for="lname">Lastname:</label><br />
-        <input type="text" id="lname" name="lname" />
-        <label for="mail">Email:</label><br />
-        <input type="text" id="mail" name="mail" />
-        <label for="pass">Password:</label><br />
-        <input type="password" id="passcode" name="passcode" />
-        <input type="submit" value="SignUp" class="signupbtn" />
-      </form>
-    </div>
-  </main>
+  <img
+    alt="Groupomania logo"
+    class="logowhite"
+    src="./assets/icon-left-font-monochrome-white.png"
+  />
+
+  <h1>SignUp</h1>
+  <div class="containerform">
+    <form class="ins">
+      <label for="fname">Firstname:</label><br />
+      <input type="text" id="fname" name="fname" /><br />
+      <label for="lname">Lastname:</label><br />
+      <input type="text" id="lname" name="lname" />
+      <label for="mail">Email:</label><br />
+      <input type="text" id="mail" name="mail" />
+      <label for="pass">Password:</label><br />
+      <input type="password" id="passcode" name="passcode" />
+      <input type="submit" value="SignUp" class="signupbtn" />
+    </form>
+  </div>
 </template>
 
 <style lang="scss">
@@ -41,8 +38,8 @@ body {
 
 .logowhite {
   margin-top: 219px;
-  width: 362px;
-  height: 60px;
+  width: 200px;
+
   display: block;
   margin-left: auto;
   margin-right: auto;
