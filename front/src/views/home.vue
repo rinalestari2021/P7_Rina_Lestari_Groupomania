@@ -8,12 +8,6 @@ export default {
 </script>
 
 <template>
-  <img
-    alt="Groupomania logo"
-    class="logoblack"
-    src="./assets/icon-left-font-monochrome-black.png"
-  />
-
   <div class="newfeedblock">
     <div class="user">Username</div>
     <picture>
@@ -30,7 +24,7 @@ export default {
         v-model="message"
       />
     </form>
-    <button class="delbtn">delete</button>
+    <button class="delbtn">Delete</button>
   </div>
   <div class="sidebar">
     <a href="./home.vue" class="returnhome">Home</a>
@@ -40,33 +34,14 @@ export default {
 </template>
 
 <style lang="scss">
-body {
-  margin: 0;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-}
-.user {
-  text-align: left;
-  font-size: 6pt;
-  color: black;
-}
-
-.logoblack {
-  margin-top: 219px;
-  width: 276px;
-
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .user,
 .returnhome,
 .contactlist,
 .exit {
   text-align: left;
-  font-size: 6pt;
+  font-size: 12pt;
   color: black;
-  margin-left: 10px;
+  margin-left: 20%;
 }
 
 img {
@@ -82,25 +57,45 @@ img {
   align-content: center;
   flex-wrap: wrap;
   background-color: #5adfe2;
-  width: 657 px;
+  width: 100%;
   height: auto;
 }
 a hover {
   cursor: pointer;
 }
 
-a,
 .form-control {
-  font-size: 6pt;
+  font-size: 12pt;
   color: black;
   text-align: left;
+  width: 50vw;
+  height: 50vh;
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
   float: right;
   margin: 0 1.5%;
   background-color: #5adfe2;
   width: 150px;
-  height: auto;
+  height: 600px;
+}
+
+.exit {
+  border: 1pt white;
+  background-color: white;
+  border-spacing: 5px;
+  font-weight: bold;
+  width: 100px;
+  padding: 6px 6px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.delbtn {
+  position: absolute;
+  margin-left: 24%;
 }
 </style>

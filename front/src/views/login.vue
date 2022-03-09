@@ -8,12 +8,6 @@ export default {
 </script>
 
 <template>
-  <img
-    alt="Groupomania logo"
-    class="logosignup"
-    src="./assets/icon-left-font-monochrome-white.png"
-  />
-
   <div class="containerform">
     <form class="log">
       <label for="mail">Email:</label><br />
@@ -33,12 +27,15 @@ body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-.logowhite {
-  display: block;
+form.log {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 5%;
 }
-
 .containerform {
   background-size: 446px 668px;
   background-color: #011f48;
@@ -58,6 +55,15 @@ input[type="text"] {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  border-radius: 15px;
+}
+
+input[type="submit"] {
+  width: 100px;
+  padding: 6px 6px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 15px;
 }
 
 #passcode {
@@ -71,7 +77,8 @@ input[type="text"] {
   border: 1pt white;
   background-color: white;
   border-spacing: 5px;
-  font-size: 6pt;
+  font-size: 12pt;
+  font-weight: bold;
   color: black;
   text-align: center;
   color: #011f48;

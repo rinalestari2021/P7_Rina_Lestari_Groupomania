@@ -2,8 +2,8 @@
 export default {
   data() {
     return {
-      message: "Welcome to Groupomania Messenger",
-      logowhite: "",
+      message: "Groupomania Messenger",
+      openinglogo: "",
       btnsigup: "",
       btnlogin: "",
       greetings: "",
@@ -11,7 +11,10 @@ export default {
   },
   methods: {
     goToSignUp() {
-      this.$router.push("/signup");
+      this.$router.push("./signup");
+    },
+    goToLogin() {
+      this.$router.push("./login");
     },
   },
 };
@@ -25,13 +28,8 @@ export default {
     />
     <div class="opening">
       <router-view></router-view>
-      <router-link to="SignUp">Go to SignUp</router-link>
-      <button @click="goToSignUp()" id="btnsignup">SignUp</button>
-      <button id="btnsignup">Login</button>
-      <router-link to="SignUp">Go to SignUp</router-link>
-      <router-link to="SignUp">Go to SignUp</router-link>
-      <router-link to="SignUp">Go to SignUp</router-link>
-      <router-link to="SignUp">Go to SignUp</router-link>
+      <!-- <button @click="goToSignUp()" id="btnsignup">SignUp</button>
+      <button @click="goToLogin()" id="btnsignup">Login</button>-->
     </div>
     <div class="greetings">
       <h1>{{ message }}</h1>
@@ -41,20 +39,22 @@ export default {
 
 <style lang="scss">
 .body {
-  background: var(--vt-c-indigo);
+  background: #011f48;
   margin: 0;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 #app {
+  background: #011f48;
   flex-direction: column;
   position: relative;
   display: flex;
   justify-content: center;
+  height: auto;
 }
 
 .openinglogo {
-  margin-top: 20%;
+  margin-top: 10%;
   width: 30%;
   outline: none;
 }
@@ -66,9 +66,14 @@ export default {
 }
 
 .opening {
+  width: 100vw;
+  height: 100vh;
   position: relative;
-
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
+  display: flex;
+  justify-content: space-around;
 }
 
 #btnsignup,
@@ -92,10 +97,10 @@ export default {
 }
 
 .greetings {
+  position: relative;
   font-family: "Verdana";
   font-weight: bold;
   color: white;
-  margin-top: 60px;
   font-size: 9pt;
   text-align: center;
 }

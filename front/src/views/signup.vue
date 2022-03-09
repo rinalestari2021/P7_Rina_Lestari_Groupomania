@@ -8,13 +8,6 @@ export default {
 </script>
 
 <template>
-  <img
-    alt="Groupomania logo"
-    class="logowhite"
-    src="./assets/icon-left-font-monochrome-white.png"
-  />
-
-  <h1>SignUp</h1>
   <div class="containerform">
     <form class="ins">
       <label for="fname">Firstname:</label><br />
@@ -36,13 +29,18 @@ body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-.logowhite {
-  margin-top: 219px;
-  width: 200px;
+.containerform {
+  position: relative;
+}
 
-  display: block;
+form.ins {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 5%;
 }
 
 .containerform {
@@ -65,6 +63,7 @@ input[type="text"] {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  border-radius: 15px;
 }
 
 input[type="password"] {
@@ -72,20 +71,23 @@ input[type="password"] {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  border-radius: 15px;
 }
 
 input[type="submit"] {
-  width: 400px;
-  padding: 12px 20px;
+  width: 100px;
+  padding: 6px 6px;
   margin: 8px 0;
   box-sizing: border-box;
+  border-radius: 15px;
 }
 
 .signupbtn {
   border: 1pt white;
   background-color: white;
   border-spacing: 5px;
-  font-size: 6pt;
+  font-size: 12pt;
+  font-weight: bold;
   color: black;
   text-align: center;
   color: #011f48;
