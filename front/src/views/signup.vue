@@ -91,6 +91,7 @@ input[type="submit"] {
   color: black;
   text-align: center;
   color: #011f48;
+  left: 38%;
 }
 
 .signupbtn:hover {

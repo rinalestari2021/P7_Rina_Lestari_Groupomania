@@ -27,3 +27,25 @@ DELETE post :http://localhost:3000/api/auth/:id
 POST comment : http://localhost:3000/api/auth/comment
 
 DELETE comment :http://localhost:3000/api/auth/comment/:id
+
+Routes Front
+App
+http://localhost:3000
+
+Signup
+http://localhost:3000/SignUp
+
+Login
+http://localhost:3000/Login
+
+Home(Newsfeed)
+http://localhost:3000/Home
+
+User
+http://localhost:3000/userprofile
+
+Userlist
+http://localhost:3000/Contact
+
+Chatroom(conversation)
+http://localhost:3000/Forum

@@ -11,10 +11,12 @@ export default {
   },
   methods: {
     goToSignUp() {
-      this.$router.push("./signup");
+      let route = this.$router.resolve({ path: "/signup" });
+      window.open(route.href);
     },
     goToLogin() {
-      this.$router.push("./login");
+      let route = this.$router.resolve({ path: "/login" });
+      window.open(route.href);
     },
   },
 };
@@ -54,7 +56,7 @@ export default {
 }
 
 .openinglogo {
-  margin-top: 10%;
+  margin-top: 8%;
   width: 30%;
   outline: none;
 }
@@ -87,7 +89,6 @@ export default {
   border-radius: 12px;
   padding: 5px;
   text-decoration: none;
-
   margin: 4px 2px;
   font-family: "Arial Narrow Bold";
   color: #011f48;
