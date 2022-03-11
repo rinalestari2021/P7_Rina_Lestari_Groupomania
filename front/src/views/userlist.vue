@@ -2,36 +2,59 @@
 export default {
   name: "Contact",
   data() {
-    return {};
+    return {
+      fontSize: "14px",
+      fontWeight: "Bold",
+      optionColor: "#011f48",
+    };
+  },
+  methods: {
+    goToUserprofile() {
+      let route = this.$router.resolve({ path: "/userprofile" });
+      window.open(route.href);
+    },
   },
 };
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Groupomania logo"
-      class="logowhite"
-      src="./assets/icon-left-font-monochrome-white.png"
-    />
-  </header>
-  <main>
+  <div class="frame">
     <div class="userlist">
-      <a href="./userprofile.vue">
-        <picture>
-          <source srcset="" class="uploadimage" media="(min-width: 1000px)" />
-          <source srcset="" class="uploadimage" media="(min-width: 600px)" />
-          <img src="./assets/pp1.png" class="pp" />
-        </picture>
-      </a>
+      <img
+        class="profpic"
+        src="./assets/pp2.png"
+        alt="profilepicture"
+        width="150"
+        height="150"
+      />
       <div class="prof-name">
-        <a href="./userprofile.vue">Username></a>
+        <button @click="goToUserprofile()">yourfullnamehere</button>
       </div>
     </div>
-    <div>
-      <input type="button" onclick="./home.vue" id="btnhome" value="Home" />
+    <div class="userlist2">
+      <img
+        class="profpic"
+        src="./assets/pp2.png"
+        alt="profilepicture"
+        width="150"
+        height="150"
+      />
+      <div class="prof-name2">
+        <button @click="goToUserprofile()">yourfullnamehere</button>
+      </div>
     </div>
-  </main>
+
+    <button
+      @click="returnHome()"
+      :style="{
+        'font-size': fontSize,
+        'font-weight': fontWeight,
+      }"
+      class="returnhome"
+    >
+      Home
+    </button>
+  </div>
 </template>
 
 <style lang="scss">
@@ -39,34 +62,41 @@ body {
   margin: 0;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-
-.logowhite {
-  margin-top: 219px;
-  margin-right: 500px;
-  width: 362px;
-  height: 60px;
+.frame {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: auto;
+  border-style: solid 2px #5adfe2;
+  background-color: #5adfe2;
+  align-content: center;
+  line-height: 40px;
 }
 
-img {
-  border-radius: 4px;
-  padding: 5px;
-  width: 150px;
+.prof-name,
+.prof-name2 {
+  top: 3%;
+  line-height: 50px;
 }
 
-img:hover {
-  box-shadow: 0 0 2px 1px white;
-}
-.prof-name {
-  font-size: 6pt;
-  color: white;
-}
-
-#homebtn {
-  font-size: 6pt;
-  color: white;
+.returnhome {
+  position: relative;
+  left: 70%;
+  margin-top: 30%;
+  width: 55px;
 }
 
-#homebtn:hover {
-  color: #5adfe2;
+.profpic {
+  border-radius: 50%;
+  outline: 2px solid #011f48;
+  top: 10px;
+}
+
+.userlist {
+  margin-top: 40px;
+}
+
+.userlist2 {
+  margin-top: 20px;
 }
 </style>

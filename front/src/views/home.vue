@@ -3,7 +3,7 @@ export default {
   name: "Home",
   data() {
     return {
-      fontSize: "14px",
+      fontSize: "12pt",
       fontWeight: "Bold",
       optionColor: "#011f48",
       topDist: "30px",
@@ -35,7 +35,7 @@ export default {
 <template>
   <div class="newfeedblock">
     <div
-      class="user"
+      class="userhome"
       :style="{
         'font-size': fontSize,
         'font-weight': fontWeight,
@@ -45,45 +45,24 @@ export default {
     >
       Your username/name here
     </div>
-    <!--<source srcset="" class="uploadimage" media="(min-width: 1000px)" />
-      must respect our media queries and will swap images at our exact
-        breakpoints
-      <source srcset="" class="uploadimage" media="(min-width: 600px)" />-->
-    <img :src="image" alt="" />
-
-    <form @submit.prevent="submit">
-      <input
-        class="form-control"
-        placeholder="Write a message"
-        v-model="message"
-      />
-    </form>
-    <button class="btnedit">Edit</button>
-    <button class="delbtn">Delete</button>
-
-    <div
-      class="user"
-      :style="{
-        'font-size': fontSize,
-        'font-weight': fontWeight,
-        top: topDist,
-        left: leftDist,
-      }"
-    >
-      Your username/name here
-    </div>
-    <img :src="image" alt="" />
+    <img
+      class="imagefeed"
+      src="./assets/pp2.png"
+      width="300"
+      height="150"
+      alt="imageupload"
+    />
     <div class="form">
       <img :src="image" alt="" />
       <form @submit.prevent="submit">
         <input
-          class="form-control"
+          class="framefeed"
           placeholder="Write a message"
           v-model="message"
         />
       </form>
-      <button class="btnedit">Edit</button>
-      <button class="btndel">Delete</button>
+      <button class="b-edit">Edit</button>
+      <button class="b-del">Delete</button>
     </div>
   </div>
   <div class="sidebar">
@@ -118,13 +97,13 @@ img {
   margin-right: auto;
 }
 
-.newfeedblock {
+.framefeed {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  background-color: #5adfe2;
+  background-color: white;
   width: 100%;
   height: auto;
   line-height: 20px;
@@ -133,13 +112,22 @@ button:hover {
   cursor: pointer;
 }
 
-.form-control {
+.framefeed {
   font-size: 12pt;
   color: black;
   text-align: left;
   width: 50vw;
   height: 35vh;
-  margin-top: 30px;
+  bottom: 80px;
+}
+
+.imagefeed {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  outline: 2px solid #011f48;
+  bottom: 200px;
 }
 
 div.sidebar {
@@ -195,15 +183,22 @@ div.sidebar {
   top: 20px;
 }
 
-.delbtn {
+.b-del {
   position: absolute;
-  margin-left: 24%;
-  margin-top: 10px;
+  margin-left: 40%;
+  top: 190px;
 }
 
-.btnedit {
+.b-edit {
   position: absolute;
-  margin-left: 21%;
-  margin-top: 10px;
+  margin-left: 35%;
+  top: 190px;
+}
+
+.userhome {
+  color: #011f48;
+  position: absolute;
+  top: 200px;
+  left: 390px;
 }
 </style>

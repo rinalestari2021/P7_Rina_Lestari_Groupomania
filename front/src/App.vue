@@ -56,9 +56,10 @@ export default {
 }
 
 .openinglogo {
-  margin-top: 8%;
+  margin-top: 2%;
   width: 30%;
   outline: none;
+  align-items: center;
 }
 
 .logowhite {
@@ -69,7 +70,7 @@ export default {
 
 .opening {
   width: 100vw;
-  height: 100vh;
+  height: 150vh;
   position: relative;
   margin-left: auto;
   margin-right: auto;

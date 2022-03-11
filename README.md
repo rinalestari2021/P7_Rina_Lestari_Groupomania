@@ -45,7 +45,7 @@ User
 http://localhost:3000/userprofile
 
 Userlist
-http://localhost:3000/Contact
+http://localhost:3000/userlist
 
 Chatroom(conversation)
-http://localhost:3000/Forum
+http://localhost:3000/chatroom

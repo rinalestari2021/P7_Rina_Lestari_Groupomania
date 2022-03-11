@@ -3,7 +3,7 @@ export default {
   name: "Profile",
   data() {
     return {
-      fontSize: "14px",
+      fontSize: "12pt",
       fontWeight: "Bold",
       optionColor: "#011f48",
       topDist: "10px",
@@ -26,33 +26,35 @@ export default {
 </script>
 
 <template>
-  <div class="newfeedblock">
-    <img
-      class="profpic"
-      src="./assets/pp2.png"
-      alt="profilepicture"
-      width="150"
-      height="150"
-    />
-    <div
-      class="profname"
-      :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
-    >
-      Firstname Lastname(Username)
-    </div>
-    <div class="stat_user">Staff</div>
+  <div class="container">
+    <div class="frameprofile">
+      <img
+        class="profpic"
+        src="./assets/pp2.png"
+        alt="picture"
+        width="150"
+        height="150"
+      />
+      <div
+        class="profname"
+        :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
+      >
+        Firstname Lastname(Username)
+      </div>
+      <div class="stat_user">Staff</div>
 
-    <div class="form">
-      <img :src="image" alt="" />
-      <form @submit.prevent="submit">
-        <input
-          class="form-control"
-          placeholder="Write a message"
-          v-model="message"
-        />
-      </form>
-      <button class="btnedit">Edit</button>
-      <button class="btndel">Delete</button>
+      <div class="form">
+        <img :src="image" alt="" />
+        <form @submit.prevent="submit">
+          <input
+            class="framecontrol"
+            placeholder="Write a message"
+            v-model="message"
+          />
+        </form>
+        <button class="btnedit">Edit</button>
+        <button class="btndel">Delete</button>
+      </div>
     </div>
   </div>
   <div class="sidebar">
@@ -66,18 +68,18 @@ export default {
     >
       Home
     </button>
+
     <button id="turnoff">Deactivate</button>
     <button id="exit">LogOut</button>
   </div>
 </template>
 
 <style lang="scss">
-.newfeedblock {
+.container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  flex-wrap: wrap;
   background-color: #5adfe2;
   width: 100%;
   height: auto;
@@ -96,7 +98,7 @@ button:hover {
 
 .profpic {
   border-radius: 50%;
-  outline: 1px solid black;
+  outline: 2px solid #011f48;
   top: 10px;
 }
 
@@ -120,7 +122,7 @@ div.sidebar {
 
 .btndel {
   position: absolute;
-  margin-left: 24%;
+  margin-left: 40%;
   margin-top: 10px;
 }
 
@@ -148,7 +150,20 @@ div.sidebar {
 
 .btnedit {
   position: absolute;
-  margin-left: 21%;
+  margin-left: 35%;
+  margin-top: 10px;
+}
+
+.framecontrol {
+  font-size: 12pt;
+  color: black;
+  text-align: left;
+  width: 50vw;
+  height: 35vh;
+  margin-top: 30px;
+}
+
+.frameprofile {
   margin-top: 10px;
 }
 </style>
