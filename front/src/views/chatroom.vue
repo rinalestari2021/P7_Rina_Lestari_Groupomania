@@ -9,7 +9,7 @@ export default {
 
 <template>
   <div class="profileheader">
-    <img class="pics" src="./assets/pp2.png" width="150" height="150" alt="" />
+    <img class="pics" src="/pp2.png" width="180" height="180" alt="" />
     <div class="headers">
       <div class="completename">FirstnameLastname</div>
       <div class="position">Staff</div>
@@ -25,27 +25,31 @@ export default {
       left: leftDist,
     }"
   >
-    Your username/name here
+    Yournamehere
   </div>
   <div class="conversation">
-    <img
-      class="uploadpics"
-      src="./assets/pp2.png"
-      width="300"
-      height="150"
-      alt="imageupload"
-    />
+    <img class="uploadpics" src="" width="300" height="150" alt="imageupload" />
 
     <form @submit.prevent="submit">
-      <input
-        class="messageframe"
-        placeholder="Write a message"
-        v-model="message"
-      />
+      <input class="messageframe" placeholder="Write a message" />
     </form>
   </div>
   <button class="btn-edit">Edit</button>
   <button class="btn-del">Delete</button>
+
+  <div class="newmessage">
+    <a href="#"
+      ><img
+        src="/icon-img.png"
+        @click=""
+        class="imgFileUpload"
+        width="50"
+        height="50"
+    /></a>
+    <input class="addmessage" placeholder="Type here" />
+    <img src="/icon-send.png" @click="" class="send" width="50" height="50" />
+  </div>
+
   <div class="sidebar">
     <button
       @click="goToHome()"
@@ -98,6 +102,27 @@ body {
   margin-top: 30px;
 }
 
+.addmessage {
+  font-size: 12pt;
+  color: black;
+  text-align: left;
+  width: 50vw;
+  height: 6.5vh;
+}
+
+.newmessage {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  bottom: 200px;
+  margin-left: 5px;
+}
+
+.imgFileUpload,
+.send {
+  margin-right: 5px;
+}
+
 .conversation {
   position: absolute;
   background-color: #5adfe2;
@@ -145,8 +170,6 @@ img {
   display: flex;
   justify-items: center;
   border-radius: 50%;
-  outline: 2px solid #011f48;
-  top: 19px;
   margin-left: 100px;
   margin-right: 0;
 }

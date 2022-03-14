@@ -30,8 +30,9 @@ export default {
     />
     <div class="opening">
       <router-view></router-view>
-      <!-- <button @click="goToSignUp()" id="btnsignup">SignUp</button>
-      <button @click="goToLogin()" id="btnsignup">Login</button>-->
+
+      <!-- <button @click.self="goToSignUp()" id="btnsignup">SignUp</button>
+      <button @click.self="goToLogin()" id="btnsignup">Login</button>-->
     </div>
     <div class="greetings">
       <h1>{{ message }}</h1>

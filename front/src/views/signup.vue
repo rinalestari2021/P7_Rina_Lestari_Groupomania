@@ -2,22 +2,66 @@
 export default {
   name: "SignUp",
   data() {
-    return {};
+    return {
+      fname: "",
+      lname: "",
+      mail: "",
+      passcode: "",
+      role: "",
+      terms: false,
+    };
+  },
+  method: {
+    handleSignUp() {
+      //validate password
+      this.passwordError =
+        this.password.lenght > 6
+          ? ""
+          : "Password must be at least 6 chars long";
+      //all syntaxe js connect with DB here
+    },
   },
 };
 </script>
 
 <template>
   <div class="containerform">
-    <form class="ins">
+    <form @submit.prevent="handleSignUp" class="insc">
       <label for="fname">Firstname:</label><br />
-      <input type="text" id="fname" name="fname" /><br />
+      <input
+        type="text"
+        id="fname"
+        name="fname"
+        required
+        v-model="fname"
+      /><br />
       <label for="lname">Lastname:</label><br />
-      <input type="text" id="lname" name="lname" />
+      <input type="text" id="lname" name="lname" required v-model="lname" />
       <label for="mail">Email:</label><br />
-      <input type="text" id="mail" name="mail" />
+      <input type="text" id="mail" name="mail" required v-model="mail" />
       <label for="pass">Password:</label><br />
-      <input type="password" id="passcode" name="passcode" />
+      <input
+        type="password"
+        id="passcode"
+        name="passcode"
+        required
+        v-model="passcode"
+      />
+      <div v-if="passwordError" class="errorpass">{{ passwordError }}</div>
+
+      <label class="state">Role:</label>
+      <select v-model="role">
+        <option value="developper">Web Developper</option>
+        <option value="administration">Administration Staff</option>
+        <option value="accounting">Accounting Staff</option>
+        <option value="commercial">Marketing Staff</option>
+      </select>
+
+      <div class="terms">
+        <input type="checkbox" v-model="terms" required />
+        <label>Accept terms and conditions</label>
+      </div>
+
       <input type="submit" value="SignUp" class="signupbtn" />
     </form>
   </div>
@@ -33,7 +77,7 @@ body {
   position: relative;
 }
 
-form.ins {
+form.insc {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -58,12 +102,13 @@ form.ins {
   color: black;
 }
 
-input[type="text"] {
+input[type="text"],
+select {
   width: 400px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border-radius: 15px;
+  border-radius: 14pt;
 }
 
 input[type="password"] {
@@ -72,6 +117,15 @@ input[type="password"] {
   margin: 8px 0;
   box-sizing: border-box;
   border-radius: 15px;
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.errorpass {
+  color: #011f48;
+  margin-top: 10px;
+  font-size: 6pt;
+  font-weight: bold;
 }
 
 input[type="submit"] {
@@ -80,6 +134,11 @@ input[type="submit"] {
   margin: 8px 0;
   box-sizing: border-box;
   border-radius: 15px;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  margin: 0 10px 0 0;
 }
 
 .signupbtn {

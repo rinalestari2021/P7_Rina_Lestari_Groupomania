@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vue/cli": "^5.0.1",
+    "axios": "^0.26.1",
     "source-map-url": "^0.4.1",
     "vue": "^3.2.31",
     "vue-router": "^4.0.12",
