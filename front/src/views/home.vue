@@ -12,11 +12,11 @@ export default {
   },
   methods: {
     goToProfile() {
-      let route = this.$router.resolve({ path: "/profile" });
+      let route = this.$router.resolve({ path: "/userprofile" });
       window.open(route.href);
     },
     goToContact() {
-      let route = this.$router.resolve({ path: "/contact" });
+      let route = this.$router.resolve({ path: "/userlist" });
       window.open(route.href);
     },
     changeFontSize: function (event) {
@@ -27,6 +27,12 @@ export default {
     },
     onFileChanged(event) {
       const file = event.target.files[0];
+    },
+    logout() {
+      //need to setup the auth first
+      //this.$auth.logout ({
+      //  returnTo:window.location.origin
+      //});
     },
   },
 };
@@ -45,16 +51,10 @@ export default {
     >
       Your username/name here
     </div>
-    <img
-      class="imagefeed"
-      src="./assets/pp2.png"
-      width="300"
-      height="150"
-      alt="imageupload"
-    />
+    <img class="imagefeed" src="/" width="300" height="150" alt="imageupload" />
     <div class="form">
       <img :src="image" alt="" />
-      <form @submit.prevent="submit">
+      <form @submit.self="submit">
         <input
           class="framefeed"
           placeholder="Write a message"
@@ -86,11 +86,23 @@ export default {
     >
       Contact
     </button>
-    <button id="exit">LogOut</button>
+    <button @click="logout()" id="exit">LogOut</button>
   </div>
 </template>
 
 <style lang="scss">
+.newfeedblock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: #5adfe2;
+  width: 100%;
+  height: auto;
+  line-height: 20px;
+}
+
 img {
   display: block;
   margin-left: auto;
@@ -122,12 +134,9 @@ button:hover {
 }
 
 .imagefeed {
-  display: flex;
   justify-items: center;
   align-items: center;
   text-align: center;
-  outline: 2px solid #011f48;
-  bottom: 200px;
 }
 
 div.sidebar {
@@ -186,19 +195,19 @@ div.sidebar {
 .b-del {
   position: absolute;
   margin-left: 40%;
-  top: 190px;
+  top: 100px;
 }
 
 .b-edit {
   position: absolute;
   margin-left: 35%;
-  top: 190px;
+  top: 100px;
 }
 
 .userhome {
   color: #011f48;
   position: absolute;
-  top: 200px;
+
   left: 390px;
 }
 </style>

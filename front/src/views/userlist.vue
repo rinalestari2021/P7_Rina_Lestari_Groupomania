@@ -9,10 +9,7 @@ export default {
     };
   },
   methods: {
-    goToUserprofile() {
-      let route = this.$router.resolve({ path: "/userprofile" });
-      window.open(route.href);
-    },
+    //need to add profile with attribut id etc
   },
 };
 </script>
@@ -22,38 +19,29 @@ export default {
     <div class="userlist">
       <img
         class="profpic"
-        src="./assets/pp2.png"
+        src="/pic2.png"
         alt="profilepicture"
         width="150"
         height="150"
       />
-      <div class="prof-name">
-        <button @click="goToUserprofile()">yourfullnamehere</button>
-      </div>
+      <router-link :to="{ name: 'Profile' }" class="prof-name"
+        >yourfullnamehere</router-link
+      >
     </div>
     <div class="userlist2">
       <img
         class="profpic"
-        src="./assets/pp2.png"
+        src="/pic1.png"
         alt="profilepicture"
         width="150"
         height="150"
       />
-      <div class="prof-name2">
-        <button @click="goToUserprofile()">yourfullnamehere</button>
-      </div>
+      <router-link :to="{ name: 'Profile' }" class="prof-name2"
+        >yourfullnamehere</router-link
+      >
     </div>
 
-    <button
-      @click="returnHome()"
-      :style="{
-        'font-size': fontSize,
-        'font-weight': fontWeight,
-      }"
-      class="returnhome"
-    >
-      Home
-    </button>
+    <router-link :to="{ name: 'Home' }" class="returnhome">Home</router-link>
   </div>
 </template>
 
@@ -77,6 +65,8 @@ body {
 .prof-name2 {
   top: 3%;
   line-height: 50px;
+  text-decoration: none;
+  color: #011f48;
 }
 
 .returnhome {
@@ -84,6 +74,10 @@ body {
   left: 70%;
   margin-top: 30%;
   width: 55px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 12pt;
+  color: #011f48;
 }
 
 .profpic {

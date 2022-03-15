@@ -21,6 +21,12 @@ export default {
     changeOptionColor: function (event) {
       this.optionColor = event.target.value;
     },
+    logout() {
+      //need to setup the auth first
+      //this.$auth.logout ({
+      //  returnTo:window.location.origin
+      //});
+    },
   },
 };
 </script>
@@ -30,7 +36,7 @@ export default {
     <div class="frameprofile">
       <img
         class="profpic"
-        src="./assets/pp2.png"
+        src="/pic1.png"
         alt="picture"
         width="150"
         height="150"
@@ -70,7 +76,7 @@ export default {
     </button>
 
     <button id="turnoff">Deactivate</button>
-    <button id="exit">LogOut</button>
+    <button @click="logout()" id="exit">LogOut</button>
   </div>
 </template>
 
@@ -165,5 +171,9 @@ div.sidebar {
 
 .frameprofile {
   margin-top: 10px;
+}
+
+#turnoff:hover {
+  background-color: #5adfe2;
 }
 </style>

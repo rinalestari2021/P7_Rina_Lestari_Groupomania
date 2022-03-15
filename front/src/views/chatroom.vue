@@ -4,12 +4,28 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    goToHome() {
+      let route = this.$router.resolve({ path: "/home" });
+      window.open(route.href);
+    },
+    goToContact() {
+      let route = this.$router.resolve({ path: "/userlist" });
+      window.open(route.href);
+    },
+  },
+  logout() {
+    //need to setup the auth first
+    //this.$auth.logout ({
+    //  returnTo:window.location.origin
+    //});
+  },
 };
 </script>
 
 <template>
   <div class="profileheader">
-    <img class="pics" src="/pp2.png" width="180" height="180" alt="" />
+    <img class="pics" src="/pic1.png" width="150" height="150" alt="" />
     <div class="headers">
       <div class="completename">FirstnameLastname</div>
       <div class="position">Staff</div>
@@ -71,7 +87,7 @@ export default {
     >
       Contact
     </button>
-    <button id="exit">LogOut</button>
+    <button @click="logout()" id="exit">LogOut</button>
   </div>
 </template>
 
@@ -172,6 +188,8 @@ img {
   border-radius: 50%;
   margin-left: 100px;
   margin-right: 0;
+  margin-top: 20px;
+  outline: 2px solid #011f48;
 }
 
 .uploadpics {
@@ -180,18 +198,6 @@ img {
   align-items: center;
   top: 30px;
   text-align: center;
-}
-
-.newfeedblock {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  background-color: #5adfe2;
-  width: 100%;
-  height: auto;
-  line-height: 20px;
 }
 
 .sidebar {
@@ -204,8 +210,18 @@ img {
   height: auto;
 }
 
-a hover {
+.backhome:hover {
+  background-color: #5adfe2;
   cursor: pointer;
+}
+
+.profilepage:hover {
+  background-color: #5adfe2;
+  cursor: pointer;
+}
+
+#exit:hover {
+  background-color: #5adfe2;
 }
 
 .btn-edit {

@@ -97,28 +97,29 @@ form.insc {
 
 #fname,
 #lname,
-#mail {
-  font-size: 6pt;
+#mail,
+#passcode {
+  font-size: 11pt;
   color: black;
 }
 
 input[type="text"],
 select {
+  font-size: inherit;
   width: 400px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border-radius: 14pt;
+  border-radius: 15pt;
 }
 
 input[type="password"] {
+  font-size: 300%;
   width: 400px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
   border-radius: 15px;
-  font-size: 14pt;
-  font-weight: bold;
 }
 
 .errorpass {
@@ -137,7 +138,7 @@ input[type="submit"] {
 }
 
 input[type="checkbox"] {
-  width: 16px;
+  width: 14px;
   margin: 0 10px 0 0;
 }
 

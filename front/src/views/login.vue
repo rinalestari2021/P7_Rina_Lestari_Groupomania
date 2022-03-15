@@ -2,19 +2,50 @@
 export default {
   name: "login",
   data() {
-    return {};
+    return {
+      mail: "",
+      passcode: "",
+    };
+  },
+  method: {
+    handleLogin() {
+      //validate password
+      this.passwordError =
+        this.password.lenght > 6
+          ? ""
+          : "Password must be at least 6 chars long";
+      //all syntaxe js connect with DB here
+    },
+    submitlogin() {
+      //need to setup the auth first
+      //this.$auth.loginWithRedirect()
+    },
   },
 };
 </script>
 
 <template>
   <div class="containerform">
-    <form class="log">
+    <form @submit.prevent="handleLogin" class="log">
       <label for="mail">Email:</label><br />
-      <input type="text" id="mail" name="mail" />
+      <input type="text" id="mail" name="mail" required v-model="mail" />
       <label for="pass">Password:</label><br />
-      <input type="password" id="passcode" name="passcode" />
-      <input type="submit" value="Login" class="loginbtn" />
+      <input
+        type="password"
+        id="passcode"
+        name="passcode"
+        required
+        v-model="passcode"
+      />
+
+      <div v-if="passwordError" class="errorpass">{{ passwordError }}</div>
+
+      <input
+        @click="submitlogin()"
+        type="submit"
+        value="Login"
+        class="loginbtn"
+      />
       <!--need to
         connect direct to home afterlogin-->
     </form>
@@ -46,7 +77,7 @@ form.log {
 
 #mail,
 #passcode {
-  font-size: 6pt;
+  font-size: 11pt;
   color: black;
 }
 

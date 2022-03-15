@@ -24,6 +24,8 @@ export default {
 
 <template>
   <div id="app">
+    <router-link :to="{ name: 'SignUp' }">SignUp</router-link>
+    <router-link :to="{ name: 'Login' }">Login</router-link>
     <img
       class="openinglogo"
       src="./assets/icon-left-font-monochrome-white.png"
