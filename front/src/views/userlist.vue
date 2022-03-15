@@ -5,13 +5,16 @@ export default {
     return {
       fontSize: "14px",
       fontWeight: "Bold",
-      optionColor: "#011f48",
-    };
+      optionColor: "#011f48"
+    }
   },
   methods: {
     //need to add profile with attribut id etc
   },
-};
+  mounted() {
+    console.log("COUCOU")
+  }
+}
 </script>
 
 <template>

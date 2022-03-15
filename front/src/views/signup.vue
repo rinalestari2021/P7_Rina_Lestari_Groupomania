@@ -1,4 +1,5 @@
 <script>
+import axios from "axios"
 export default {
   name: "SignUp",
   data() {
@@ -9,19 +10,31 @@ export default {
       passcode: "",
       role: "",
       terms: false,
-    };
+      passwordError: ""
+    }
   },
-  method: {
+  methods: {
     handleSignUp() {
       //validate password
       this.passwordError =
-        this.password.lenght > 6
-          ? ""
-          : "Password must be at least 6 chars long";
-      //all syntaxe js connect with DB here
-    },
-  },
-};
+        this.passcode.lenght > 6 ? "" : "Password must be at least 6 chars long"
+      // all syntaxe js connect with DB here
+      let data = {
+        first_name: this.fname,
+        last_name: this.lname
+      }
+      axios
+        .post("http://localhost:3000/api/auth/signup", data)
+        .then((data) => {
+          //
+          console.log(data)
+        })
+        .catch((err) => {
+          console.error("ERROR REQUEST ===========")
+        })
+    }
+  }
+}
 </script>
 
 <template>
@@ -47,6 +60,9 @@ export default {
         required
         v-model="passcode"
       />
+      <pre>
+        {{ passwordError }}
+      </pre>
       <div v-if="passwordError" class="errorpass">{{ passwordError }}</div>
 
       <label class="state">Role:</label>
@@ -58,8 +74,8 @@ export default {
       </select>
 
       <div class="terms">
-        <input type="checkbox" v-model="terms" required />
-        <label>Accept terms and conditions</label>
+        <input type="checkbox" id="conditions" v-model="terms" required />
+        <label for="conditions">Accept terms and conditions</label>
       </div>
 
       <input type="submit" value="SignUp" class="signupbtn" />

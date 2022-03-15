@@ -4,24 +4,22 @@ export default {
   data() {
     return {
       mail: "",
-      passcode: "",
-    };
+      login: ""
+    }
   },
   method: {
     handleLogin() {
       //validate password
       this.passwordError =
-        this.password.lenght > 6
-          ? ""
-          : "Password must be at least 6 chars long";
+        this.password.lenght > 6 ? "" : "Password must be at least 6 chars long"
       //all syntaxe js connect with DB here
     },
     submitlogin() {
       //need to setup the auth first
       //this.$auth.loginWithRedirect()
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <template>
