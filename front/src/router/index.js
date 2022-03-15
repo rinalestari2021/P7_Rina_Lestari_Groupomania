@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import SignUp from "../views/signup.vue";
-import Login from "../views/login.vue";
-import Home from "../views/home.vue";
-import Homepage from "../views/homepage.vue";
-import Profile from "../views/userprofile.vue";
-import Contact from "../views/userlist.vue";
-import Forum from "../views/chatroom.vue";
+import SignUp from "../views/Signup.vue";
+import Login from "../views/Login.vue";
+import Home from "../views/Home.vue";
+import Homepage from "../views/Homepage.vue";
+import Profile from "../views/Profile.vue";
+import Contact from "../views/Contact.vue";
+import Forum from "../views/Forum.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,17 +31,17 @@ const router = createRouter({
       component: Login,
     },
     {
-      path: "/userprofile",
+      path: "/profile",
       name: "Profile",
       component: Profile,
     },
     {
-      path: "/userlist",
+      path: "/contact",
       name: "Contact",
       component: Contact,
     },
     {
-      path: "/chatroom",
+      path: "/forum",
       name: "Forum",
       component: Forum,
     },

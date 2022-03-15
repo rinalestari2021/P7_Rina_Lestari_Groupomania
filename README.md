@@ -29,11 +29,8 @@ POST comment : http://localhost:3000/api/auth/comment
 DELETE comment :http://localhost:3000/api/auth/comment/:id
 
 ROUTES FRONT
-App
+App Homepage
 http://localhost:3000
-
-Homepage
-http://localhost:3000/homepage
 
 Signup
 http://localhost:3000/SignUp
@@ -48,7 +45,7 @@ User
 http://localhost:3000/userprofile
 
 Userlist
-http://localhost:3000/userlist
+http://localhost:3000/contact
 
 Chatroom(conversation)
-http://localhost:3000/chatroom
+http://localhost:3000/forum

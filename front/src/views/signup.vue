@@ -1,5 +1,5 @@
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   name: "SignUp",
   data() {
@@ -10,31 +10,34 @@ export default {
       passcode: "",
       role: "",
       terms: false,
-      passwordError: ""
-    }
+      passwordError: "",
+    };
   },
   methods: {
     handleSignUp() {
       //validate password
       this.passwordError =
-        this.passcode.lenght > 6 ? "" : "Password must be at least 6 chars long"
+        this.passcode.lenght > 6
+          ? ""
+          : "Password must be at least 6 chars long";
       // all syntaxe js connect with DB here
       let data = {
         first_name: this.fname,
-        last_name: this.lname
-      }
+        last_name: this.lname,
+        email: this.mail,
+      };
       axios
         .post("http://localhost:3000/api/auth/signup", data)
         .then((data) => {
           //
-          console.log(data)
+          console.log(data);
         })
         .catch((err) => {
-          console.error("ERROR REQUEST ===========")
-        })
-    }
-  }
-}
+          console.error("ERROR REQUEST ===========");
+        });
+    },
+  },
+};
 </script>
 
 <template>

@@ -10,7 +10,7 @@ export default {
       window.open(route.href);
     },
     goToContact() {
-      let route = this.$router.resolve({ path: "/userlist" });
+      let route = this.$router.resolve({ path: "/contact" });
       window.open(route.href);
     },
   },
@@ -85,7 +85,7 @@ export default {
       }"
       class="profilepage"
     >
-      Contact
+      Contacts
     </button>
     <button @click="logout()" id="exit">LogOut</button>
   </div>

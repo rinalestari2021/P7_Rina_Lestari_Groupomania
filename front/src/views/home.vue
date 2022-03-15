@@ -7,35 +7,35 @@ export default {
       fontWeight: "Bold",
       optionColor: "#011f48",
       topDist: "30px",
-      leftDist: "285px"
-    }
+      leftDist: "285px",
+    };
   },
   methods: {
     goToProfile() {
-      let route = this.$router.resolve({ path: "/userprofile" })
-      window.open(route.href)
+      let route = this.$router.resolve({ path: "/userprofile" });
+      window.open(route.href);
     },
     goToContact() {
-      let route = this.$router.resolve({ path: "/userlist" })
-      window.open(route.href)
+      let route = this.$router.resolve({ path: "/userlist" });
+      window.open(route.href);
     },
     changeFontSize: function (event) {
-      this.fontSize = event.target.value + "px"
+      this.fontSize = event.target.value + "px";
     },
     changeOptionColor: function (event) {
-      this.optionColor = event.target.value
+      this.optionColor = event.target.value;
     },
     onFileChanged(event) {
-      const file = event.target.files[0]
+      const file = event.target.files[0];
     },
     logout() {
       //need to setup the auth first
       //this.$auth.logout ({
       //  returnTo:window.location.origin
       //});
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <template>
@@ -46,7 +46,7 @@ export default {
         'font-size': fontSize,
         'font-weight': fontWeight,
         top: topDist,
-        left: leftDist
+        left: leftDist,
       }"
     >
       Your username/name here
@@ -70,7 +70,7 @@ export default {
       @click="goToProfile()"
       :style="{
         'font-size': fontSize,
-        'font-weight': fontWeight
+        'font-weight': fontWeight,
       }"
       class="profilepage"
     >
@@ -80,11 +80,11 @@ export default {
       @click="goToContact()"
       :style="{
         'font-size': fontSize,
-        'font-weight': fontWeight
+        'font-weight': fontWeight,
       }"
       class="profilepage"
     >
-      Contact
+      Contacts
     </button>
     <button @click="logout()" id="exit">LogOut</button>
   </div>
