@@ -28,9 +28,12 @@ POST comment : http://localhost:3000/api/auth/comment
 
 DELETE comment :http://localhost:3000/api/auth/comment/:id
 
-Routes Front
+ROUTES FRONT
 App
 http://localhost:3000
+
+Homepage
+http://localhost:3000/homepage
 
 Signup
 http://localhost:3000/SignUp
