@@ -1,32 +1,63 @@
 <script>
+import axios from "axios";
+
 export default {
   name: "login",
   data() {
     return {
       mail: "",
-      login: ""
-    }
+      login: "",
+    };
   },
-  method: {
+  methods: {
     handleLogin() {
       //validate password
       this.passwordError =
-        this.password.lenght > 6 ? "" : "Password must be at least 6 chars long"
+        this.password.lenght > 6
+          ? ""
+          : "Password must be at least 6 chars long";
       //all syntaxe js connect with DB here
+      let data = {
+        email: this.mail,
+        password: this.passcode,
+      };
+      axios
+        .post("http://localhost:3000/api/auth/login", data)
+        .then((data) => {
+          //
+          console.log(data);
+        })
+        .catch((err) => {
+          console.error("ERROR REQUEST ===========");
+        });
     },
     submitlogin() {
+      //const auth = { email: this.email, password: this.password };
+      //this.success = false;
+      //this.error = null;
+      //try {
+      // const res = await axios
+      // .get("http://localhost:3000/api/auth/accounts", { auth })
+      //  .then((res) => res.data);
+      //this.success = true;
+      // } catch (err) {
+      //this.error = err.message;
+      //}
       //need to setup the auth first
       //this.$auth.loginWithRedirect()
-    }
-  }
-}
+    },
+    prevPage() {
+      this.$router.go(-1);
+    },
+  },
+};
 </script>
 
 <template>
   <div class="containerform">
-    <form @submit.prevent="handleLogin" class="log">
+    <form @submit.prevent="handleLogin()" class="log">
       <label for="mail">Email:</label><br />
-      <input type="text" id="mail" name="mail" required v-model="mail" />
+      <input type="string" id="mail" name="mail" required v-model="mail" />
       <label for="pass">Password:</label><br />
       <input
         type="password"
@@ -37,6 +68,7 @@ export default {
       />
 
       <div v-if="passwordError" class="errorpass">{{ passwordError }}</div>
+      <div v-if="success" id="success">Logged in Successully</div>
 
       <input
         @click="submitlogin()"
@@ -47,6 +79,7 @@ export default {
       <!--need to
         connect direct to home afterlogin-->
     </form>
+    <button @click="prevPage" class="previous">Go Back</button>
   </div>
 </template>
 
@@ -95,11 +128,20 @@ input[type="submit"] {
   border-radius: 15px;
 }
 
-#passcode {
+#passcode,
+#mail {
   width: 400px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  border-radius: 15pt;
+}
+
+#success {
+  color: #011f48;
+  margin-top: 10px;
+  font-size: 6pt;
+  font-weight: bold;
 }
 
 .loginbtn {
@@ -117,5 +159,19 @@ input[type="submit"] {
 .loginbtn:hover {
   background-color: #5adfe2;
   cursor: pointer;
+}
+
+.previous {
+  margin: 0 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 7px;
+  top: 50px;
+  background: white;
+}
+
+.precedent:hover {
+  background-color: #5adfe2;
+  color: #b86758;
 }
 </style>

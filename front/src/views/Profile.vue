@@ -49,17 +49,9 @@ export default {
       </div>
       <div class="stat_user">Staff</div>
 
-      <div class="form">
-        <img :src="image" alt="" />
-        <form @submit.prevent="submit">
-          <input
-            class="framecontrol"
-            placeholder="Write a message"
-            v-model="message"
-          />
-        </form>
-        <button class="btnedit">Edit</button>
-        <button class="btndel">Delete</button>
+      <div class="bio">
+        About:
+        <p class="biodata">Lorem ipsum sit amit dolor</p>
       </div>
     </div>
   </div>
@@ -170,10 +162,16 @@ div.sidebar {
 }
 
 .frameprofile {
-  margin-top: 10px;
+  margin-top: 80px;
 }
 
 #turnoff:hover {
   background-color: #5adfe2;
+}
+
+.bio {
+  color: black;
+  font-size: 12pt;
+  top: 30px;
 }
 </style>

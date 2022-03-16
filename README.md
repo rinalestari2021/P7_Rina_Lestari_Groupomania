@@ -1,6 +1,7 @@
 # P7_Rina_Lestari_Groupomania
 
 Routes API Backend
+To launch : node server
 
 POST signup : http://localhost:3000/api/auth/signup
 
@@ -28,7 +29,9 @@ POST comment : http://localhost:3000/api/auth/comment
 
 DELETE comment :http://localhost:3000/api/auth/comment/:id
 
-ROUTES FRONT
+ROUTES FRONT (Please use port :3001 for front if the port :3000 isn't working)
+To launch : npm run dev
+
 App Homepage
 http://localhost:3000
 

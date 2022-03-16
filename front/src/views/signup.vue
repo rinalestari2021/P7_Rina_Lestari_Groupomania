@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+
 export default {
   name: "SignUp",
   data() {
@@ -25,6 +26,7 @@ export default {
         first_name: this.fname,
         last_name: this.lname,
         email: this.mail,
+        password: this.passcode,
       };
       axios
         .post("http://localhost:3000/api/auth/signup", data)
@@ -35,6 +37,9 @@ export default {
         .catch((err) => {
           console.error("ERROR REQUEST ===========");
         });
+    },
+    prevPage() {
+      this.$router.go(-1);
     },
   },
 };
@@ -83,6 +88,7 @@ export default {
 
       <input type="submit" value="SignUp" class="signupbtn" />
     </form>
+    <button @click="prevPage" class="previous">Go Back</button>
   </div>
 </template>
 
@@ -120,6 +126,7 @@ form.insc {
 #passcode {
   font-size: 11pt;
   color: black;
+  border-radius: 15pt;
 }
 
 input[type="text"],
@@ -129,7 +136,7 @@ select {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border-radius: 15pt;
+  border-radius: 15px;
 }
 
 input[type="password"] {

@@ -1,6 +1,23 @@
 <script>
+//import Postlist from "../components/Postlist.vue";
+//import { ref } from "vue";
+
 export default {
   name: "Home",
+  //components: { Postlist },
+  //setup() {
+  //const posts = ref([
+  // { title: "Bonjour", imageUrl: "/", body: "Lorem ipsum", id: "1" },
+  // {
+  //   title: "helloo",
+  //   message: "lorem ipsum sit amit dolor",
+  //  imageUrl: "/",
+  //   body: "Lorem ipsum",
+  //   id: "2",
+  //   },
+  //]);
+  // return { posts };
+  //},
   data() {
     return {
       fontSize: "12pt",
@@ -12,11 +29,11 @@ export default {
   },
   methods: {
     goToProfile() {
-      let route = this.$router.resolve({ path: "/userprofile" });
+      let route = this.$router.resolve({ path: "/profile" });
       window.open(route.href);
     },
     goToContact() {
-      let route = this.$router.resolve({ path: "/userlist" });
+      let route = this.$router.resolve({ path: "/contact" });
       window.open(route.href);
     },
     changeFontSize: function (event) {
@@ -40,30 +57,7 @@ export default {
 
 <template>
   <div class="newfeedblock">
-    <div
-      class="userhome"
-      :style="{
-        'font-size': fontSize,
-        'font-weight': fontWeight,
-        top: topDist,
-        left: leftDist,
-      }"
-    >
-      Your username/name here
-    </div>
-    <img class="imagefeed" src="/" width="300" height="150" alt="imageupload" />
-    <div class="form">
-      <img :src="image" alt="" />
-      <form @submit.self="submit">
-        <input
-          class="framefeed"
-          placeholder="Write a message"
-          v-model="message"
-        />
-      </form>
-      <button class="b-edit">Edit</button>
-      <button class="b-del">Delete</button>
-    </div>
+    <Postlist :posts="posts" />
   </div>
   <div class="sidebar">
     <button

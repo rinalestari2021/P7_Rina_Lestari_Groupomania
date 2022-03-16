@@ -2,9 +2,9 @@
 export default {
   name: "Homepage",
   data() {
-    return {}
-  }
-}
+    return {};
+  },
+};
 </script>
 
 <template>
@@ -17,30 +17,40 @@ export default {
 </template>
 
 <style lang="scss">
+.homepage {
+  top: 50px;
+  position: relative;
+}
 .openingtext {
   font-family: "Verdana";
   font-size: 12pt;
   font-weight: bold;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 #btnsignup,
 #btnlogin {
   width: 100px;
   height: auto;
-  font-size: 12pt;
+  font-size: 14pt;
   font-weight: bold;
   background-color: white;
   border: 1px solid white;
-  border-radius: 12px;
-  padding: 5px;
+  border-radius: 15px;
+  padding: 8px;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: 4px 10px;
   font-family: "Arial Narrow Bold";
   color: #011f48;
-  -webkit-box-shadow: 0 10px 6px -6px #777;
-  -moz-box-shadow: 0 10px 6px -6px #777;
-  box-shadow: 0 10px 6px -6px #777;
+  -webkit-box-shadow: 0 10px 6px -8px #777;
+  -moz-box-shadow: 0 10px 6px -8px #777;
+  box-shadow: 0 10px 6px -8px #777;
+  top: 50px;
+}
+
+#btnsignup:hover {
+  background-color: #5adfe2;
+  cursor: pointer;
 }
 </style>
