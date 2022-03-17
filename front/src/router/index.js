@@ -6,6 +6,7 @@ import Homepage from "../views/Homepage.vue";
 import Profile from "../views/Profile.vue";
 import Contact from "../views/Contact.vue";
 import Forum from "../views/Forum.vue";
+import NotFound from "../views/NotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,12 @@ const router = createRouter({
       path: "/forum",
       name: "Forum",
       component: Forum,
+    },
+    //catchall 404
+    {
+      path: "/:catchAll(.*)",
+      name: "NotFound",
+      component: NotFound,
     },
   ],
 });

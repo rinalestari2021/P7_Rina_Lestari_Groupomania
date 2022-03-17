@@ -54,14 +54,7 @@ export default {
   <button class="btn-del">Delete</button>
 
   <div class="newmessage">
-    <a href="#"
-      ><img
-        src="/icon-img.png"
-        @click=""
-        class="imgFileUpload"
-        width="50"
-        height="50"
-    /></a>
+    <chat-form v-on:messagesend="addMessage"> </chat-form>
     <input class="addmessage" placeholder="Type here" />
     <img src="/icon-send.png" @click="" class="send" width="50" height="50" />
   </div>

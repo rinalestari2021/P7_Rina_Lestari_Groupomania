@@ -36,15 +36,13 @@ export default {
       //this.success = false;
       //this.error = null;
       //try {
-      // const res = await axios
-      // .get("http://localhost:3000/api/auth/accounts", { auth })
-      //  .then((res) => res.data);
+      // res = await axios
+      //.get("http://localhost:3000/api/auth/accounts", { auth })
+      //.then((res) => res.data);
       //this.success = true;
-      // } catch (err) {
+      //} catch (err) {
       //this.error = err.message;
       //}
-      //need to setup the auth first
-      //this.$auth.loginWithRedirect()
     },
     prevPage() {
       this.$router.go(-1);
@@ -170,7 +168,7 @@ input[type="submit"] {
   background: white;
 }
 
-.precedent:hover {
+.previous:hover {
   background-color: #5adfe2;
   color: #b86758;
 }

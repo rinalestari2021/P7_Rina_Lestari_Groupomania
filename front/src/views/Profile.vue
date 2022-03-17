@@ -1,6 +1,9 @@
 <script>
+import axios from "axios";
+
 export default {
   name: "Profile",
+  props: ["user", "messages", "currentuserid"],
   data() {
     return {
       fontSize: "12pt",
@@ -8,6 +11,8 @@ export default {
       optionColor: "#011f48",
       topDist: "10px",
       leftDist: "285px",
+      user: null,
+      biograph: "[]",
     };
   },
   methods: {
@@ -27,31 +32,61 @@ export default {
       //  returnTo:window.location.origin
       //});
     },
+    //fetchAuth() {
+    // this.$http
+    //  .get("api/auth")
+    // .then((response) => {
+    //  this.user = response.data.auth;
+    //  })
+    //  .catch((error) => {
+    //    console.error("ERROR REQUEST ===========");
+    // });
+    //},
+  },
+  created() {
+    axios
+      .get("/api/auth/accounts/:id" + this.$route.params)
+      .then((response) => response.json())
+      .then((data) => {
+        this.currentuserid = data;
+        this.default = [...data.data];
+      });
   },
 };
 </script>
 
 <template>
   <div class="container">
-    <div class="frameprofile">
+    <div
+      class="frameprofile"
+      v-for="message in messages"
+      v-bind:class="{
+        classForUser: message.user.id === currentuserid,
+        classNotForUser: message.user.id === currentuserid,
+      }"
+    >
       <img
         class="profpic"
-        src="/pic1.png"
-        alt="picture"
+        :src="`uploads/images_${user.firstName}_${user.lastName}.png`"
+        alt="Auth image"
         width="150"
         height="150"
       />
       <div
         class="profname"
         :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
+        v-bind:class="{
+          classForAuthororUser: message.user.id === currentuserid,
+          classForAuthorNotTheUser: message.user.id !== currentuserid,
+        }"
       >
-        Firstname Lastname(Username)
+        {{ message.user.firstName }},{{ message.user.lastName }}
       </div>
-      <div class="stat_user">Staff</div>
+      <div class="stat_user">{{ message.user.role }}</div>
 
       <div class="bio">
         About:
-        <p class="biodata">Lorem ipsum sit amit dolor</p>
+        <p class="biodata">{{ message.biograph }}</p>
       </div>
     </div>
   </div>

@@ -5,10 +5,10 @@ export default {
   name: "SignUp",
   data() {
     return {
-      fname: "",
-      lname: "",
-      mail: "",
-      passcode: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
       role: "",
       terms: false,
       passwordError: "",
@@ -16,26 +16,32 @@ export default {
   },
   methods: {
     handleSignUp() {
+      console.log("form submitted");
       //validate password
       this.passwordError =
-        this.passcode.lenght > 6
+        this.password.lenght > 6
           ? ""
           : "Password must be at least 6 chars long";
+      if (!this.passwordError) {
+        console.log("email:", this.email);
+        console.log("password:", this.password);
+        console.log("role:", this.role);
+        console.log("terms:", this.terms);
+      }
       // all syntaxe js connect with DB here
       let data = {
-        first_name: this.fname,
-        last_name: this.lname,
-        email: this.mail,
-        password: this.passcode,
+        first_name: this.firstName,
+        last_name: this.lastName,
+        email: this.email,
+        password: this.password,
       };
       axios
         .post("http://localhost:3000/api/auth/signup", data)
         .then((data) => {
-          //
           console.log(data);
         })
         .catch((err) => {
-          console.error("ERROR REQUEST ===========");
+          console.log("ERROR REQUEST ===========");
         });
     },
     prevPage() {
@@ -54,19 +60,19 @@ export default {
         id="fname"
         name="fname"
         required
-        v-model="fname"
+        v-model="firstName"
       /><br />
       <label for="lname">Lastname:</label><br />
-      <input type="text" id="lname" name="lname" required v-model="lname" />
+      <input type="text" id="lname" name="lname" required v-model="lastName" />
       <label for="mail">Email:</label><br />
-      <input type="text" id="mail" name="mail" required v-model="mail" />
+      <input type="text" id="mail" name="mail" required v-model="email" />
       <label for="pass">Password:</label><br />
       <input
         type="password"
         id="passcode"
         name="passcode"
         required
-        v-model="passcode"
+        v-model="password"
       />
       <pre>
         {{ passwordError }}
@@ -148,11 +154,12 @@ input[type="password"] {
   border-radius: 15px;
 }
 
-.errorpass {
+pre {
   color: #011f48;
-  margin-top: 10px;
+  top: 5px;
   font-size: 6pt;
   font-weight: bold;
+  text-align: center;
 }
 
 input[type="submit"] {
