@@ -19,15 +19,10 @@ export default {
       console.log("form submitted");
       //validate password
       this.passwordError =
-        this.password.lenght > 6
+        this.password.length > 6
           ? ""
           : "Password must be at least 6 chars long";
-      if (!this.passwordError) {
-        console.log("email:", this.email);
-        console.log("password:", this.password);
-        console.log("role:", this.role);
-        console.log("terms:", this.terms);
-      }
+      if (!this.passwordError);
       // all syntaxe js connect with DB here
       let data = {
         first_name: this.firstName,
@@ -39,10 +34,10 @@ export default {
       axios
         .post("http://localhost:3000/api/auth/signup", data)
         .then((res) => {
-          console.log(res);
+          this.$router.push("/login");
         })
         .catch((err) => {
-          console.log("ERROR REQUEST ===========");
+          console.log("ERROR REQUEST");
         });
     },
     prevPage() {

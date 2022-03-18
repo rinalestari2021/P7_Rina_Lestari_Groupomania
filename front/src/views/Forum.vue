@@ -47,10 +47,7 @@ export default {
   </div>
   <div class="conversation">
     <img class="uploadpics" src="" width="300" height="150" alt="imageupload" />
-
-    <form @submit.prevent="submit">
-      <input class="messageframe" placeholder="Write a message" />
-    </form>
+    <h3 v-if="user">Hi, {{ user.first_name }} {{ user.last_name }}</h3>
   </div>
   <button class="btn-edit">Edit</button>
   <button class="btn-del">Delete</button>

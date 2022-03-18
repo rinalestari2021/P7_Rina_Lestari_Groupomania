@@ -29,26 +29,26 @@ POST comment : http://localhost:3000/api/auth/comment
 
 DELETE comment :http://localhost:3000/api/auth/comment/:id
 
-ROUTES FRONT (Please use port :3001 for front if the port :3000 isn't working)
+ROUTES FRONT
 To launch : npm run dev
 
 App Homepage
-http://localhost:3000
+http://localhost:8080
 
 Signup
-http://localhost:3000/SignUp
+http://localhost:8080/SignUp
 
 Login
-http://localhost:3000/Login
+http://localhost:8080/Login
 
 Home(Newsfeed)
-http://localhost:3000/Home
+http://localhost:8080/Home
 
 User
-http://localhost:3000/userprofile
+http://localhost:8080/userprofile
 
 Userlist
-http://localhost:3000/contact
+http://localhost:8080/contact
 
 Chatroom(conversation)
-http://localhost:3000/forum
+http://localhost:8080/forum

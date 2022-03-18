@@ -80,7 +80,7 @@ export default {
           classForAuthorNotTheUser: message.user.id !== currentuserid,
         }"
       >
-        {{ message.user.firstName }},{{ message.user.lastName }}
+        {{ message.user.first_name }},{{ message.user.last_name }}
       </div>
       <div class="stat_user">{{ message.user.role }}</div>
 

@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export default {
-  name: "login",
+  name: "Login",
   data() {
     return {
       email: "",
@@ -12,26 +12,21 @@ export default {
     };
   },
   methods: {
-    async handleLogin() {
-      const response = await axios.post("login", {
-        email: this.email,
-        password: (this.password =
-          this.password.lenght > 6
-            ? ""
-            : "Password must be at least 6 chars long"),
-      });
+    handleLogin() {
+      axios
+        .post("http://localhost:3000/api/auth/login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then((res) => {
+          localStorage.setItem("token", res.data);
+          this.$router.push("/home");
+        });
       if (!this.passwordError) {
         console.log("email:", this.email);
         console.log("password:", this.password);
       }
       // all syntaxe js connect with DB here
-      let data = {
-        first_name: this.firstName,
-        last_name: this.lastName,
-        email: this.email,
-        password: this.password,
-      };
-      console.log(data);
     },
     prevPage() {
       this.$router.go(-1);

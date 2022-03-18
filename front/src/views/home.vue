@@ -19,6 +19,7 @@ export default {
       optionColor: "#011f48",
       topDist: "30px",
       leftDist: "285px",
+      user: null,
     };
   },
   methods: {
@@ -39,19 +40,15 @@ export default {
     onFileChanged(event) {
       const file = event.target.files[0];
     },
-    logout() {
-      //need to setup the auth first
-      //this.$auth.logout ({
-      //  returnTo:window.location.origin
-      //});
-    },
+    logout() {},
   },
 };
 </script>
 
 <template>
   <div class="newfeedblock">
-    <!--<Postlist :posts="posts" />-->
+    <h3 v-if="user">Hi, {{ user.first_name }} {{ user.last_name }}</h3>
+    <h3 v-if="!user">You are not logged in</h3>
   </div>
   <div class="sidebar">
     <button
