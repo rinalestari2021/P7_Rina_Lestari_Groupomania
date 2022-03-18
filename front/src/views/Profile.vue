@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default {
   name: "Profile",
-  props: ["user", "messages", "currentuserid"],
+  //props: ["user", "messages", "currentuserid"],
   data() {
     return {
       fontSize: "12pt",
@@ -45,7 +45,7 @@ export default {
   },
   created() {
     axios
-      .get("/api/auth/accounts/:id" + this.$route.params)
+      .post("/api/auth/accounts" + this.$route.params)
       .then((response) => response.json())
       .then((data) => {
         this.currentuserid = data;
@@ -175,8 +175,6 @@ div.sidebar {
   margin: 4px 2px;
   font-family: "Arial Narrow Bold";
   color: #011f48;
-  -webkit-box-shadow: 0 10px 6px -6px #777;
-  -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;
   top: 20px;
 }

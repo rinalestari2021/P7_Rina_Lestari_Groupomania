@@ -5,16 +5,16 @@ export default {
     return {
       fontSize: "14px",
       fontWeight: "Bold",
-      optionColor: "#011f48"
-    }
+      optionColor: "#011f48",
+    };
   },
   methods: {
     //need to add profile with attribut id etc
   },
   mounted() {
-    console.log("COUCOU")
-  }
-}
+    console.log("COUCOU");
+  },
+};
 </script>
 
 <template>
@@ -58,7 +58,6 @@ body {
   flex-direction: column;
   width: 30%;
   height: auto;
-  border-style: solid 2px #5adfe2;
   background-color: #5adfe2;
   align-content: center;
   line-height: 40px;
@@ -81,6 +80,11 @@ body {
   font-weight: bold;
   font-size: 12pt;
   color: #011f48;
+}
+
+.returnhome:hover {
+  color: #b86758;
+  cursor: pointer;
 }
 
 .profpic {

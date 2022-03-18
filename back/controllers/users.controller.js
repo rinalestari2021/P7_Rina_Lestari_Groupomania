@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 // Model : SignUp
 exports.signup = async (req, res, next) => {
   try {
-    const hash = await bcrypt.hash(req.body.password, 10);
+    const hash = await bcrypt.hash(req.body.password, 6);
     const user = new User({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -19,10 +19,7 @@ exports.signup = async (req, res, next) => {
     await user.save();
 
     res.status(201).json({
-      UserId: user.id,
-      token: jwt.sign({ UserId: user.id }, `${process.env.JWT_RAND_SECRET}`, {
-        expiresIn: "365days",
-      }),
+      message: "User created",
     });
   } catch (error) {
     res.status(400).json({ error: "Email already in use" });

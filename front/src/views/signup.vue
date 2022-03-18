@@ -35,6 +35,7 @@ export default {
         email: this.email,
         password: this.password,
       };
+      console.log(data);
       axios
         .post("http://localhost:3000/api/auth/signup", data)
         .then((data) => {

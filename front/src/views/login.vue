@@ -5,44 +5,31 @@ export default {
   name: "login",
   data() {
     return {
-      mail: "",
-      login: "",
+      email: "",
+      password: "",
     };
   },
   methods: {
-    handleLogin() {
-      //validate password
-      this.passwordError =
-        this.password.lenght > 6
-          ? ""
-          : "Password must be at least 6 chars long";
-      //all syntaxe js connect with DB here
+    async handleLogin() {
+      const response = await axios.post("login", {
+        email: this.email,
+        password: (this.password =
+          this.password.lenght > 6
+            ? ""
+            : "Password must be at least 6 chars long"),
+      });
+      if (!this.passwordError) {
+        console.log("email:", this.email);
+        console.log("password:", this.password);
+      }
+      // all syntaxe js connect with DB here
       let data = {
-        email: this.mail,
-        password: this.passcode,
+        first_name: this.firstName,
+        last_name: this.lastName,
+        email: this.email,
+        password: this.password,
       };
-      axios
-        .post("http://localhost:3000/api/auth/login", data)
-        .then((data) => {
-          //
-          console.log(data);
-        })
-        .catch((err) => {
-          console.error("ERROR REQUEST ===========");
-        });
-    },
-    submitlogin() {
-      //const auth = { email: this.email, password: this.password };
-      //this.success = false;
-      //this.error = null;
-      //try {
-      // res = await axios
-      //.get("http://localhost:3000/api/auth/accounts", { auth })
-      //.then((res) => res.data);
-      //this.success = true;
-      //} catch (err) {
-      //this.error = err.message;
-      //}
+      console.log(data);
     },
     prevPage() {
       this.$router.go(-1);
@@ -55,25 +42,23 @@ export default {
   <div class="containerform">
     <form @submit.prevent="handleLogin()" class="log">
       <label for="mail">Email:</label><br />
-      <input type="string" id="mail" name="mail" required v-model="mail" />
+      <input type="string" id="mail" name="mail" required v-model="email" />
       <label for="pass">Password:</label><br />
       <input
         type="password"
         id="passcode"
         name="passcode"
         required
-        v-model="passcode"
+        v-model="password"
       />
-
+      <pre>
+        {{ passwordError }}
+      </pre>
       <div v-if="passwordError" class="errorpass">{{ passwordError }}</div>
+
       <div v-if="success" id="success">Logged in Successully</div>
 
-      <input
-        @click="submitlogin()"
-        type="submit"
-        value="Login"
-        class="loginbtn"
-      />
+      <input type="submit" value="Login" class="loginbtn" />
       <!--need to
         connect direct to home afterlogin-->
     </form>

@@ -57,7 +57,7 @@ export default {
 
 <template>
   <div class="newfeedblock">
-    <Postlist :posts="posts" />
+    <!--<Postlist :posts="posts" />-->
   </div>
   <div class="sidebar">
     <button
@@ -160,8 +160,6 @@ div.sidebar {
   margin: 4px 2px;
   font-family: "Arial Narrow Bold";
   color: #011f48;
-  -webkit-box-shadow: 0 10px 6px -6px #777;
-  -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;
 }
 
@@ -180,8 +178,6 @@ div.sidebar {
   margin: 4px 2px;
   font-family: "Arial Narrow Bold";
   color: #011f48;
-  -webkit-box-shadow: 0 10px 6px -6px #777;
-  -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;
   top: 20px;
 }

@@ -43,8 +43,6 @@ export default {
   margin: 4px 10px;
   font-family: "Arial Narrow Bold";
   color: #011f48;
-  -webkit-box-shadow: 0 10px 6px -8px #777;
-  -moz-box-shadow: 0 10px 6px -8px #777;
   box-shadow: 0 10px 6px -8px #777;
   top: 50px;
 }
