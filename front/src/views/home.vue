@@ -1,23 +1,17 @@
 <script>
-//import Postlist from "../components/Postlist.vue";
-//import { ref } from "vue";
+import axios from "axios";
 
 export default {
   name: "Home",
-  //components: { Postlist },
-  //setup() {
-  //const posts = ref([
-  // { title: "Bonjour", imageUrl: "/", body: "Lorem ipsum", id: "1" },
-  // {
-  //   title: "helloo",
-  //   message: "lorem ipsum sit amit dolor",
-  //  imageUrl: "/",
-  //   body: "Lorem ipsum",
-  //   id: "2",
-  //   },
-  //]);
-  // return { posts };
-  //},
+  async created() {
+    const response = await axios.get("user", {
+      headers: {
+        Authorization: "Bearer" + localstorage.getItem("token"),
+      },
+    });
+
+    console.log(response);
+  },
   data() {
     return {
       fontSize: "12pt",

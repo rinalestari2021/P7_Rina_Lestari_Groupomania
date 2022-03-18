@@ -38,8 +38,8 @@ export default {
       console.log(data);
       axios
         .post("http://localhost:3000/api/auth/signup", data)
-        .then((data) => {
-          console.log(data);
+        .then((res) => {
+          console.log(res);
         })
         .catch((err) => {
           console.log("ERROR REQUEST ===========");

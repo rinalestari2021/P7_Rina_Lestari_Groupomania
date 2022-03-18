@@ -7,6 +7,8 @@ export default {
     return {
       email: "",
       password: "",
+      passwordError: "",
+      success: "",
     };
   },
   methods: {
