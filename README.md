@@ -7,9 +7,9 @@ POST signup : http://localhost:3000/api/auth/signup
 
 POST login : http://localhost:3000/api/auth/login
 
-GET user : http://localhost:3000/api/auth/accounts
+GET all user : http://localhost:3000/api/auth/accounts
 
-GET all user : http://localhost:3000/api/auth/accounts/:id
+GET user : http://localhost:3000/api/auth/accounts/:id
 
 DELETE accounts :http://localhost:3000/api/auth/accounts/:id
 

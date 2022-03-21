@@ -20,13 +20,13 @@ export default {
         })
         .then((res) => {
           localStorage.setItem("token", res.data);
+          //this.$store.dispatch('user', res.data.user) activate this one when store is add
           this.$router.push("/home");
         });
       if (!this.passwordError) {
         console.log("email:", this.email);
         console.log("password:", this.password);
       }
-      // all syntaxe js connect with DB here
     },
     prevPage() {
       this.$router.go(-1);

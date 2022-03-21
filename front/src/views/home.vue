@@ -22,6 +22,9 @@ export default {
       user: null,
     };
   },
+  async created() {
+    axios.get("http://localhost:3000/api/auth/accounts");
+  },
   methods: {
     goToProfile() {
       let route = this.$router.resolve({ path: "/profile" });

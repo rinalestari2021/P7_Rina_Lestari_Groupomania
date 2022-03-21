@@ -3,7 +3,6 @@ import axios from "axios";
 
 export default {
   name: "Profile",
-  //props: ["user", "messages", "currentuserid"],
   data() {
     return {
       fontSize: "12pt",
@@ -12,7 +11,17 @@ export default {
       topDist: "10px",
       leftDist: "285px",
       user: null,
-      biograph: "[]",
+      profiles: [
+        {
+          id: "",
+          first_name: "",
+          last_name: "",
+          biograph: "",
+          role: "",
+          images: "/",
+        },
+      ],
+      profile: {},
     };
   },
   methods: {
@@ -27,31 +36,18 @@ export default {
       this.optionColor = event.target.value;
     },
     logout() {
-      //need to setup the auth first
-      //this.$auth.logout ({
-      //  returnTo:window.location.origin
-      //});
+      this.$router.push("/login");
     },
-    //fetchAuth() {
-    // this.$http
-    //  .get("api/auth")
-    // .then((response) => {
-    //  this.user = response.data.auth;
-    //  })
-    //  .catch((error) => {
-    //    console.error("ERROR REQUEST ===========");
-    // });
-    //},
   },
-  created() {
-    axios
-      .post("/api/auth/accounts" + this.$route.params)
-      .then((response) => response.json())
-      .then((data) => {
-        this.currentuserid = data;
-        this.default = [...data.data];
-      });
-  },
+  //created() {
+  // axios
+  //  .post("/api/auth/accounts" + this.$route.params)
+  // .then((response) => response.json())
+  //.then((data) => {
+  //  this.currentuserid = data;
+  //   this.default = [...data.data];
+  //  });
+  //},
 };
 </script>
 
@@ -59,34 +55,30 @@ export default {
   <div class="container">
     <div
       class="frameprofile"
-      v-for="message in messages"
+      v-for="profile in profiles"
       v-bind:class="{
-        classForUser: message.user.id === currentuserid,
-        classNotForUser: message.user.id === currentuserid,
+        //classForUser: profile.id === userid,
+        //classNotForUser: profile.id === userid,
       }"
     >
       <img
         class="profpic"
-        :src="`uploads/images_${user.firstName}_${user.lastName}.png`"
-        alt="Auth image"
-        width="150"
-        height="150"
+        src="/pic2.png"
+        alt="profile image"
+        width="200"
+        height="200"
       />
       <div
         class="profname"
         :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
-        v-bind:class="{
-          classForAuthororUser: message.user.id === currentuserid,
-          classForAuthorNotTheUser: message.user.id !== currentuserid,
-        }"
       >
-        {{ message.user.first_name }},{{ message.user.last_name }}
+        Username:{{ profile.first_name }}{{ profile.last_name }}
       </div>
-      <div class="stat_user">{{ message.user.role }}</div>
+      <div class="stat_user">{{ profile.role }}</div>
 
       <div class="bio">
         About:
-        <p class="biodata">{{ message.biograph }}</p>
+        <p class="biodata">{{ profile.biograph }}</p>
       </div>
     </div>
   </div>
@@ -131,8 +123,7 @@ button:hover {
 
 .profpic {
   border-radius: 50%;
-  outline: 2px solid #011f48;
-  top: 10px;
+  margin-top: 30px;
 }
 
 .profname,
@@ -196,6 +187,12 @@ div.sidebar {
 
 .frameprofile {
   margin-top: 80px;
+  background-image: linear-gradient(#b86758, rgb(179, 29, 29));
+  border-radius: 20px;
+  box-shadow: grey 5px 5px 6px 1px;
+  width: 50vw;
+  height: 100vh;
+  align-items: center;
 }
 
 #turnoff:hover {
@@ -205,6 +202,7 @@ div.sidebar {
 .bio {
   color: black;
   font-size: 12pt;
-  top: 30px;
+  top: 50px;
+  text-align: center;
 }
 </style>

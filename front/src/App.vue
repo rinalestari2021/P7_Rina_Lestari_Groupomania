@@ -1,4 +1,6 @@
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -6,10 +8,10 @@ export default {
       openinglogo: "",
       btnsigup: "",
       btnlogin: "",
-      greetings: ""
-    }
-  }
-}
+      greetings: "",
+    };
+  },
+};
 </script>
 
 <template>

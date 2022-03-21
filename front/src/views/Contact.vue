@@ -10,9 +10,7 @@ export default {
       optionColor: "#011f48",
     };
   },
-  methods: {
-    //need to add profile with attribut id etc
-  },
+  methods: {},
   mounted() {
     console.log("COUCOU");
   },
@@ -29,9 +27,9 @@ export default {
         width="150"
         height="150"
       />
-      <router-link :to="{ name: 'Profile' }" class="prof-name"
-        >yourfullnamehere</router-link
-      >
+      <router-link :to="{ name: 'Profile' }" class="prof-name">
+        yournamehere{{ profile }}
+      </router-link>
     </div>
     <div class="userlist2">
       <img
@@ -42,7 +40,7 @@ export default {
         height="150"
       />
       <router-link :to="{ name: 'Profile' }" class="prof-name2"
-        >yourfullnamehere</router-link
+        >yourfullnamehere {{ profile }}</router-link
       >
     </div>
 
