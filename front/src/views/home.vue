@@ -1,14 +1,21 @@
 <script>
 import axios from "axios";
 
+//import PostsList from "@/components/PostsList";
+//import ImagesList from "@/components/UploadImage";
+
 export default {
   name: "Home",
+  //components: { PostsList, ImagesList },
   async created() {
-    const response = await axios.get("user", {
-      headers: {
-        Authorization: "Bearer" + localstorage.getItem("token"),
-      },
-    });
+    const response = await axios.get(
+      "http://localhost:3000/api/auth/accounts/",
+      {
+        headers: {
+          Authorization: "Bearer" + localstorage.getItem("token"),
+        },
+      }
+    );
 
     console.log(response);
   },
@@ -20,12 +27,19 @@ export default {
       topDist: "30px",
       leftDist: "285px",
       user: null,
+      first_name: "",
+      last_name: "",
+      posts: [],
+      uploaded: [],
     };
   },
   async created() {
-    axios.get("http://localhost:3000/api/auth/accounts");
+    axios.get("http://localhost:3000/api/auth/accounts/:id");
   },
   methods: {
+    post: function (uploaded) {
+      this.posts.push(uploaded);
+    },
     goToProfile() {
       let route = this.$router.resolve({ path: "/profile" });
       window.open(route.href);
@@ -43,6 +57,9 @@ export default {
     onFileChanged(event) {
       const file = event.target.files[0];
     },
+    prevPage() {
+      this.$router.go(-1);
+    },
     logout() {},
   },
 };
@@ -50,9 +67,12 @@ export default {
 
 <template>
   <div class="newfeedblock">
-    <h3 v-if="user">Hi, {{ user.first_name }} {{ user.last_name }}</h3>
-    <h3 v-if="!user">You are not logged in</h3>
+    <h1 class="wall">Newsfeed</h1>
+    <p v-for="post in posts" v-bind:user="post"></p>
+
+    <button @click="prevPage" class="prev">Previous</button>
   </div>
+
   <div class="sidebar">
     <button
       @click="goToProfile()"
@@ -89,6 +109,11 @@ export default {
   width: 100%;
   height: auto;
   line-height: 20px;
+}
+
+.wall {
+  color: black;
+  margin: auto;
 }
 
 img {
@@ -191,7 +216,21 @@ div.sidebar {
 .userhome {
   color: #011f48;
   position: absolute;
-
   left: 390px;
+}
+.prev {
+  margin: 0 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 7px;
+  bottom: 50px;
+  background: white;
+  bottom: 680px;
+  right: 600px;
+  width: 70px;
+}
+.prev:hover {
+  background-color: white;
+  color: #b86758;
 }
 </style>

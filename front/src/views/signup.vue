@@ -14,6 +14,13 @@ export default {
       passwordError: "",
     };
   },
+  //stock into localstorage
+  mounted() {
+    if (localStorage.first_name) this.firstName = localStorage.first_name;
+    if (localStorage.last_name) this.lastName = localStorage.last_name;
+    if (localStorage.email) this.email = localStorage.email;
+    if (localStorage.password) this.password = localStorage.password;
+  },
   methods: {
     handleSignUp() {
       console.log("form submitted");

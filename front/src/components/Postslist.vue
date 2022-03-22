@@ -1,15 +1,48 @@
 <script>
+import axios from "axios";
+
 export default {
-  props: ["posts"],
-  setup(props) {
-    console.log("props".props);
+  name: "Postslist",
+  data() {
+    posts: [];
+    return {};
+  },
+  methods: {
+    updatePost() {
+      axios
+        .get("http://localhost:3000/api/auth/")
+        .then((response) => (this.posts = response.data))
+        .catch((error) => console.log(error));
+    },
+    createPost() {
+      axios
+        .post("http://localhost:3000/api/auth/accounts/:id", {
+          id: 1,
+          title: "",
+          body: "",
+          userId: 1,
+        })
+        .then((response) => (this.posts = response.data))
+        .catch((error) => console.log(error));
+    },
+    deletePost() {
+      axios
+        .delete("http://localhost:3000/api/auth/accounts/:id", {
+          id: 1,
+          title: "",
+          body: "",
+          userId: 1,
+        })
+        .then((response) => (this.posts = response.data))
+        .catch((error) => console.log(error));
+    },
   },
 };
 </script>
 <template>
-  <div class="post-list">
-    <div v-for="post in posts" :key="post.id">
-      <h3>{{ post.title }}</h3>
+  <div class="PostList">
+    <div v-on:load="updatePost">
+      <h3 v-for="post in posts">{{ post.tittle }}</h3>
     </div>
   </div>
 </template>

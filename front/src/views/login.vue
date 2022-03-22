@@ -9,6 +9,9 @@ export default {
       password: "",
       passwordError: "",
       success: "",
+      first_name: "",
+      last_name: "",
+      userId: "",
     };
   },
   methods: {
@@ -20,7 +23,6 @@ export default {
         })
         .then((res) => {
           localStorage.setItem("token", res.data);
-          //this.$store.dispatch('user', res.data.user) activate this one when store is add
         });
       if (!isAuthenticated) {
         this.$router.push({ name: "login", query: { redirect: "/path" } });
