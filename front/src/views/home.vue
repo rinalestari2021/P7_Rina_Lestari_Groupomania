@@ -1,8 +1,8 @@
 <script>
 import axios from "axios";
 
-//import PostsList from "@/components/PostsList";
-//import ImagesList from "@/components/UploadImage";
+import PostsList from "../components/PostsList.vue";
+import ImagesList from "../components/UploadImage.vue";
 
 export default {
   name: "Home",
@@ -19,6 +19,9 @@ export default {
 
     console.log(response);
   },
+  components: {
+    ImagesList,
+  },
   data() {
     return {
       fontSize: "12pt",
@@ -33,9 +36,7 @@ export default {
       uploaded: [],
     };
   },
-  async created() {
-    axios.get("http://localhost:3000/api/auth/accounts/:id");
-  },
+
   methods: {
     post: function (uploaded) {
       this.posts.push(uploaded);

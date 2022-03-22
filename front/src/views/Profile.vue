@@ -11,17 +11,14 @@ export default {
       topDist: "10px",
       leftDist: "285px",
       user: null,
-      profiles: [
-        {
-          id: "",
-          first_name: "",
-          last_name: "",
-          biograph: "",
-          role: "",
-          images: "/",
-        },
-      ],
-      profile: {},
+      profile: {
+        id: "",
+        first_name: "",
+        last_name: "",
+        biograph: "",
+        role: "",
+        images: "/",
+      },
     };
   },
   methods: {
@@ -39,28 +36,21 @@ export default {
       this.$router.push("/login");
     },
   },
-  //created() {
-  // axios
-  //  .post("/api/auth/accounts" + this.$route.params)
-  // .then((response) => response.json())
-  //.then((data) => {
-  //  this.currentuserid = data;
-  //   this.default = [...data.data];
-  //  });
-  //},
+  created() {
+    axios
+      .post("http://localhost:3000/api/auth/accounts/:id" + this.$router.params)
+      .then((response) => response.json())
+      .then((data) => {
+        this.currentuserid = data;
+        this.default = [...data.data];
+      });
+  },
 };
 </script>
 
 <template>
   <div class="container">
-    <div
-      class="frameprofile"
-      v-for="profile in profiles"
-      v-bind:class="{
-        //classForUser: profile.id === userid,
-        //classNotForUser: profile.id === userid,
-      }"
-    >
+    <div class="frameprofile">
       <img
         class="profpic"
         src="/pic2.png"

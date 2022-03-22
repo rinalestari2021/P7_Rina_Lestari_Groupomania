@@ -41,9 +41,7 @@ export default {
       axios
         .post("http://localhost:3000/api/auth/signup", data)
         .then((res) => {
-          if (!isAuthenticated) {
-            this.$router.push({ name: "login", query: { redirect: "/path" } });
-          }
+          this.$router.push("/login");
         })
         .catch((err) => {
           console.log("ERROR REQUEST");

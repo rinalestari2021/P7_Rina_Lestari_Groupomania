@@ -22,11 +22,9 @@ export default {
           password: this.password,
         })
         .then((res) => {
-          localStorage.setItem("token", res.data);
+          localStorage.setItem("token", res.data.token);
+          this.$router.push("/home");
         });
-      if (!isAuthenticated) {
-        this.$router.push({ name: "login", query: { redirect: "/path" } });
-      }
     },
     prevPage() {
       this.$router.go(-1);
