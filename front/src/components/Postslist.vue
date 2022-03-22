@@ -10,7 +10,7 @@ export default {
   methods: {
     updatePost() {
       axios
-        .get("http://localhost:3000/api/auth/")
+        .get("http://localhost:3000/api/auth/post")
         .then((response) => (this.posts = response.data))
         .catch((error) => console.log(error));
     },
