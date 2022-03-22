@@ -21,11 +21,9 @@ export default {
         .then((res) => {
           localStorage.setItem("token", res.data);
           //this.$store.dispatch('user', res.data.user) activate this one when store is add
-          this.$router.push("/home");
         });
-      if (!this.passwordError) {
-        console.log("email:", this.email);
-        console.log("password:", this.password);
+      if (!isAuthenticated) {
+        this.$router.push({ name: "login", query: { redirect: "/path" } });
       }
     },
     prevPage() {
