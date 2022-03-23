@@ -13,15 +13,20 @@ export default {
       user: null,
       profile: {
         id: "",
-        first_name: "",
-        last_name: "",
+        username: "",
         biograph: "",
         role: "",
-        images: "/",
+        image: "/",
       },
     };
   },
   methods: {
+    isCurrentUser() {
+      if (this.isCurrentUser.username && this.profile.username) {
+        return this.isCurrentUser.username === this.profile.username;
+      }
+      return false;
+    },
     goToHome() {
       let route = this.$router.resolve({ path: "/home" });
       window.open(route.href);
@@ -33,15 +38,16 @@ export default {
       this.optionColor = event.target.value;
     },
     logout() {
+      localStorage.clear();
       this.$router.push("/login");
     },
   },
   created() {
     axios
-      .post("http://localhost:3000/api/auth/accounts/:id" + this.$router.params)
-      .then((response) => response.json())
+      .get("http://localhost:3000/api/auth/accounts/:id")
+      .then((res) => response.json())
       .then((data) => {
-        this.currentuserid = data;
+        this.profile = data;
         this.default = [...data.data];
       });
   },
@@ -51,24 +57,26 @@ export default {
 <template>
   <div class="container">
     <div class="frameprofile">
-      <img
-        class="profpic"
-        src="/pic2.png"
-        alt="profile image"
-        width="200"
-        height="200"
-      />
-      <div
-        class="profname"
-        :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
-      >
-        Username:{{ profile.first_name }}{{ profile.last_name }}
-      </div>
-      <div class="stat_user">{{ profile.role }}</div>
+      <div v-if="isCurrentUser()">
+        <img
+          class="profpic"
+          :src="profile.image"
+          alt="profile image"
+          width="200"
+          height="200"
+        />
+        <div
+          class="profname"
+          :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
+        >
+          Username:{{ profile.username }}
+        </div>
+        <div class="stat_user">{{ profile.role }}</div>
 
-      <div class="bio">
-        About:
-        <p class="biodata">{{ profile.biograph }}</p>
+        <div class="bio">
+          About:
+          <p class="biodata">{{ profile.biograph }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -85,7 +93,7 @@ export default {
     </button>
 
     <button id="turnoff">Deactivate</button>
-    <button @click="logout()" id="exit">LogOut</button>
+    <button @click.prevent="logout()" id="exit">LogOut</button>
   </div>
 </template>
 

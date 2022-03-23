@@ -1,8 +1,8 @@
 <script>
 import axios from "axios";
 
-import PostsList from "../components/PostsList.vue";
-import ImagesList from "../components/UploadImage.vue";
+//import PostsList from "../components/PostsList.vue";
+//import ImagesList from "../components/UploadImage.vue";
 
 export default {
   name: "Home",
@@ -12,7 +12,7 @@ export default {
       "http://localhost:3000/api/auth/accounts/",
       {
         headers: {
-          Authorization: "Bearer" + localstorage.getItem("token"),
+          Authorization: "Bearer" + localStorage.getItem("token"),
         },
       }
     );
@@ -20,7 +20,8 @@ export default {
     console.log(response);
   },
   components: {
-    ImagesList,
+    //ImagesList,
+    //PostsList,
   },
   data() {
     return {
@@ -33,13 +34,30 @@ export default {
       first_name: "",
       last_name: "",
       posts: [],
-      uploaded: [],
+      url: "",
     };
   },
 
   methods: {
-    post: function (uploaded) {
-      this.posts.push(uploaded);
+    //update post in newsfeed
+    updatePost() {
+      axios
+        .get("http://localhost:3000/api/posts")
+        .then((res) => {
+          this.posts.res.data;
+        })
+        .catch((error) => (this.posts = [{ title: "Charging Error" }]));
+    },
+    //create post
+    createPost() {
+      axios
+        .post("http://localhost:3000/api/auth/posts", {
+          id: "",
+          tittle: "",
+          body: "",
+          userId: "",
+        })
+        .then((res) => console.log(res));
     },
     goToProfile() {
       let route = this.$router.resolve({ path: "/profile" });
@@ -61,15 +79,28 @@ export default {
     prevPage() {
       this.$router.go(-1);
     },
-    logout() {},
+    logout() {
+      localStorage.clear();
+      this.$router.push("/login");
+    },
   },
 };
 </script>
 
 <template>
   <div class="newfeedblock">
-    <h1 class="wall">Newsfeed</h1>
-    <p v-for="post in posts" v-bind:user="post"></p>
+    <h1 class="wall" :show="updatePost()">Newsfeed</h1>
+    <div v-for="post in posts" :key="posts.id" class="f-post">
+      {{ posts.id }}
+      <p>{{ posts.title }}</p>
+      <img :src="url" />
+      <input type="text" placeholder="Write here" /> {{ posts.body }}
+      <button @click.prevent="editPost(post)" class="b-edit">Edit</button>
+      <button @click.prevent="deletePost(post.id)" class="btndelete">
+        Delete
+      </button>
+      <button type="submit" class="btnsend">Send</button>
+    </div>
 
     <button @click="prevPage" class="prev">Previous</button>
   </div>
@@ -208,12 +239,6 @@ div.sidebar {
   top: 100px;
 }
 
-.b-edit {
-  position: absolute;
-  margin-left: 35%;
-  top: 100px;
-}
-
 .userhome {
   color: #011f48;
   position: absolute;
@@ -224,14 +249,26 @@ div.sidebar {
   padding: 5px;
   border: none;
   border-radius: 7px;
-  bottom: 50px;
   background: white;
-  bottom: 680px;
-  right: 600px;
+  bottom: 30px;
+  right: 350px;
   width: 70px;
 }
 .prev:hover {
   background-color: white;
   color: #b86758;
+}
+
+.b-edit,
+.btndelete,
+.btnsend {
+  width: 50px;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+}
+
+.f-post {
+  width: 600px;
 }
 </style>

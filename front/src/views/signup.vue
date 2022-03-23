@@ -40,7 +40,7 @@ export default {
       console.log(data);
       axios
         .post("http://localhost:3000/api/auth/signup", data)
-        .then((res) => {
+        .then((Res) => {
           this.$router.push("/login");
         })
         .catch((err) => {
