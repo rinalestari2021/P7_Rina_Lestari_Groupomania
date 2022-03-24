@@ -36,18 +36,18 @@ App Homepage
 http://localhost:8080
 
 Signup
-http://localhost:8080/SignUp
+http://localhost:8080/signup
 
 Login
-http://localhost:8080/Login
+http://localhost:8080/login
 
 Home(Newsfeed)
-http://localhost:8080/Home
+http://localhost:8080/home
 
-User
-http://localhost:8080/userprofile
+Profile
+http://localhost:8080/profile
 
-Userlist
+Contact
 http://localhost:8080/contact
 
 Chatroom(conversation)

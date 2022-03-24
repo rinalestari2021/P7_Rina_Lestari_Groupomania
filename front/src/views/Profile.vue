@@ -16,7 +16,6 @@ export default {
         username: "",
         biograph: "",
         role: "",
-        image: "/",
       },
     };
   },
@@ -38,7 +37,7 @@ export default {
       this.optionColor = event.target.value;
     },
     logout() {
-      localStorage.clear();
+      localStorage.clear("user");
       this.$router.push("/login");
     },
   },
@@ -60,8 +59,8 @@ export default {
       <div v-if="isCurrentUser()">
         <img
           class="profpic"
-          :src="profile.image"
-          alt="profile image"
+          :src="require('/')"
+          alt="Avatar"
           width="200"
           height="200"
         />

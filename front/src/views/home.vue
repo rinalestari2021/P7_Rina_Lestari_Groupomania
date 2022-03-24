@@ -9,10 +9,10 @@ export default {
   //components: { PostsList, ImagesList },
   async created() {
     const response = await axios.get(
-      "http://localhost:3000/api/auth/accounts/",
+      "http://localhost:3000/api/auth/accounts/:id",
       {
         headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
+          Authorization: "Bearer" + localStorage.getItem("token", user),
         },
       }
     );
@@ -34,7 +34,10 @@ export default {
       first_name: "",
       last_name: "",
       posts: [],
-      url: "",
+      post: {
+        url: "",
+        message: "",
+      },
     };
   },
 
@@ -54,8 +57,8 @@ export default {
         .post("http://localhost:3000/api/auth/posts", {
           id: "",
           tittle: "",
-          body: "",
-          userId: "",
+          imageurl: "",
+          message: "",
         })
         .then((res) => console.log(res));
     },
@@ -80,7 +83,7 @@ export default {
       this.$router.go(-1);
     },
     logout() {
-      localStorage.clear();
+      localStorage.clear("user");
       this.$router.push("/login");
     },
   },
@@ -91,14 +94,19 @@ export default {
   <div class="newfeedblock">
     <h1 class="wall" :show="updatePost()">Newsfeed</h1>
     <div v-for="post in posts" :key="posts.id" class="f-post">
-      {{ posts.id }}
-      <p>{{ posts.title }}</p>
-      <img :src="url" />
-      <input type="text" placeholder="Write here" /> {{ posts.body }}
-      <button @click.prevent="editPost(post)" class="b-edit">Edit</button>
-      <button @click.prevent="deletePost(post.id)" class="btndelete">
-        Delete
-      </button>
+      {{ post.message }}
+    </div>
+
+    <div>
+      <h2>Create New</h2>
+      <form @submit.prevent="createPost()">
+        <p>{{ post.title }}</p>
+        <img :src="imageurl" />
+        <input type="text" placeholder="Write here" v-model="post.message" />
+      </form>
+
+      <button @click.prevent="editPost()" class="b-edit">Edit</button>
+      <button @click.prevent="deletePost()" class="btndelete">Delete</button>
       <button type="submit" class="btnsend">Send</button>
     </div>
 

@@ -9,7 +9,7 @@ export default {
       lastName: "",
       email: "",
       password: "",
-      role: "",
+      dept: "",
       terms: false,
       passwordError: "",
     };
@@ -82,8 +82,8 @@ export default {
       </pre>
       <div v-if="passwordError" class="errorpass">{{ passwordError }}</div>
 
-      <label class="state">Role:</label>
-      <select v-model="role">
+      <label class="state">Dept:</label>
+      <select v-model="dept">
         <option value="developper">Web Developper</option>
         <option value="administration">Administration Staff</option>
         <option value="accounting">Accounting Staff</option>
