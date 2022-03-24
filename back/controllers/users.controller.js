@@ -1,3 +1,4 @@
+const dotenv = require("dotenv").config({ encoding: "latin1" });
 const { User } = require("../models");
 // Next : replace bcrypt with CryptoJS
 // Allows to easily create a hash out of a password string
@@ -28,12 +29,10 @@ exports.signup = async (req, res, next) => {
 
 // Model : SignIn
 exports.login = async (req, res, next) => {
-  console.log("salut");
   try {
     const user = await User.findOne({
       where: { email: req.body.email },
     });
-    console.log("test");
     if (!user) {
       return res.status(401).json({ error: "User not found" });
     }
@@ -41,12 +40,11 @@ exports.login = async (req, res, next) => {
     if (!valid) {
       return res.status(401).json({ error: "Incorrect password" });
     }
-    console.log(user);
     res.status(200).json({
       // Modify UserId
       token: jwt.sign(
         { UserId: user.id, isAdmin: user.isAdmin },
-        `${process.env.JWT_RAND_SECRET}`,
+        process.env.JWT_TOKEN,
         {
           expiresIn: "365days",
         }

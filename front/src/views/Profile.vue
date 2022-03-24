@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default {
   name: "Profile",
+
   data() {
     return {
       fontSize: "12pt",
@@ -19,13 +20,11 @@ export default {
       },
     };
   },
+  created() {
+    this.user = localStorage.getItem("user");
+    console.log(this.user);
+  },
   methods: {
-    isCurrentUser() {
-      if (this.isCurrentUser.username && this.profile.username) {
-        return this.isCurrentUser.username === this.profile.username;
-      }
-      return false;
-    },
     goToHome() {
       let route = this.$router.resolve({ path: "/home" });
       window.open(route.href);
@@ -41,40 +40,25 @@ export default {
       this.$router.push("/login");
     },
   },
-  created() {
-    axios
-      .get("http://localhost:3000/api/auth/accounts/:id")
-      .then((res) => response.json())
-      .then((data) => {
-        this.profile = data;
-        this.default = [...data.data];
-      });
-  },
 };
 </script>
 
 <template>
   <div class="container">
     <div class="frameprofile">
-      <div v-if="isCurrentUser()">
-        <img
-          class="profpic"
-          :src="require('/')"
-          alt="Avatar"
-          width="200"
-          height="200"
-        />
+      <div>
+        <img class="profpic" src="" alt="Avatar" width="200" height="200" />
         <div
           class="profname"
           :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
         >
-          Username:{{ profile.username }}
+          Username:{{ this.user.last_name }}
         </div>
-        <div class="stat_user">{{ profile.role }}</div>
+        <div class="stat_user">{{ user.isAdmin }}</div>
 
         <div class="bio">
-          About:
-          <p class="biodata">{{ profile.biograph }}</p>
+          Email:
+          <p class="biodata">{{ user.email }}</p>
         </div>
       </div>
     </div>

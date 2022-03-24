@@ -22,8 +22,8 @@ export default {
           password: this.password,
         })
         .then((res) => {
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("user", res.data.user);
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          localStorage.setItem("user", JSON.stringify(res.data.user));
           this.$router.push("/home");
         });
     },

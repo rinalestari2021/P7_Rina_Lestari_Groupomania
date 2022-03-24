@@ -8,8 +8,8 @@ export default {
   name: "Home",
   //components: { PostsList, ImagesList },
   created() {
-    this.user = localStorage.getItem("user").data;
-    console.log(JSON.parse(localStorage.getItem("user")));
+    this.user = localStorage.getItem("user");
+    console.log(this.user);
   },
   components: {
     //ImagesList,
@@ -50,12 +50,20 @@ export default {
     //create post
     createPost() {
       axios
-        .post("http://localhost:3000/api/auth/posts", {
-          id: "",
-          tittle: "",
-          imageurl: "",
-          message: "",
-        })
+        .post(
+          "http://localhost:3000/api/auth/posts",
+          {
+            id: "",
+            tittle: "",
+            imageurl: "",
+            message: "",
+          },
+          {
+            headers: {
+              Authorization: "Bearer" + localStorage.getItem("token"),
+            },
+          }
+        )
         .then((res) => console.log(res));
     },
     goToProfile() {
