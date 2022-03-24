@@ -7,17 +7,9 @@ import axios from "axios";
 export default {
   name: "Home",
   //components: { PostsList, ImagesList },
-  async created() {
-    const response = await axios.get(
-      "http://localhost:3000/api/auth/accounts/:id",
-      {
-        headers: {
-          Authorization: "Bearer" + localStorage.getItem("token", user),
-        },
-      }
-    );
-
-    console.log(response);
+  created() {
+    this.user = localStorage.getItem("user").data;
+    console.log(JSON.parse(localStorage.getItem("user")));
   },
   components: {
     //ImagesList,
@@ -45,7 +37,11 @@ export default {
     //update post in newsfeed
     updatePost() {
       axios
-        .get("http://localhost:3000/api/posts")
+        .get("http://localhost:3000/api/posts", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
         .then((res) => {
           this.posts.res.data;
         })
@@ -92,7 +88,7 @@ export default {
 
 <template>
   <div class="newfeedblock">
-    <h1 class="wall" :show="updatePost()">Newsfeed</h1>
+    <h1 class="wall" @click="updatePost()">Newsfeed</h1>
     <div v-for="post in posts" :key="posts.id" class="f-post">
       {{ post.message }}
     </div>

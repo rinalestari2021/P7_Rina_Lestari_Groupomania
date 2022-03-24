@@ -23,6 +23,7 @@ export default {
         })
         .then((res) => {
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user", res.data.user);
           this.$router.push("/home");
         });
     },

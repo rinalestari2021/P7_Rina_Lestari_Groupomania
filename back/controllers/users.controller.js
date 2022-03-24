@@ -28,11 +28,12 @@ exports.signup = async (req, res, next) => {
 
 // Model : SignIn
 exports.login = async (req, res, next) => {
+  console.log("salut");
   try {
     const user = await User.findOne({
       where: { email: req.body.email },
     });
-
+    console.log("test");
     if (!user) {
       return res.status(401).json({ error: "User not found" });
     }
@@ -40,9 +41,8 @@ exports.login = async (req, res, next) => {
     if (!valid) {
       return res.status(401).json({ error: "Incorrect password" });
     }
-
+    console.log(user);
     res.status(200).json({
-      UserId: user.id,
       // Modify UserId
       token: jwt.sign(
         { UserId: user.id, isAdmin: user.isAdmin },
@@ -51,7 +51,7 @@ exports.login = async (req, res, next) => {
           expiresIn: "365days",
         }
       ),
-      user,
+      user: user,
     });
   } catch (error) {
     res.status(500).json({ error });
