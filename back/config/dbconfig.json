@@ -3,7 +3,7 @@
     "host": "localhost",
     "database": "groupomania",
     "username": "root",
-    "password": "Rina2021",
+    "password": "DB_PASS",
     "dialect": "mysql"
   }
 }
