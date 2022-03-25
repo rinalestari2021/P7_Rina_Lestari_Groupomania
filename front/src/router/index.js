@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import SignUp from "../views/signup.vue";
-import Login from "../views/login.vue";
-import Home from "../views/Home.vue";
-import Homepage from "../views/Homepage.vue";
-import Profile from "../views/Profile.vue";
-import Contact from "../views/Contact.vue";
-import Forum from "../views/Forum.vue";
-import NotFound from "../views/NotFound.vue";
-//import AdminPage from "../views/Admin.vue";
+import signup from "../views/signup.vue";
+import login from "../views/login.vue";
+import home from "../views/home.vue";
+import homepage from "../views/homepage.vue";
+import profile from "../views/profile.vue";
+import contact from "../views/contact.vue";
+import forum from "../views/forum.vue";
+import notfound from "../views/notfound.vue";
+//import adminpage from "../views/adminpage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,43 +15,43 @@ const router = createRouter({
     {
       path: "/",
       name: "App",
-      component: Homepage,
+      component: homepage,
     },
     {
       path: "/home",
-      name: "Home",
-      component: Home,
+      name: "home",
+      component: home,
     },
     {
       path: "/signup",
-      name: "SignUp",
-      component: SignUp,
+      name: "signup",
+      component: signup,
     },
     {
       path: "/login",
-      name: "Login",
-      component: Login,
+      name: "login",
+      component: login,
     },
     {
       path: "/profile",
-      name: "Profile",
-      component: Profile,
+      name: "profile",
+      component: profile,
     },
     {
       path: "/contact",
-      name: "Contact",
-      component: Contact,
+      name: "contact",
+      component: contact,
     },
     {
       path: "/forum",
-      name: "Forum",
-      component: Forum,
+      name: "forum",
+      component: forum,
     },
     //catchall 404
     {
       path: "/:catchAll(.*)",
-      name: "NotFound",
-      component: NotFound,
+      name: "notfound",
+      component: notfound,
     },
     {
       // path: "/post/:id",

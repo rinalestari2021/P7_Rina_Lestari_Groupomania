@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "Homepage",
+  name: "homepage",
   data() {
     return {};
   },

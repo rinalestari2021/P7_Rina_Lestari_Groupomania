@@ -17,32 +17,82 @@ export default {
     this.fetchPosts();
   },
   methods: {
-    createPost() {
+    //get one post
+    getPost() {
       axios
-        .post("http://localhost:3000/api/", this.post)
-        .then((res) => (res.data.post = null))
-        .catch((error) => console.log(error));
+        .get("http://localhost:3000/api/posts/1", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+        .then((res) => response.json())
+        .then((json) => console.log(json));
     },
-    deletePost() {
-      if (confirm("Delete" + post.title)) {
-        axios.delete("http://localhost:3000/api/${post.id}").then((res) => {
+  },
+  //modify post
+  updatePost() {
+    axios
+      .put("http://localhost:3000/api/posts/", {
+        body: JSON.stringify({
+          id: "",
+          title: "",
+          body: "",
+        }),
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => response.json())
+      .then((json) => console.log(json));
+  },
+
+  createPost() {
+    axios
+      .post("http://localhost:3000/api/posts", {
+        body: JSON.stringify({
+          title: "",
+          body: "",
+          userId: "",
+        }),
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        this.posts.res.data;
+      })
+      .catch(error);
+  },
+
+  deletePost() {
+    if (confirm("Delete" + post.title)) {
+      axios
+        .delete("http://localhost:3000/api/${post.id}", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          this.posts.res.data;
+        })
+        .catch(error)
+        .then((res) => {
           return response;
         });
-      }
-    },
-    editPost() {
-      let data = {
-        id: this.post.id,
-        title: this.post.title,
-        imageurl: this.post.imageurl,
-        message: this.post.message,
-      }
-        .update(this.post.id)
-        .then((res) => {
-          this.message = "Post edited";
-        })
-        .catch(error);
-    },
+    }
+  },
+  editPost() {
+    let data = {
+      id: this.post.id,
+      title: this.post.title,
+      imageurl: this.post.imageurl,
+      message: this.post.message,
+    }
+      .update(this.post.id)
+      .then((res) => {
+        this.message = "Post edited";
+      })
+      .catch(error);
   },
 };
 </script>

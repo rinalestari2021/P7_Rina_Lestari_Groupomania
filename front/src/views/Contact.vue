@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export default {
-  name: "Contact",
+  name: "contact",
   data() {
     return {
       fontSize: "14px",

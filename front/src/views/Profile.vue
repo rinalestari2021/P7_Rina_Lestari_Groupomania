@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export default {
-  name: "Profile",
+  name: "profile",
 
   data() {
     return {

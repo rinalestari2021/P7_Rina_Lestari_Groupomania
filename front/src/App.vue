@@ -2,6 +2,7 @@
 import axios from "axios";
 
 export default {
+  name: "App",
   data() {
     return {
       message: "Groupomania Messenger",
@@ -17,7 +18,7 @@ export default {
       src="./assets/icon-left-font-monochrome-white.png"
     />
     <div class="opening">
-      <router-view></router-view>
+      <router-view />
     </div>
     <div class="greetings">
       <h1>{{ message }}</h1>

@@ -5,7 +5,7 @@ import axios from "axios";
 //import ImagesList from "../components/UploadImage.vue";
 
 export default {
-  name: "Home",
+  name: "home",
   //components: { PostsList, ImagesList },
   created() {
     this.user = localStorage.getItem("user");
