@@ -5,10 +5,6 @@ export default {
   data() {
     return {
       message: "Groupomania Messenger",
-      openinglogo: "",
-      btnsigup: "",
-      btnlogin: "",
-      greetings: "",
     };
   },
 };

@@ -27,7 +27,7 @@ export default {
       last_name: "",
       posts: [],
       post: {
-        url: "",
+        imageUrl: "",
         message: "",
       },
     };
@@ -55,7 +55,6 @@ export default {
           {
             id: "",
             tittle: "",
-            imageurl: "",
             message: "",
           },
           {
@@ -83,6 +82,9 @@ export default {
     onFileChanged(event) {
       const file = event.target.files[0];
     },
+    sendMsg() {
+      this.$refs.msg.click();
+    },
     prevPage() {
       this.$router.go(-1);
     },
@@ -105,13 +107,13 @@ export default {
       <h2>Create New</h2>
       <form @submit.prevent="createPost()">
         <p>{{ post.title }}</p>
-        <img :src="imageurl" />
-        <input type="text" placeholder="Write here" v-model="post.message" />
+        <img src="" />
+        <input type="text" placeholder="Write here" ref="msg" />
       </form>
 
-      <button @click.prevent="editPost()" class="b-edit">Edit</button>
-      <button @click.prevent="deletePost()" class="btndelete">Delete</button>
-      <button type="submit" class="btnsend">Send</button>
+      <button @click="editPost()" class="b-edit">Edit</button>
+      <button @click="deletePost()" class="btndelete">Delete</button>
+      <button type="submit" @click="sendMsg()" class="btnsend">Send</button>
     </div>
 
     <button @click="prevPage" class="prev">Previous</button>

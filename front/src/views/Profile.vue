@@ -11,14 +11,26 @@ export default {
       optionColor: "#011f48",
       topDist: "10px",
       leftDist: "285px",
-      user: null,
-      profile: {
-        id: "",
-        username: "",
-        biograph: "",
-        role: "",
-      },
+      user: [
+        {
+          id: "",
+          fist_name: "",
+          last_name: "",
+          email: "",
+        },
+      ],
     };
+  },
+  mounted() {
+    axios
+      .get("http://localhost:3000/api/auth/accounts/${id}", {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        this.user;
+      });
   },
   created() {
     this.user = localStorage.getItem("user");
@@ -47,19 +59,21 @@ export default {
   <div class="container">
     <div class="frameprofile">
       <div>
-        <img class="profpic" src="" alt="Avatar" width="200" height="200" />
-        <div
+        <img
+          :src="user.img"
+          alt="avatar"
+          width="200"
+          height="200"
+          class="profpic"
+        />
+        <p
           class="profname"
           :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
         >
-          Username:{{ this.user.last_name }}
-        </div>
-        <div class="stat_user">{{ user.isAdmin }}</div>
-
-        <div class="bio">
-          Email:
-          <p class="biodata">{{ user.email }}</p>
-        </div>
+          {{ user }}
+        </p>
+        <p class="stat_user">{{ user.isAdmin }}</p>
+        <p class="e-mail">{{ user.email }}</p>
       </div>
     </div>
   </div>
@@ -171,7 +185,7 @@ div.sidebar {
   background-image: linear-gradient(#b86758, rgb(179, 29, 29));
   border-radius: 20px;
   box-shadow: grey 5px 5px 6px 1px;
-  width: 50vw;
+  width: 40vw;
   height: 100vh;
   align-items: center;
 }
@@ -180,7 +194,7 @@ div.sidebar {
   background-color: #5adfe2;
 }
 
-.bio {
+.e-mail {
   color: black;
   font-size: 12pt;
   top: 50px;
