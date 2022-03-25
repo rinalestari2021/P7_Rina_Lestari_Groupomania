@@ -99,13 +99,13 @@ export default {
 <template>
   <div>
     <h2>Create New</h2>
-    <form @submit.prevent="createPost()">
+    <form @submit.prevent="updatePost()">
       <p>{{ post.title }}</p>
       <img :src="imageurl" />
-      <input type="text" placeholder="Write here" v-model="post.message" />
+      <input type="text" placeholder="Write here" v-model="post.body" />
     </form>
 
-    <button @click.prevent="editPost()" class="b-edit">Edit</button>
+    <button @click.prevent="updatePost()" class="b-edit">Edit</button>
     <button @click.prevent="deletePost()" class="btndelete">Delete</button>
     <button type="submit" class="btnsend">Send</button>
   </div>

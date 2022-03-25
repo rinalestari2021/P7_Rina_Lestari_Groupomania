@@ -10,8 +10,8 @@ export default {
 <template>
   <div class="homepage">
     <h1 class="openingtext">Please select to continue</h1>
-    <router-link :to="{ name: 'SignUp' }" id="btnsignup">SignUp</router-link>
-    <router-link :to="{ name: 'Login' }" id="btnsignup">Login</router-link>
+    <router-link :to="{ name: 'signup' }" id="btnsignup">SignUp</router-link>
+    <router-link :to="{ name: 'login' }" id="btnsignup">Login</router-link>
   </div>
 </template>
 

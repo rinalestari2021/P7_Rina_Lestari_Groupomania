@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export default {
-  name: "uploadImage",
+  name: "uploadimage",
   data() {
     return {
       image: null,

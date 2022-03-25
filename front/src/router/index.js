@@ -53,18 +53,18 @@ const router = createRouter({
       name: "notfound",
       component: notfound,
     },
-    {
-      // path: "/post/:id",
-      // name: "Post",
-      // props:true,
-      // component: () => import("../components/posts.vue"),
-    },
-    {
-      // path: "/Admin",
-      // name: "AdminPage",
-      //component: AdminPage,
-      //meta: { authorize: [Role.Admin] },
-    },
+    //{
+    // path: "/post/:id",
+    // name: "post",
+    // props:true,
+    // component: () => import("../components/posts.vue"),
+    //},
+    //{
+    // path: "/adminpage",
+    // name: "adminpage",
+    //component: adminpage,
+    //meta: { authorize: [Role.Admin] },
+    //},
   ],
 });
 
