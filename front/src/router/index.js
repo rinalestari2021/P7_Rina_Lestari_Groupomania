@@ -55,7 +55,7 @@ const router = createRouter({
     },
     //{
     // path: "/post/:id",
-    // name: "post",
+    // name: "posts",
     // props:true,
     // component: () => import("../components/posts.vue"),
     //},

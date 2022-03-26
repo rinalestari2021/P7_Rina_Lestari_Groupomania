@@ -25,7 +25,9 @@ export default {
   font-size: 12pt;
   font-weight: bold;
   text-align: center;
-  margin-top: 40px;
+  margin-bottom: 30px;
+  color: white;
+  margin-top: 50px;
 }
 
 #btnsignup,
@@ -39,11 +41,11 @@ export default {
   border-radius: 15px;
   padding: 8px;
   text-decoration: none;
-  margin: 4px 10px;
+  margin: 4px 15px;
   font-family: "Arial Narrow Bold";
   color: #011f48;
   box-shadow: 0 10px 6px -8px #777;
-  top: 50px;
+  top: 80px;
 }
 
 #btnsignup:hover {

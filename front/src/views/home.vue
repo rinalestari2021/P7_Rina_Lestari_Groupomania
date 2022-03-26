@@ -2,18 +2,14 @@
 import axios from "axios";
 
 //import PostsList from "../components/PostsList.vue";
-//import ImagesList from "../components/UploadImage.vue";
+import uploadimage from "../components/UploadImage.vue";
 
 export default {
   name: "home",
-  //components: { PostsList, ImagesList },
+  components: { uploadimage },
   created() {
     this.user = localStorage.getItem("user");
     console.log(this.user);
-  },
-  components: {
-    //ImagesList,
-    //PostsList,
   },
   data() {
     return {
