@@ -250,11 +250,12 @@ div.sidebar {
 .f-post {
   text-align: left;
   text-indent: 15px;
-  width: 10px;
+  width: auto;
   height: 30px;
   background-color: white;
   border-radius: 5px;
   margin: 10px 15px;
+  box-shadow: 3px 3px 5px #b86758;
 }
 .contactlist,
 .profilepage {
@@ -297,15 +298,17 @@ div.sidebar {
   width: 70px;
 }
 .prev:hover {
-  background-color: white;
-  color: #b86758;
+  background-color: #b86758;
+  color: black;
 }
 
 .b-edit,
 .btndelete,
 .btnsend {
+  text-align: center;
   align-items: center;
   width: 50px;
+  margin: 3px 5px 5px;
   border-radius: 8px;
   background-color: white;
   color: black;
@@ -318,7 +321,7 @@ div.sidebar {
   color: black;
 }
 
-.f-post {
-  width: 600px;
+button:hover {
+  font-weight: bold;
 }
 </style>

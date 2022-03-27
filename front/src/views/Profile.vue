@@ -3,7 +3,6 @@ import axios from "axios";
 
 export default {
   name: "profile",
-
   data() {
     return {
       fontSize: "12pt",
@@ -19,24 +18,46 @@ export default {
           email: "",
         },
       ],
+      maxSize: 1024,
+      uploadFieldName: "File",
     };
   },
+  props: { value: Object },
   mounted() {
     //fetch is not working yet
-    //fetch("http://localhost:3000/api/accounts/", {
-    // headers: {
-    //   Authorization: "Bearer" + localStorage.getItem("token"),
-    // },
-    //})
-    // .then((res) => res.json())
-    // .then((data) => (this.user.id = data))
-    // .catch((err) => console.log(err.message));
+    fetch("http://localhost:3000/api/accounts", {
+      headers: {
+        Authorization: "Bearer" + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => (this.user.id = data))
+      .catch((err) => console.log(err.message));
   },
   created() {
     this.user = localStorage.getItem("user");
     console.log(this.user);
   },
   methods: {
+    launchFilePicker() {
+      this.$refs.file.click();
+    },
+    onFieldChange(fieldName, file) {
+      const { maxSize } = this;
+      let imageFile = file[0];
+      if (file.lenght > 0) {
+        let size = imageFile.size / maxSize / maxSize;
+        if (!imageFile.type.match("image.*")) {
+          this.errorDialog = true;
+          this.errorText = "File size too big!Please select an image under 1MB";
+        } else {
+          let formData = new FormData();
+          let imageURL = URL.createObjectURL(imageFile);
+          formData.append(fieldName, imageFile);
+          this.$emit("input", { formData, imageURL });
+        }
+      }
+    },
     goToHome() {
       let route = this.$router.resolve({ path: "/home" });
       window.open(route.href);
@@ -59,13 +80,16 @@ export default {
   <div class="container">
     <div class="frameprofile">
       <div>
-        <img
-          :src="user.img"
-          alt="avatar"
-          width="200"
-          height="200"
-          class="profpic"
-        />
+        <div @click="launchFilePicker()">
+          <input
+            type="file"
+            alt="avatar"
+            class="profpic"
+            ref="file"
+            :name="uploadFieldName"
+            @change="onFileChange($event.target.name, $event.target.files)"
+          />
+        </div>
         <p
           class="profname"
           :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
@@ -119,6 +143,8 @@ button:hover {
 .profpic {
   border-radius: 50%;
   margin-top: 30px;
+  width: 200px;
+  height: 200px;
 }
 
 .profname,
