@@ -55,8 +55,6 @@ export default {
       <div v-if="success" id="success">Logged in Successully</div>
 
       <input type="submit" value="Login" class="loginbtn" />
-      <!--need to
-        connect direct to home afterlogin-->
     </form>
     <button @click="prevPage" class="previous">Go Back</button>
   </div>

@@ -1,12 +1,13 @@
 <script>
 import axios from "axios";
 
-//import PostsList from "../components/PostsList.vue";
-import uploadimage from "../components/UploadImage.vue";
+import posts from "../components/posts.vue";
+import uploadimage from "../components/uploadimage.vue";
+import comments from "../components/comments.vue";
 
 export default {
   name: "home",
-  components: { uploadimage },
+  components: { uploadimage, posts, comments },
   created() {
     this.user = localStorage.getItem("user");
     console.log(this.user);
@@ -26,12 +27,13 @@ export default {
         imageUrl: "",
         message: "",
       },
+      comment: [],
     };
   },
 
   methods: {
     //update post in newsfeed
-    updatePost() {
+    getPost() {
       axios
         .get("http://localhost:3000/api/posts", {
           headers: {
@@ -39,7 +41,7 @@ export default {
           },
         })
         .then((res) => {
-          this.posts.res.data;
+          this.post.res.data;
         })
         .catch((error) => (this.posts = [{ title: "Charging Error" }]));
     },
@@ -60,6 +62,13 @@ export default {
           }
         )
         .then((res) => console.log(res));
+    },
+    //btn send
+    sendMsg() {
+      this.isVisible = !this.isVisible;
+    },
+    send(post) {
+      console.log(post);
     },
     goToProfile() {
       let route = this.$router.resolve({ path: "/profile" });
@@ -94,7 +103,7 @@ export default {
 
 <template>
   <div class="newfeedblock">
-    <h1 class="wall" @click="updatePost()">Newsfeed</h1>
+    <h1 class="wall" onclick="getPost()">Newsfeed</h1>
     <div v-for="post in posts" :key="posts.id" class="f-post">
       {{ post.message }}
     </div>
@@ -104,10 +113,16 @@ export default {
       <form @submit.prevent="createPost()">
         <p>{{ post.title }}</p>
         <img src="" />
-        <input type="text" placeholder="Write here" ref="msg" />
+        <input
+          type="text"
+          @keyup.enter="sendMsg()"
+          v-model="post"
+          placeholder="Write here"
+          ref="msg"
+        />
       </form>
-
-      <button @click="editPost()" class="b-edit">Edit</button>
+      <button @click="createcomment()" class="addComm">Comment</button>
+      <button @click="updatePost()" class="b-edit">Edit</button>
       <button @click="deletePost()" class="btndelete">Delete</button>
       <button type="submit" @click="sendMsg()" class="btnsend">Send</button>
     </div>
@@ -272,7 +287,15 @@ div.sidebar {
 .b-edit,
 .btndelete,
 .btnsend {
+  align-items: center;
   width: 50px;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+}
+.addComm {
+  text-align: center;
+  width: 75px;
   border-radius: 8px;
   background-color: white;
   color: black;

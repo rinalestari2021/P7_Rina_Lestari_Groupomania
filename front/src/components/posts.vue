@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import { updatePost } from "../../../back/controllers/posts.controllers";
+//import { getPost } from "../../../back/controllers/posts.controllers";
 
 export default {
   name: "posts",
@@ -14,7 +14,7 @@ export default {
     };
   },
   mounted() {
-    this.fetchPosts();
+    this.fetchPost();
   },
   methods: {
     //get all posts
@@ -99,17 +99,19 @@ export default {
   <div class="newfeedblock">
     <h1 class="wall" @click="getPost()">Newsfeed</h1>
     <div v-for="post in posts" :key="posts.id" class="f-post">
-      {{ post.message }}
+      {{ post }}
     </div>
 
     <div>
       <h2>Create New</h2>
       <form @submit.prevent="createPost()">
         <p>{{ post }}</p>
+        <img src="" />
+        <input type="text" placeholder="Write here" ref="msg" />
       </form>
 
-      <button @click="editPost()" class="b-edit">Edit</button>
-      <button @click="updatePost()" class="btndelete">Delete</button>
+      <button @click="updatePost()" class="b-edit">Edit</button>
+      <button @click="deletePost()" class="btndelete">Delete</button>
       <button type="submit" @click="sendMsg()" class="btnsend">Send</button>
     </div>
   </div>

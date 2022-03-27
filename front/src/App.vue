@@ -64,7 +64,6 @@ export default {
   text-align: center;
   display: flex;
   justify-content: space-around;
-  bottom: 50px;
 }
 
 .greetings {

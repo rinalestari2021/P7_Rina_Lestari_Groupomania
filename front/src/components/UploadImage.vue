@@ -42,9 +42,9 @@ export default {
         });
     },
     submitFile() {
-      const fData = new FormData();
+      const formData = new FormData();
       console.log("submitFile =======", fData);
-      fData.append("file", this.image);
+      formData.append("file", this.image);
       const headers = { "Content-Type": "multipart/form-data" };
       axios
         .post("http://localhost:3000/api/auth/post", fData, {
