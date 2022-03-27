@@ -22,15 +22,15 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("http://localhost:3000/api/auth/accounts/${id}", {
-        headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        this.user;
-      });
+    //fetch is not working yet
+    //fetch("http://localhost:3000/api/accounts/", {
+    // headers: {
+    //   Authorization: "Bearer" + localStorage.getItem("token"),
+    // },
+    //})
+    // .then((res) => res.json())
+    // .then((data) => (this.user.id = data))
+    // .catch((err) => console.log(err.message));
   },
   created() {
     this.user = localStorage.getItem("user");

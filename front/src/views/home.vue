@@ -30,7 +30,16 @@ export default {
       comment: [],
     };
   },
-
+  mounted() {
+    fetch("http://localhost:3000/api/posts", {
+      headers: {
+        Authorization: "Bearer" + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => (this.posts = data))
+      .catch((err) => console.log(err.message));
+  },
   methods: {
     //update post in newsfeed
     getPost() {
@@ -110,15 +119,15 @@ export default {
 
     <div>
       <h2>Create New</h2>
+
       <form @submit.prevent="createPost()">
-        <p>{{ post.title }}</p>
-        <img src="" />
+        <p>{{ post.posts }}</p>
+        <img src="{{post.uploadimage}}" />
         <input
           type="text"
           @keyup.enter="sendMsg()"
           v-model="post"
           placeholder="Write here"
-          ref="msg"
         />
       </form>
       <button @click="createcomment()" class="addComm">Comment</button>
@@ -238,7 +247,15 @@ div.sidebar {
   color: #011f48;
   box-shadow: 0 10px 6px -6px #777;
 }
-
+.f-post {
+  text-align: left;
+  text-indent: 15px;
+  width: 10px;
+  height: 30px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 10px 15px;
+}
 .contactlist,
 .profilepage {
   width: 100px;
