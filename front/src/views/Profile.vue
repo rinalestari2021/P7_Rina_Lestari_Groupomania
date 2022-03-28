@@ -57,7 +57,7 @@ export default {
     fetchUser() {
       userId = this.id;
       if (userId != 0) {
-        axios.get("http://localhost:3000/api/accounts/" + userId, {
+        axios.get("http://localhost:3000/api/accounts/${id}", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           }
@@ -70,19 +70,23 @@ export default {
       }
     },
     addUser() {
-      axios.post("http://localhost:3000/api/accounts/" + id, {
+      axios.post("http://localhost:3000/api/accounts/${id}", {
         headers: {
           Authorization: "Bearer" + localStorage.getItem("token"),
         }
           .then((res) => {
-            this.user.push(this.user);
+            this.user.push({
+              id: user.id,
+              img: user.img,
+              first_name: user.first_name,
+              last_name: user.last_name,
+              role: user.role,
+              email: user.email,
+            });
             console.log(res.data);
           })
           .catch(error),
       });
-    },
-    addNewUser() {
-      this.users.push(this.user);
     },
 
     //Upload picker for avatar
@@ -145,7 +149,7 @@ export default {
             ref="file"
             :name="uploadFieldName"
             @change="onFileChange($event.target.name, $event.target.files)"
-          /><!--<img :src="user.avatar.URL" :alt="avatar" />-->
+          /><img :src="user.img" :alt="avatar" />
         </div>
         <div v-if="avatar && saved == false">
           <button class="" @click="uploadimage" :loading="saving">
@@ -160,7 +164,7 @@ export default {
             {{ user.id }}
             Username: {{ user.fist_name + user.last_name }}
           </h3>
-          <p class="stat_user">Role: {{ user.isAdmin }}</p>
+          <p class="stat_user">Role: {{ user.role }}</p>
           <p class="e-mail">Email: {{ user.email }}</p>
         </div>
       </div>

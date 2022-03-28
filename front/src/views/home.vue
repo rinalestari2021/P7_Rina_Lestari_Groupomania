@@ -122,7 +122,7 @@ export default {
     sendMsg() {
       this.$refs.msg.click(post);
     },
-
+    deletePost() {},
     prevPage() {
       this.$router.go(-1);
     },
@@ -137,11 +137,12 @@ export default {
 <template>
   <div class="newfeedblock">
     <h1 class="wall" onclick="getPost()">Newsfeed</h1>
+
     <div v-for="post in posts" :key="posts.id" class="f-post">
       <p>{{ post.message }}</p>
       <button @click="createcomment()" class="addComm">Comment</button>
       <button @click="updatePost()" class="b-edit">Edit</button>
-      <button @click="deletePost()" class="btndelete">Delete</button>
+      <button @click="deletePost(post.id)" class="btndelete">Delete</button>
     </div>
 
     <div>
