@@ -122,6 +122,7 @@ export default {
     sendMsg() {
       this.$refs.msg.click(post);
     },
+
     prevPage() {
       this.$router.go(-1);
     },
@@ -138,22 +139,14 @@ export default {
     <h1 class="wall" onclick="getPost()">Newsfeed</h1>
     <div v-for="post in posts" :key="posts.id" class="f-post">
       <p>{{ post.message }}</p>
+      <button @click="createcomment()" class="addComm">Comment</button>
       <button @click="updatePost()" class="b-edit">Edit</button>
       <button @click="deletePost()" class="btndelete">Delete</button>
     </div>
 
     <div>
       <h2>Create New</h2>
-      <div @click="launchFilePicker()">
-        <input
-          type="file"
-          alt="avatar"
-          class="tumbnailupload"
-          ref="file"
-          :name="uploadFieldName"
-          @change="onFileChange($event.target.name, $event.target.files)"
-        />
-      </div>
+
       <form @submit.prevent="createPost()">
         <p>{{ post.posts }}</p>
         <input
@@ -162,8 +155,17 @@ export default {
           v-model="post"
           placeholder="Write here"
         />
+        <div @click="launchFilePicker()">
+          <input
+            type="file"
+            alt="avatar"
+            class="tumbnailupload"
+            ref="file"
+            :name="uploadFieldName"
+            @change="onFileChange($event.target.name, $event.target.files)"
+          />
+        </div>
       </form>
-      <button @click="createcomment()" class="addComm">Comment</button>
 
       <button type="submit" @click="sendMsg()" class="btnsend">Send</button>
     </div>
@@ -235,6 +237,10 @@ button:hover {
   cursor: pointer;
 }
 
+h2 {
+  top: 5px;
+}
+
 .framefeed {
   font-size: 12pt;
   color: black;
@@ -286,8 +292,9 @@ div.sidebar {
   height: 30px;
   background-color: white;
   border-radius: 5px;
-  margin: 20px 15px;
+  margin: 30px 15px;
   box-shadow: 3px 3px 5px #b86758;
+  bottom: 20px;
 }
 
 .contactlist,
@@ -336,7 +343,8 @@ div.sidebar {
 }
 
 .b-edit,
-.btndelete {
+.btndelete,
+.addComm {
   top: 13px;
 }
 
@@ -370,6 +378,10 @@ div.sidebar {
 }
 
 button:hover {
+  font-weight: bold;
+}
+
+.tumbnailupload:hover {
   font-weight: bold;
 }
 </style>

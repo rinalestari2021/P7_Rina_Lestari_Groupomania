@@ -48,6 +48,11 @@ export default {
     this.user = localStorage.getItem("user");
     console.log(this.user);
   },
+  mounted() {
+    if (!this.user) {
+      this.$router.push("/login");
+    }
+  },
   methods: {
     fetchUser() {
       userId = this.id;
@@ -91,7 +96,8 @@ export default {
         let size = imageFile.size / maxSize / maxSize;
         if (!imageFile.type.match("image.*")) {
           this.errorDialog = true;
-          this.errorText = "File size too big!Please select an image under 1MB";
+          this.errorText =
+            "File size is too big!Please select an image under 1MB";
         } else {
           let formData = new FormData();
           let imageURL = URL.createObjectURL(imageFile);
@@ -147,15 +153,15 @@ export default {
           </button>
         </div>
         <div>
-          <h4
+          <h3
             class="profname"
             :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
           >
             {{ user.id }}
-            {{ user.fist_name + user.last_name }}
-          </h4>
-          <p class="stat_user">{{ user.isAdmin }}</p>
-          <p class="e-mail">{{ user.email }}</p>
+            Username: {{ user.fist_name + user.last_name }}
+          </h3>
+          <p class="stat_user">Role: {{ user.isAdmin }}</p>
+          <p class="e-mail">Email: {{ user.email }}</p>
         </div>
       </div>
     </div>
