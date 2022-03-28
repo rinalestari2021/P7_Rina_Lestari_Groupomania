@@ -10,8 +10,16 @@ export default {
       optionColor: "#011f48",
       topDist: "10px",
       leftDist: "285px",
-      user: [
+      user: {
+        id: true,
+        first_name: "",
+        last_name: "",
+        email: "",
+      },
+      users: [
         {
+          avatar: "",
+          img: "",
           id: "",
           fist_name: "",
           last_name: "",
@@ -20,25 +28,59 @@ export default {
       ],
       maxSize: 1024,
       uploadFieldName: "File",
+      avatar: null,
+      saving: false,
+      saved: false,
+      showUser: true,
     };
   },
   props: { value: Object },
-  mounted() {
-    //fetch is not working yet
-    fetch("http://localhost:3000/api/accounts", {
-      headers: {
-        Authorization: "Bearer" + localStorage.getItem("token"),
+  watch: {
+    avatar: {
+      handler: function () {
+        this.saved = false;
       },
-    })
-      .then((res) => res.json())
-      .then((data) => (this.user.id = data))
-      .catch((err) => console.log(err.message));
+      deep: true,
+    },
   },
+
   created() {
     this.user = localStorage.getItem("user");
     console.log(this.user);
   },
   methods: {
+    fetchUser() {
+      userId = this.id;
+      if (userId != 0) {
+        axios.get("http://localhost:3000/api/accounts/" + userId, {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          }
+            .then((res) => {
+              this.user = res.data;
+              console.log(res.data);
+            })
+            .catch(error),
+        });
+      }
+    },
+    addUser() {
+      axios.post("http://localhost:3000/api/accounts/" + id, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("token"),
+        }
+          .then((res) => {
+            this.user.push(this.user);
+            console.log(res.data);
+          })
+          .catch(error),
+      });
+    },
+    addNewUser() {
+      this.users.push(this.user);
+    },
+
+    //Upload picker for avatar
     launchFilePicker() {
       this.$refs.file.click();
     },
@@ -57,6 +99,15 @@ export default {
           this.$emit("input", { formData, imageURL });
         }
       }
+    },
+    //Avatar setting
+    uploadimage() {
+      this.saving = true;
+      setTimeout(() => this.savedAvatar(), 1000);
+    },
+    savedAvatar() {
+      this.saving = false;
+      this.saved = true;
     },
     goToHome() {
       let route = this.$router.resolve({ path: "/home" });
@@ -79,7 +130,7 @@ export default {
 <template>
   <div class="container">
     <div class="frameprofile">
-      <div>
+      <div :users="users">
         <div @click="launchFilePicker()">
           <input
             type="file"
@@ -88,16 +139,24 @@ export default {
             ref="file"
             :name="uploadFieldName"
             @change="onFileChange($event.target.name, $event.target.files)"
-          />
+          /><!--<img :src="user.avatar.URL" :alt="avatar" />-->
         </div>
-        <p
-          class="profname"
-          :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
-        >
-          {{ user }}
-        </p>
-        <p class="stat_user">{{ user.isAdmin }}</p>
-        <p class="e-mail">{{ user.email }}</p>
+        <div v-if="avatar && saved == false">
+          <button class="" @click="uploadimage" :loading="saving">
+            Save Avatar
+          </button>
+        </div>
+        <div>
+          <h4
+            class="profname"
+            :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
+          >
+            {{ user.id }}
+            {{ user.fist_name + user.last_name }}
+          </h4>
+          <p class="stat_user">{{ user.isAdmin }}</p>
+          <p class="e-mail">{{ user.email }}</p>
+        </div>
       </div>
     </div>
   </div>

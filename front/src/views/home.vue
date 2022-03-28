@@ -28,8 +28,11 @@ export default {
         message: "",
       },
       comment: [],
+      maxSize: 1024,
+      uploadFieldName: "File",
     };
   },
+
   mounted() {
     fetch("http://localhost:3000/api/posts", {
       headers: {
@@ -50,7 +53,7 @@ export default {
           },
         })
         .then((res) => {
-          this.post.res.data;
+          this.posts.res.data;
         })
         .catch((error) => (this.posts = [{ title: "Charging Error" }]));
     },
@@ -79,6 +82,26 @@ export default {
     send(post) {
       console.log(post);
     },
+    //clique to insert image
+    launchFilePicker() {
+      this.$refs.file.click();
+    },
+    onFieldChange(fieldName, file) {
+      const { maxSize } = this;
+      let imageFile = file[0];
+      if (file.lenght > 0) {
+        let size = imageFile.size / maxSize / maxSize;
+        if (!imageFile.type.match("image.*")) {
+          this.errorDialog = true;
+          this.errorText = "File size too big!Please select an image under 1MB";
+        } else {
+          let formData = new FormData();
+          let imageURL = URL.createObjectURL(imageFile);
+          formData.append(fieldName, imageFile);
+          this.$emit("input", { formData, imageURL });
+        }
+      }
+    },
     goToProfile() {
       let route = this.$router.resolve({ path: "/profile" });
       window.open(route.href);
@@ -97,7 +120,7 @@ export default {
       const file = event.target.files[0];
     },
     sendMsg() {
-      this.$refs.msg.click();
+      this.$refs.msg.click(post);
     },
     prevPage() {
       this.$router.go(-1);
@@ -114,15 +137,25 @@ export default {
   <div class="newfeedblock">
     <h1 class="wall" onclick="getPost()">Newsfeed</h1>
     <div v-for="post in posts" :key="posts.id" class="f-post">
-      {{ post.message }}
+      <p>{{ post.message }}</p>
+      <button @click="updatePost()" class="b-edit">Edit</button>
+      <button @click="deletePost()" class="btndelete">Delete</button>
     </div>
 
     <div>
       <h2>Create New</h2>
-
+      <div @click="launchFilePicker()">
+        <input
+          type="file"
+          alt="avatar"
+          class="tumbnailupload"
+          ref="file"
+          :name="uploadFieldName"
+          @change="onFileChange($event.target.name, $event.target.files)"
+        />
+      </div>
       <form @submit.prevent="createPost()">
         <p>{{ post.posts }}</p>
-        <img src="{{post.uploadimage}}" />
         <input
           type="text"
           @keyup.enter="sendMsg()"
@@ -131,8 +164,7 @@ export default {
         />
       </form>
       <button @click="createcomment()" class="addComm">Comment</button>
-      <button @click="updatePost()" class="b-edit">Edit</button>
-      <button @click="deletePost()" class="btndelete">Delete</button>
+
       <button type="submit" @click="sendMsg()" class="btnsend">Send</button>
     </div>
 
@@ -254,9 +286,10 @@ div.sidebar {
   height: 30px;
   background-color: white;
   border-radius: 5px;
-  margin: 10px 15px;
+  margin: 20px 15px;
   box-shadow: 3px 3px 5px #b86758;
 }
+
 .contactlist,
 .profilepage {
   width: 100px;
@@ -273,7 +306,7 @@ div.sidebar {
   font-family: "Arial Narrow Bold";
   color: #011f48;
   box-shadow: 0 10px 6px -6px #777;
-  top: 20px;
+  top: 0px;
 }
 
 .b-del {
@@ -303,6 +336,11 @@ div.sidebar {
 }
 
 .b-edit,
+.btndelete {
+  top: 13px;
+}
+
+.b-edit,
 .btndelete,
 .btnsend {
   text-align: center;
@@ -316,6 +354,16 @@ div.sidebar {
 .addComm {
   text-align: center;
   width: 75px;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+}
+
+.tumbnailupload {
+  text-align: center;
+  align-items: center;
+  width: 200px;
+  margin: 3px 5px 5px;
   border-radius: 8px;
   background-color: white;
   color: black;
