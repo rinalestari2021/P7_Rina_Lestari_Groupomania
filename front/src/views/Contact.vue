@@ -27,8 +27,8 @@ export default {
         width="150"
         height="150"
       />
-      <router-link :to="{ name: 'Profile' }" class="prof-name">
-        yournamehere{{ profile }}
+      <router-link :to="{ name: '' }" class="prof-name">
+        Username:{{ user }}
       </router-link>
     </div>
     <div class="userlist2">
@@ -39,12 +39,12 @@ export default {
         width="150"
         height="150"
       />
-      <router-link :to="{ name: 'Profile' }" class="prof-name2"
-        >yourfullnamehere {{ profile }}</router-link
+      <router-link :to="{ name: '' }" class="prof-name2"
+        >Username: {{ user }}</router-link
       >
     </div>
 
-    <router-link :to="{ name: 'Home' }" class="returnhome">Home</router-link>
+    <router-link :to="{ name: 'home' }" class="returnhome">Home</router-link>
   </div>
 </template>
 

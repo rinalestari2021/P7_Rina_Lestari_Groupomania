@@ -21,7 +21,7 @@ export default {
           avatar: "",
           img: "",
           id: "",
-          fist_name: "",
+          first_name: "",
           last_name: "",
           email: "",
         },
@@ -48,43 +48,50 @@ export default {
     this.user = localStorage.getItem("user");
     console.log(this.user);
   },
+  beforeMount() {
+    this.fetchUser();
+  },
   mounted() {
-    console.log(this.user);
+    if (!this.user) {
+      this.$router.push("/login");
+    }
   },
   methods: {
     fetchUser() {
-      userId = this.id;
-      if (userId != 0) {
-        axios.get("http://localhost:3000/api/accounts/${id}", {
-          headers: {
-            Authorization: "Bearer" + localStorage.getItem("token"),
-          }
-            .then((res) => {
-              this.user = res.data;
-              console.log(res.data);
-            })
-            .catch(error),
-        });
+      try {
+        this.user = JSON.parse(localStorage.getItem("user"));
+        console.log(this.user);
+      } catch (e) {
+        localStorage.removeItem("user");
+        console.log("File Corrupt");
       }
     },
-    addUser() {
-      axios.post("http://localhost:3000/api/accounts/${id}", {
-        headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
-        }
-          .then((res) => {
-            this.user.push({
-              id: user.id,
-              img: user.img,
-              first_name: user.first_name,
-              last_name: user.last_name,
-              role: user.role,
-              email: user.email,
-            });
-            console.log(res.data);
-          })
-          .catch(error),
-      });
+    //update user
+    updateUser() {
+      axios
+        .put("http://localhost:3000/api/accounts/${id}", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+        .update(this.user.id)
+        .then((res) => {
+          this.user = "User Update";
+        })
+        .catch(error);
+    },
+
+    //delete user
+    deleteUser() {
+      axios
+        .delete("http://localhost:3000/api/delete/user?id=${id}", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          this.result.splice(id, 1);
+        });
     },
 
     //Upload picker for avatar
@@ -157,15 +164,15 @@ export default {
             Save Avatar
           </button>
         </div>
-        <div>
+        <div class="infoprof">
           <h3
             class="profname"
             :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
           >
             {{ user.id }}
-            Username: {{ user.fist_name + user.last_name }}
+            Username: {{ user.first_name + user.last_name }}
           </h3>
-          <p class="stat_user">Role: {{ user.role }}</p>
+          <p class="stat_user">Status: {{ user.isActive }}</p>
           <p class="e-mail">Email: {{ user.email }}</p>
         </div>
       </div>
@@ -183,7 +190,7 @@ export default {
       Home
     </button>
 
-    <button id="turnoff">Deactivate</button>
+    <button id="turnoff" @click="deleteUser()">Deactivate</button>
     <button @click.prevent="logout()" id="exit">LogOut</button>
   </div>
 </template>
@@ -282,7 +289,7 @@ div.sidebar {
   border-radius: 20px;
   box-shadow: grey 5px 5px 6px 1px;
   width: 40vw;
-  height: 100vh;
+  height: 50vh;
   align-items: center;
 }
 
