@@ -89,7 +89,7 @@ export default {
     onFieldChange(fieldName, file) {
       const { maxSize } = this;
       let imageFile = file[0];
-      if (file.lenght > 0) {
+      if (file.length > 0) {
         let size = imageFile.size / maxSize / maxSize;
         if (!imageFile.type.match("image.*")) {
           this.errorDialog = true;
@@ -119,10 +119,15 @@ export default {
     onFileChanged(event) {
       const file = event.target.files[0];
     },
-    sendMsg() {
-      this.$refs.msg.click(post);
+
+    submit() {
+      this.message++;
+      console.log(this.$refs.input.value);
     },
+
     deletePost() {},
+    //code for delete button here
+
     prevPage() {
       this.$router.go(-1);
     },
@@ -142,20 +147,20 @@ export default {
       <p>{{ post.message }}</p>
       <button @click="createcomment()" class="addComm">Comment</button>
       <button @click="updatePost()" class="b-edit">Edit</button>
-      <button @click="deletePost(post.id)" class="btndelete">Delete</button>
+      <button @click="deletePost()" class="btndelete">Delete</button>
     </div>
 
     <div>
       <h2>Create New</h2>
-
       <form @submit.prevent="createPost()">
         <p>{{ post.posts }}</p>
         <input
           type="text"
-          @keyup.enter="sendMsg()"
           v-model="post"
+          ref="input"
           placeholder="Write here"
         />
+
         <div @click="launchFilePicker()">
           <input
             type="file"
@@ -168,7 +173,7 @@ export default {
         </div>
       </form>
 
-      <button type="submit" @click="sendMsg()" class="btnsend">Send</button>
+      <button type="submit" @click="submit()" class="btnsend">Send</button>
     </div>
 
     <button @click="prevPage" class="prev">Previous</button>

@@ -49,9 +49,7 @@ export default {
     console.log(this.user);
   },
   mounted() {
-    if (!this.user) {
-      this.$router.push("/login");
-    }
+    console.log(this.user);
   },
   methods: {
     fetchUser() {
@@ -96,9 +94,12 @@ export default {
     onFieldChange(fieldName, file) {
       const { maxSize } = this;
       let imageFile = file[0];
-      if (file.lenght > 0) {
+      if (file.length > 0) {
         let size = imageFile.size / maxSize / maxSize;
         if (!imageFile.type.match("image.*")) {
+          this.errorDialog = true;
+          this.errorText = "Please choose and image file";
+        } else if (size > 1) {
           this.errorDialog = true;
           this.errorText =
             "File size is too big!Please select an image under 1MB";

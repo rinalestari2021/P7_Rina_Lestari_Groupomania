@@ -12,14 +12,27 @@ export default {
 };
 </script>
 <template>
-  <div>
+  <div class="adminset">
     <h1>Admin</h1>
+    <router-link :to="{ name: 'home' }">
+      <button class="btn-ad">Admin Post</button>
+    </router-link>
     <p>Page can be access by the administrator only</p>
   </div>
-  <ul v-if="users.length">
-    <li v-for="user" in users :key="user.id">
-      {{ user.firstName + "" + user.lastName }}
-    </li>
-  </ul>
+  >
 </template>
-<style></style>
+<style lang="scss">
+.adminset {
+  left: 20vw;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.btn-ad {
+  border-radius: 10px;
+}
+.btn-ad:hover {
+  font-weight: bold;
+  color: #b86758;
+}
+</style>

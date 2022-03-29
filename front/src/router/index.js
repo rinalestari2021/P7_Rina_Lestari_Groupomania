@@ -7,7 +7,7 @@ import profile from "../views/profile.vue";
 import contact from "../views/contact.vue";
 import forum from "../views/forum.vue";
 import notfound from "../views/notfound.vue";
-//import adminpage from "../views/adminpage.vue";
+import adminpage from "../views/adminpage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +52,12 @@ const router = createRouter({
       path: "/:catchAll(.*)",
       name: "notfound",
       component: notfound,
+    },
+    //admin page
+    {
+      path: "/adminpage",
+      name: "adminpage",
+      component: adminpage,
     },
     //{
     // path: "/post/:id",
