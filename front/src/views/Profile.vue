@@ -212,7 +212,7 @@ button:hover {
 
 .profname,
 .stat_user {
-  font-size: 12px;
+  font-size: 16px;
   color: black;
   font-weight: bold;
 }
@@ -223,11 +223,14 @@ button:hover {
   width: 200px;
   height: 200px;
 }
+p {
+  font-size: 16px;
+}
 
 .profname,
 .stat_user {
   top: 10px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
   line-height: 30px;
 }
