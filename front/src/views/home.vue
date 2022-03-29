@@ -32,7 +32,6 @@ export default {
       uploadFieldName: "File",
     };
   },
-
   mounted() {
     //to get all the posts
     fetch("http://localhost:3000/api/posts", {
@@ -76,6 +75,7 @@ export default {
         )
         .then((res) => console.log(res));
     },
+
     //btn send
     sendMsg() {
       this.isVisible = !this.isVisible;
@@ -122,7 +122,7 @@ export default {
     },
 
     submit() {
-      this.message++;
+      this.message;
       console.log(this.$refs.input.value);
     },
 

@@ -18,7 +18,6 @@ export default {
       },
       users: [
         {
-          avatar: "",
           img: "",
           id: "",
           first_name: "",
@@ -26,22 +25,8 @@ export default {
           email: "",
         },
       ],
-      maxSize: 1024,
-      uploadFieldName: "File",
-      avatar: null,
-      saving: false,
-      saved: false,
-      showUser: true,
+      selectFile: null,
     };
-  },
-  props: { value: Object },
-  watch: {
-    avatar: {
-      handler: function () {
-        this.saved = false;
-      },
-      deep: true,
-    },
   },
 
   created() {
@@ -94,39 +79,32 @@ export default {
         });
     },
 
-    //Upload picker for avatar
-    launchFilePicker() {
-      this.$refs.file.click();
+    //Upload image
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0];
     },
-    onFieldChange(fieldName, file) {
-      const { maxSize } = this;
-      let imageFile = file[0];
-      if (file.length > 0) {
-        let size = imageFile.size / maxSize / maxSize;
-        if (!imageFile.type.match("image.*")) {
-          this.errorDialog = true;
-          this.errorText = "Please choose and image file";
-        } else if (size > 1) {
-          this.errorDialog = true;
-          this.errorText =
-            "File size is too big!Please select an image under 1MB";
-        } else {
-          let formData = new FormData();
-          let imageURL = URL.createObjectURL(imageFile);
-          formData.append(fieldName, imageFile);
-          this.$emit("input", { formData, imageURL });
-        }
-      }
+    onUpload() {
+      const fd = new FormData();
+      fd.append("image", this.selectedFile, this.selectedFile.name);
+      axios
+        .post("http://localhost:3000/api/auth/uploadFile", fd, {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+
+          onUploadProgress: (uploadEvent) => {
+            console.log(
+              "Upload Progress:" +
+                Math.round((uploadEvent.loaded / uploadEvent.total) * 100) +
+                "%"
+            );
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
     },
-    //Avatar setting
-    uploadimage() {
-      this.saving = true;
-      setTimeout(() => this.savedAvatar(), 1000);
-    },
-    savedAvatar() {
-      this.saving = false;
-      this.saved = true;
-    },
+
     goToHome() {
       let route = this.$router.resolve({ path: "/home" });
       window.open(route.href);
@@ -149,21 +127,15 @@ export default {
   <div class="container">
     <div class="frameprofile">
       <div :users="users">
-        <div @click="launchFilePicker()">
-          <input
-            type="file"
-            alt="avatar"
-            class="profpic"
-            ref="file"
-            :name="uploadFieldName"
-            @change="onFileChange($event.target.name, $event.target.files)"
-          /><img :src="user.img" :alt="avatar" />
-        </div>
-        <div v-if="avatar && saved == false">
-          <button class="" @click="uploadimage" :loading="saving">
-            Save Avatar
-          </button>
-        </div>
+        <input
+          style="display: none"
+          type="file"
+          @change="onFileSelected"
+          ref="fileInput"
+        />
+        <button @click="$refs.fileInput.click()">Choose Image</button>
+        <button @click="onUpload">Upload</button>
+
         <div class="infoprof">
           <h3
             class="profname"
