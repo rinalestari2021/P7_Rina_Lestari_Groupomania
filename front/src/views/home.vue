@@ -228,6 +228,9 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
+p {
+  color: black;
+}
 
 .framefeed {
   display: flex;

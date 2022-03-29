@@ -169,10 +169,9 @@ export default {
             class="profname"
             :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
           >
-            {{ user.id }}
             Username: {{ user.first_name + user.last_name }}
           </h3>
-          <p class="stat_user">Status: {{ user.isActive }}</p>
+          <p class="ident">ID {{ user.id }}</p>
           <p class="e-mail">Email: {{ user.email }}</p>
         </div>
       </div>
@@ -211,7 +210,7 @@ button:hover {
 }
 
 .profname,
-.stat_user {
+.ident {
   font-size: 16px;
   color: black;
   font-weight: bold;
@@ -228,7 +227,7 @@ p {
 }
 
 .profname,
-.stat_user {
+.ident {
   top: 10px;
   font-size: 16px;
   font-weight: bold;
