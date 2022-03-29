@@ -59,9 +59,8 @@ export default {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
-        .update(this.user.id)
         .then((res) => {
-          this.user = "User Update";
+          localStorage.setItem("user", JSON.stringify(res));
         })
         .catch(error);
     },
@@ -87,7 +86,7 @@ export default {
       const fd = new FormData();
       fd.append("image", this.selectedFile, this.selectedFile.name);
       axios
-        .post("http://localhost:3000/api/auth/uploadFile", fd, {
+        .put("http://localhost:3000/api/uploadFile/${id}", fd, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -141,7 +140,7 @@ export default {
             class="profname"
             :style="{ 'font-size': fontSize, 'font-weight': fontWeight }"
           >
-            Username: {{ user.first_name + user.last_name }}
+            Username: {{ user.first_name + " " + user.last_name }}
           </h3>
           <p class="ident">ID {{ user.id }}</p>
           <p class="e-mail">Email: {{ user.email }}</p>

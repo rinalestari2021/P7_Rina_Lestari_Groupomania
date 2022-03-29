@@ -28,12 +28,10 @@ export default {
         message: "",
       },
       comment: [],
-      maxSize: 1024,
-      uploadFieldName: "File",
+      selectFile: null,
     };
   },
   mounted() {
-    //to get all the posts
     fetch("http://localhost:3000/api/posts", {
       headers: {
         Authorization: "Bearer" + localStorage.getItem("token"),
@@ -44,24 +42,32 @@ export default {
       .catch((err) => console.log(err.message));
   },
   methods: {
-    //update post in newsfeed
+    //get all posts
     getPost() {
       axios
-        .get("http://localhost:3000/api/posts", {
+        .get("http://localhost:3000/api/posts/", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
-        .then((res) => {
-          this.posts.res.data;
-        })
-        .catch((error) => (this.posts = [{ title: "Charging Error" }]));
+        .then((response) => response.posts);
     },
+    // get one post
+    getOnePost() {
+      axios
+        .get("http://localhost:3000/api/posts/", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+        .then((response) => response.post.id);
+    },
+
     //create post
     createPost() {
       axios
         .post(
-          "http://localhost:3000/api/auth/posts",
+          "http://localhost:3000/api/posts/${id}",
           {
             id: "",
             tittle: "",
@@ -73,40 +79,103 @@ export default {
             },
           }
         )
-        .then((res) => console.log(res));
+        .then((res) => {
+          localStorage.setItem("posts", JSON.stringify(res));
+        });
+    },
+    //create comments
+    createcomment() {
+      axios
+        .post("http://localhost:3000/api/comment/${id}", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+          body: this.comment,
+        })
+        .then((res) => {
+          this.comments.res.data;
+          this.comment = "";
+        })
+        .catch((err) => {
+          console.log(error);
+        });
+    },
+    //delete comment
+    deleteComment() {
+      axios
+        .delete("http://localhost:3000/api/comment/${id}", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          this.comment.res.data;
+        })
+        .catch(error)
+        .then((res) => {
+          return response;
+        });
+    },
+    //Delete post
+    deletePost() {
+      if (confirm("Delete" + post.id)) {
+        axios
+          .delete("http://localhost:3000/api/${post.id}", {
+            headers: {
+              Authorization: "Bearer" + localStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
+            this.posts.res.data;
+          })
+          .catch(error)
+          .then((res) => {
+            return response;
+          });
+      }
     },
 
-    //btn send
+    //Upload image
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0];
+    },
+    onUpload() {
+      const fd = new FormData();
+      fd.append("image", this.selectedFile, this.selectedFile.name);
+      axios
+        .put("http://localhost:3000/api/uploadFile/${id}", fd, {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+
+          onUploadProgress: (uploadEvent) => {
+            console.log(
+              "Upload Progress:" +
+                Math.round((uploadEvent.loaded / uploadEvent.total) * 100) +
+                "%"
+            );
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    },
+
+    //button send
     sendMsg() {
       this.isVisible = !this.isVisible;
     },
     send(post) {
       console.log(post);
     },
-    //clique to insert image
-    launchFilePicker() {
-      this.$refs.file.click();
-    },
-    onFieldChange(fieldName, file) {
-      const { maxSize } = this;
-      let imageFile = file[0];
-      if (file.length > 0) {
-        let size = imageFile.size / maxSize / maxSize;
-        if (!imageFile.type.match("image.*")) {
-          this.errorDialog = true;
-          this.errorText = "File size too big!Please select an image under 1MB";
-        } else {
-          let formData = new FormData();
-          let imageURL = URL.createObjectURL(imageFile);
-          formData.append(fieldName, imageFile);
-          this.$emit("input", { formData, imageURL });
-        }
-      }
-    },
+
+    //button go to user profile page
     goToProfile() {
       let route = this.$router.resolve({ path: "/profile" });
       window.open(route.href);
     },
+
+    //go to contact list as sample only
     goToContact() {
       let route = this.$router.resolve({ path: "/contact" });
       window.open(route.href);
@@ -117,21 +186,19 @@ export default {
     changeOptionColor: function (event) {
       this.optionColor = event.target.value;
     },
-    onFileChanged(event) {
-      const file = event.target.files[0];
-    },
 
+    //send post
     submit() {
       this.message;
       console.log(this.$refs.input.value);
     },
 
-    deletePost() {},
-    //code for delete button here
-
+    //return to previous page button
     prevPage() {
       this.$router.go(-1);
     },
+
+    //signout button
     logout() {
       localStorage.clear("user");
       this.$router.push("/login");
@@ -142,7 +209,7 @@ export default {
 
 <template>
   <div class="newfeedblock">
-    <h1 class="wall" onclick="getPost()">Newsfeed</h1>
+    <h1 class="wall" @click="getPost()">Newsfeed</h1>
 
     <div v-for="post in posts" :key="posts.id" class="f-post">
       <p>{{ post.message }}</p>
@@ -154,7 +221,6 @@ export default {
     <div>
       <h2>Create New</h2>
       <form @submit.prevent="createPost()">
-        <p>{{ post.posts }}</p>
         <input
           type="text"
           v-model="post"
@@ -162,16 +228,8 @@ export default {
           placeholder="Write here"
         />
 
-        <div @click="launchFilePicker()">
-          <input
-            type="file"
-            alt="avatar"
-            class="tumbnailupload"
-            ref="file"
-            :name="uploadFieldName"
-            @change="onFileChange($event.target.name, $event.target.files)"
-          />
-        </div>
+        <button @click="$refs.fileInput.click()">Choose Image</button>
+        <button @click="onUpload">Upload</button>
       </form>
 
       <button type="submit" @click="submit()" class="btnsend">Send</button>
@@ -360,7 +418,7 @@ div.sidebar {
 
 .b-edit,
 .btndelete,
-.btnsend {
+.btnsend.btnsend {
   text-align: center;
   align-items: center;
   width: 50px;
@@ -368,6 +426,10 @@ div.sidebar {
   border-radius: 8px;
   background-color: white;
   color: black;
+}
+
+.btnsend {
+  right: 75px;
 }
 .addComm {
   text-align: center;
