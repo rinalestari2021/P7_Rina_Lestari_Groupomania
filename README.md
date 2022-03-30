@@ -46,9 +46,3 @@ http://localhost:8080/home
 
 Profile
 http://localhost:8080/profile
-
-Contact
-http://localhost:8080/contact
-
-Chatroom(conversation)
-http://localhost:8080/forum

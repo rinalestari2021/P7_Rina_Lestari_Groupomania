@@ -54,7 +54,7 @@ export default {
     //edit or modified post
     updatePost() {
       axios
-        .put("http://localhost:3000/api/posts/1", {
+        .put("http://localhost:3000/api/auth/accounts/" + this.user.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -73,7 +73,7 @@ export default {
     //create post
     createPost() {
       axios
-        .post("http://localhost:3000/api/posts/${id}", {
+        .post("http://localhost:3000/api/auth/posts/" + this.user.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -108,7 +108,7 @@ export default {
     //delete comment
     deleteComment() {
       axios
-        .delete("http://localhost:3000/api/post/${id}/comment", {
+        .delete("http://localhost:3000/api/auth/accounts/" + this.user.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -124,7 +124,7 @@ export default {
     //Delete post
     deletePost() {
       axios
-        .delete("http://localhost:3000/api/posts/1", {
+        .delete("http://localhost:3000/api/auth/accounts/" + this.user.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -142,7 +142,7 @@ export default {
       const fd = new FormData();
       fd.append("image", this.selectedFile, this.selectedFile.name);
       axios
-        .put("http://localhost:3000/api/uploadFile/${id}", fd, {
+        .put("http://localhost:3000/api/auth/accounts/" + this.user.id, fd, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },

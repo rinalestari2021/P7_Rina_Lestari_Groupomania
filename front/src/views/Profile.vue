@@ -54,7 +54,7 @@ export default {
     //update user
     updateUser() {
       axios
-        .put("http://localhost:3000/api/accounts/${id}", {
+        .put("http://localhost:3000/api/auth/accounts/" + this.user.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -68,7 +68,7 @@ export default {
     //delete user
     deleteUser() {
       axios
-        .delete("http://localhost:3000/api/delete/user?id=${id}", {
+        .delete("http://localhost:3000/api/auth/accounts/" + this.user.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -86,7 +86,7 @@ export default {
       const fd = new FormData();
       fd.append("image", this.selectedFile, this.selectedFile.name);
       axios
-        .put("http://localhost:3000/api/uploadFile/${id}", fd, {
+        .put("http://localhost:3000/api/auth/accounts/" + this.user.id, fd, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
