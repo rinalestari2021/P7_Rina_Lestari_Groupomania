@@ -32,53 +32,61 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:3000/api/posts", {
-      headers: {
-        Authorization: "Bearer" + localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => (this.posts = data))
+    axios
+      .get("http://localhost:3000/api/posts", {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("token"),
+        },
+      })
+
+      .then((res) => (this.posts = res.data))
       .catch((err) => console.log(err.message));
   },
   methods: {
-    //get all posts
-    getPost() {
-      axios
-        .get("http://localhost:3000/api/posts/", {
-          headers: {
-            Authorization: "Bearer" + localStorage.getItem("token"),
-          },
-        })
-        .then((response) => response.posts);
-    },
-    // get one post
+    //get one post
     getOnePost() {
       axios
-        .get("http://localhost:3000/api/posts/", {
+        .get("http://localhost:3000/api/posts/${id}", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
-        .then((response) => response.post.id);
+        .then((res) => res.posts);
+    },
+
+    //edit or modified post
+    updatePost() {
+      axios
+        .put("http://localhost:3000/api/posts/${id}", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+          body: JSON.stringify({
+            id: "",
+            title: "",
+            body: "",
+            userId: "",
+          }),
+        })
+        .then((res) => {
+          localStorage.setItem("posts", JSON.stringify(res));
+        });
     },
 
     //create post
     createPost() {
       axios
-        .post(
-          "http://localhost:3000/api/posts/${id}",
-          {
-            id: "",
-            tittle: "",
-            message: "",
+        .post("http://localhost:3000/api/posts/${id}", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
           },
-          {
-            headers: {
-              Authorization: "Bearer" + localStorage.getItem("token"),
-            },
-          }
-        )
+          body: JSON.stringify({
+            id: "",
+            title: "",
+            body: "",
+            userId: "",
+          }),
+        })
         .then((res) => {
           localStorage.setItem("posts", JSON.stringify(res));
         });
@@ -86,15 +94,18 @@ export default {
     //create comments
     createcomment() {
       axios
-        .post("http://localhost:3000/api/comment/${id}", {
+        .post("http://localhost:3000/api/post/${id}/comment", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
-          body: this.comment,
+          body: JSON.stringify({
+            title: "",
+            body: "",
+            userId: "",
+          }),
         })
         .then((res) => {
-          this.comments.res.data;
-          this.comment = "";
+          localStorage.setItem("comment", JSON.stringify(res));
         })
         .catch((err) => {
           console.log(error);
@@ -103,7 +114,7 @@ export default {
     //delete comment
     deleteComment() {
       axios
-        .delete("http://localhost:3000/api/comment/${id}", {
+        .delete("http://localhost:3000/api/post/${id}/comment", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -111,28 +122,30 @@ export default {
         .then((res) => {
           this.comment.res.data;
         })
-        .catch(error)
+        .catch((err) => {
+          console.log(error);
+        })
         .then((res) => {
           return response;
         });
     },
     //Delete post
     deletePost() {
-      if (confirm("Delete" + post.id)) {
-        axios
-          .delete("http://localhost:3000/api/${post.id}", {
-            headers: {
-              Authorization: "Bearer" + localStorage.getItem("token"),
-            },
-          })
-          .then((res) => {
-            this.posts.res.data;
-          })
-          .catch(error)
-          .then((res) => {
-            return response;
-          });
-      }
+      axios
+        .delete("http://localhost:3000/api/posts/${id}", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          this.posts.res.data;
+        })
+        .catch((err) => {
+          console.log(error);
+        })
+        .then((res) => {
+          return response;
+        });
     },
 
     //Upload image
@@ -159,14 +172,6 @@ export default {
         .then((res) => {
           console.log(res);
         });
-    },
-
-    //button send
-    sendMsg() {
-      this.isVisible = !this.isVisible;
-    },
-    send(post) {
-      console.log(post);
     },
 
     //button go to user profile page
@@ -213,7 +218,7 @@ export default {
 
     <div v-for="post in posts" :key="posts.id" class="f-post">
       <p>{{ post.message }}</p>
-      <button @click="createcomment()" class="addComm">Comment</button>
+      <button @click="addComment()" class="addComm">Comment</button>
       <button @click="updatePost()" class="b-edit">Edit</button>
       <button @click="deletePost()" class="btndelete">Delete</button>
     </div>
@@ -385,7 +390,7 @@ div.sidebar {
 }
 
 .b-del {
-  position: absolute;
+  position: relative;
   margin-left: 40%;
   top: 100px;
 }
@@ -413,7 +418,8 @@ div.sidebar {
 .b-edit,
 .btndelete,
 .addComm {
-  top: 13px;
+  top: 15px;
+  position: relative;
 }
 
 .b-edit,
