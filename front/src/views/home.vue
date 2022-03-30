@@ -1,13 +1,9 @@
 <script>
 import axios from "axios";
 
-import posts from "../components/posts.vue";
-import uploadimage from "../components/uploadimage.vue";
-import comments from "../components/comments.vue";
-
 export default {
   name: "home",
-  components: { uploadimage, posts, comments },
+
   created() {
     this.user = localStorage.getItem("user");
     console.log(this.user);
@@ -51,21 +47,22 @@ export default {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
-        .then((res) => res.posts);
+        .then((res) => res.posts)
+        .catch(error);
     },
 
     //edit or modified post
     updatePost() {
       axios
-        .put("http://localhost:3000/api/posts/${id}", {
+        .put("http://localhost:3000/api/posts/1", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
           body: JSON.stringify({
-            id: "",
-            title: "",
-            body: "",
-            userId: "",
+            id: this.post.id,
+            title: this.post.title,
+            imageurl: this.post.imageurl,
+            message: this.post.message,
           }),
         })
         .then((res) => {
@@ -92,9 +89,9 @@ export default {
         });
     },
     //create comments
-    createcomment() {
+    createComment() {
       axios
-        .post("http://localhost:3000/api/post/${id}/comment", {
+        .post("http://localhost:3000/api/post/1/comment", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -105,10 +102,7 @@ export default {
           }),
         })
         .then((res) => {
-          localStorage.setItem("comment", JSON.stringify(res));
-        })
-        .catch((err) => {
-          console.log(error);
+          localStorage.setItem("post", JSON.stringify(res));
         });
     },
     //delete comment
@@ -122,9 +116,7 @@ export default {
         .then((res) => {
           this.comment.res.data;
         })
-        .catch((err) => {
-          console.log(error);
-        })
+        .catch(error)
         .then((res) => {
           return response;
         });
@@ -132,19 +124,13 @@ export default {
     //Delete post
     deletePost() {
       axios
-        .delete("http://localhost:3000/api/posts/${id}", {
+        .delete("http://localhost:3000/api/posts/1", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
         .then((res) => {
           this.posts.res.data;
-        })
-        .catch((err) => {
-          console.log(error);
-        })
-        .then((res) => {
-          return response;
         });
     },
 
@@ -160,7 +146,6 @@ export default {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
-
           onUploadProgress: (uploadEvent) => {
             console.log(
               "Upload Progress:" +
@@ -218,7 +203,7 @@ export default {
 
     <div v-for="post in posts" :key="posts.id" class="f-post">
       <p>{{ post.message }}</p>
-      <button @click="addComment()" class="addComm">Comment</button>
+      <button @click="createComment()" class="addComm">Comment</button>
       <button @click="updatePost()" class="b-edit">Edit</button>
       <button @click="deletePost()" class="btndelete">Delete</button>
     </div>
