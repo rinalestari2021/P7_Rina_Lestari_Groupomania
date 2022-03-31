@@ -114,13 +114,9 @@ export default {
     changeOptionColor: function (event) {
       this.optionColor = event.target.value;
     },
-    //retour to prev page
-    prevPage() {
-      window.open("/");
-    },
 
     logout() {
-      localStorage.clear("user");
+      localStorage.clear("user", "token");
       this.$router.push("/login");
     },
   },

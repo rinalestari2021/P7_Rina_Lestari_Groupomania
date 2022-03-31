@@ -27,9 +27,7 @@ export default {
       selectFile: null,
     };
   },
-  created() {
-    window.addEventListener("keyup", this.historyBack);
-  },
+
   mounted() {
     axios
       .get("http://localhost:3000/api/posts", {
@@ -186,22 +184,10 @@ export default {
       console.log(this.$refs.input.value);
     },
 
-    //return to previous page button
-    prevPage() {
-      this.$router.go(-1);
-    },
-
-    //backspace navigation not working yet, prevent page home open avec user logout and click backspace without login
-    historyBack(e) {
-      if (e.keyCode === 8) {
-        this.$router.go(-1);
-      }
-    },
-
     //signout button
     logout() {
       localStorage.clear("user");
-      this.$router.push("/");
+      this.$router.push("/login");
     },
   },
 };
