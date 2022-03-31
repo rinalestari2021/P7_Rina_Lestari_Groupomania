@@ -27,6 +27,9 @@ export default {
       selectFile: null,
     };
   },
+  created() {
+    window.addEventListener("keyup", this.historyBack);
+  },
   mounted() {
     axios
       .get("http://localhost:3000/api/posts", {
@@ -42,7 +45,7 @@ export default {
     //get one post
     getOnePost() {
       axios
-        .get("http://localhost:3000/api/posts/${id}", {
+        .get("http://localhost:3000/api/posts/" + this.user.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -91,7 +94,7 @@ export default {
     //create comments
     createComment() {
       axios
-        .post("http://localhost:3000/api/post/1/comment", {
+        .post("http://localhost:3000/api/comment/" + this.user.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -162,7 +165,7 @@ export default {
     //button go to user profile page
     goToProfile() {
       let route = this.$router.resolve({ path: "/profile" });
-      window.open(route.href);
+      window.open("/profile", "_self");
     },
 
     //go to contact list as sample only
@@ -188,10 +191,17 @@ export default {
       this.$router.go(-1);
     },
 
+    //backspace navigation not working yet, prevent page home open avec user logout and click backspace without login
+    historyBack(e) {
+      if (e.keyCode === 8) {
+        this.$router.go(-1);
+      }
+    },
+
     //signout button
     logout() {
       localStorage.clear("user");
-      this.$router.push("/login");
+      this.$router.push("/");
     },
   },
 };

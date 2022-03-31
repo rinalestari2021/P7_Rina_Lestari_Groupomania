@@ -41,7 +41,7 @@ export default {
       axios
         .post("http://localhost:3000/api/auth/signup", data)
         .then((Res) => {
-          this.$router.push("/login");
+          this.$router.push("/login", "_self");
         })
         .catch((err) => {
           console.log("ERROR REQUEST");

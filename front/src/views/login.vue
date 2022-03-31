@@ -24,7 +24,7 @@ export default {
         .then((res) => {
           localStorage.setItem("token", JSON.stringify(res.data.token));
           localStorage.setItem("user", JSON.stringify(res.data.user));
-          this.$router.push("/home");
+          this.$router.push("/home", "_self");
         });
     },
     prevPage() {

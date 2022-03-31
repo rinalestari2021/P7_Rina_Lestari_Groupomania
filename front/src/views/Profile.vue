@@ -106,7 +106,7 @@ export default {
 
     goToHome() {
       let route = this.$router.resolve({ path: "/home" });
-      window.open(route.href);
+      window.open("/home", "_self");
     },
     changeFontSize: function (event) {
       this.fontSize = event.target.value + "px";
@@ -114,6 +114,11 @@ export default {
     changeOptionColor: function (event) {
       this.optionColor = event.target.value;
     },
+    //retour to prev page
+    prevPage() {
+      window.open("/");
+    },
+
     logout() {
       localStorage.clear("user");
       this.$router.push("/login");
