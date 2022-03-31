@@ -23,7 +23,11 @@ export default {
         imageUrl: "",
         message: "",
       },
-      comment: [],
+      comments: [],
+      comment: {
+        imageUrl: "",
+        message: "",
+      },
       selectFile: null,
     };
   },
@@ -40,10 +44,26 @@ export default {
       .catch((err) => console.log(err.message));
   },
   methods: {
+    getAllPost() {
+      axios
+        .get("http://localhost:3000/api/posts", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+
+        .then((res) => (this.posts = res.data))
+        .catch((err) => console.log(err.message));
+    },
+
+    getUser() {
+      this.user = JSON.parse(localStorage.getItem("user"));
+    },
+
     //get one post
     getOnePost() {
       axios
-        .get("http://localhost:3000/api/posts/" + this.user.id, {
+        .get("http://localhost:3000/api/posts/" + this.post.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -55,7 +75,7 @@ export default {
     //edit or modified post
     updatePost() {
       axios
-        .put("http://localhost:3000/api/auth/accounts/" + this.user.id, {
+        .put("http://localhost:3000/api/posts/" + this.post.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -73,26 +93,26 @@ export default {
 
     //create post
     createPost() {
+      let formData = new FormData();
+      formData.append("image", this.selectedFile, this.selectedFile.name);
+      formData.append("message", this.post.message);
       axios
-        .post("http://localhost:3000/api/auth/posts/" + this.user.id, {
+        .post("http://localhost:3000/api/posts/", formData, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
-          body: JSON.stringify({
-            id: "",
-            title: "",
-            body: "",
-            userId: "",
-          }),
         })
-        .then((res) => {
-          localStorage.setItem("posts", JSON.stringify(res));
+        .then(() => {
+          this.getAllPost();
         });
     },
+
     //create comments
     createComment() {
+      let formData = new FormData();
+      formData.append("image", this.selectedFile, this.selectedFile.name);
       axios
-        .post("http://localhost:3000/api/comment/" + this.user.id, {
+        .post("http://localhost:3000/api/posts/comment/", {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -109,7 +129,7 @@ export default {
     //delete comment
     deleteComment() {
       axios
-        .delete("http://localhost:3000/api/auth/accounts/" + this.user.id, {
+        .delete("http://localhost:3000/api/posts/comment/" + this.comment.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -125,7 +145,7 @@ export default {
     //Delete post
     deletePost() {
       axios
-        .delete("http://localhost:3000/api/auth/accounts/" + this.user.id, {
+        .delete("http://localhost:3000/api/posts/" + this.post.id, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
@@ -139,37 +159,15 @@ export default {
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
-    onUpload() {
-      const fd = new FormData();
-      fd.append("image", this.selectedFile, this.selectedFile.name);
-      axios
-        .put("http://localhost:3000/api/auth/accounts/" + this.user.id, fd, {
-          headers: {
-            Authorization: "Bearer" + localStorage.getItem("token"),
-          },
-          onUploadProgress: (uploadEvent) => {
-            console.log(
-              "Upload Progress:" +
-                Math.round((uploadEvent.loaded / uploadEvent.total) * 100) +
-                "%"
-            );
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    },
 
     //button go to user profile page
     goToProfile() {
-      let route = this.$router.resolve({ path: "/profile" });
-      window.open("/profile", "_self");
+      this.$router.push("/profile");
     },
 
     //go to contact list as sample only
     goToContact() {
-      let route = this.$router.resolve({ path: "/contact" });
-      window.open(route.href);
+      this.$router.push("/contact");
     },
     changeFontSize: function (event) {
       this.fontSize = event.target.value + "px";
@@ -199,6 +197,7 @@ export default {
 
     <div v-for="post in posts" :key="posts.id" class="f-post">
       <p>{{ post.message }}</p>
+      <img :src="post.imageUrl" />
       <button @click="createComment()" class="addComm">Comment</button>
       <button @click="updatePost()" class="b-edit">Edit</button>
       <button @click="deletePost()" class="btndelete">Delete</button>
@@ -206,19 +205,22 @@ export default {
 
     <div>
       <h2>Create New</h2>
-      <form @submit.prevent="createPost()">
+      <form>
         <input
           type="text"
-          v-model="post"
+          v-model="post.message"
           ref="input"
           placeholder="Write here"
         />
-
-        <button @click="$refs.fileInput.click()">Choose Image</button>
-        <button @click="onUpload">Upload</button>
       </form>
-
-      <button type="submit" @click="submit()" class="btnsend">Send</button>
+      <input
+        style="display: none"
+        type="file"
+        @change="onFileSelected"
+        ref="fileInput"
+      />
+      <button @click="$refs.fileInput.click()">Choose Image</button>
+      <button type="submit" @click="createPost()" class="btnsend">Send</button>
     </div>
 
     <button @click="prevPage" class="prev">Previous</button>
@@ -255,11 +257,9 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  flex-wrap: wrap;
   background-color: #5adfe2;
   width: 100%;
-  height: auto;
-  line-height: 20px;
+  height: 100%;
 }
 
 .wall {
@@ -267,11 +267,6 @@ export default {
   margin: auto;
 }
 
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 p {
   color: black;
 }
@@ -340,15 +335,11 @@ div.sidebar {
   box-shadow: 0 10px 6px -6px #777;
 }
 .f-post {
-  text-align: left;
-  text-indent: 15px;
-  width: auto;
-  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: white;
-  border-radius: 5px;
-  margin: 30px 15px;
   box-shadow: 3px 3px 5px #b86758;
-  bottom: 20px;
 }
 
 .contactlist,

@@ -33,7 +33,7 @@ db.sequelize.sync().then(() => {
 
 // Routes configuration
 app.use("/images", express.static(path.join(__dirname, "images")));
-app.use("/api/posts", postRoutes);
-app.use("/api/auth", userRoutes);
+app.use("/api/posts", postRoutes); //for post
+app.use("/api/auth", userRoutes); // for user
 
 module.exports = app;

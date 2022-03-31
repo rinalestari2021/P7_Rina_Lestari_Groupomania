@@ -4,9 +4,8 @@ const jwt = require("jsonwebtoken"); //standard method for secure data exchange 
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split("Bearer")[1].split('"')[1];
-    console.log(req.headers);
     jwt.verify(token, process.env.JWT_TOKEN, (err, decoded) => {
-      req.userId = decoded.id;
+      req.userId = decoded.UserId;
       next();
     });
   } catch (error) {

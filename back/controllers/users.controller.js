@@ -5,6 +5,7 @@ const { User } = require("../models");
 const bcrypt = require("bcrypt");
 // JSON Web Token is a compact URL-safe means of representing claims to be transferred between two parties.
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 
 // Model : SignUp
 exports.signup = async (req, res, next) => {
@@ -62,6 +63,13 @@ exports.deleteAccount = async (req, res, next) => {
     const user = await User.findOne({ where: { id: req.params.id } });
     if (user.avatar !== null) {
       const filename = user.avatar.split("/images/")[1];
+      fs.unlink(`images/${filename}`, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("This image is deleted");
+        }
+      });
       User.destroy({ where: { id: req.params.id } });
       res.status(200).json({ message: "User deleted" });
     } else {
@@ -100,38 +108,29 @@ exports.getOneAccount = async (req, res, next) => {
 // Model : modify account
 exports.modifyAccount = async (req, res, next) => {
   try {
-    let newPhoto;
     let user = await User.findOne({ where: { id: req.params.id } });
-
-    if (req.file && user.avatar) {
-      newPhoto = `${req.protocol}://${req.get("host")}/images/${
+    if (user.avatar) {
+      const filename = user.avatar.split("/images/")[1];
+      fs.unlink(`images/${filename}`, async function (err) {
+        user.avatar = `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`;
+        const newUser = await user.save();
+        res.status(200).json({
+          user: newUser,
+          messageRetour: "Profile modified",
+        });
+      });
+    } else {
+      user.avatar = `${req.protocol}://${req.get("host")}/images/${
         req.file.filename
       }`;
-    } else if (req.file) {
-      newPhoto = `${req.protocol}://${req.get("host")}/images/${
-        req.file.filename
-      }`;
+      const newUser = await user.save();
+      res.status(200).json({
+        user: newUser,
+        messageRetour: "Profile modified",
+      });
     }
-    if (newPhoto) {
-      user.avatar = newPhoto;
-    }
-    if (req.body.first_name) {
-      user.first_name = req.body.first_name;
-    }
-    if (req.body.last_name) {
-      user.last_name = req.body.last_name;
-    }
-    if (req.body.password) {
-      user.password = await bcrypt.hash(req.body.password, 10);
-    }
-
-    const newUser = await user.save({
-      fields: ["first_name", "last_name", "avatar", "password"],
-    });
-    res.status(200).json({
-      user: newUser,
-      messageRetour: "Profile modified",
-    });
   } catch (error) {
     return res.status(500).send({ error });
   }

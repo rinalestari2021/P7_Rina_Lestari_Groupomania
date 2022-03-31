@@ -36,30 +36,21 @@ exports.getOnePost = async (req, res, next) => {
 // Write new message
 exports.createPost = async (req, res, next) => {
   try {
-    let image;
-    const user = await User.findOne({
-      attributes: ["first_name", "avatar", "last_name", "id"],
-      where: { id: req.token.UserId },
-    });
+    let post = {};
+    const user = await User.findByPk(req.userId);
     if (user !== null) {
       if (req.file) {
-        image = `${req.protocol}://${req.get("host")}/images/${
+        post.imageUrl = `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`;
+        post.message = req.body.message;
+        post.UserId = req.userId;
       } else {
-        image = null;
+        post.imageUrl = "";
+        post.message = req.body.message;
+        post.UserId = req.userId;
       }
-      const post = await Post.create({
-        include: [
-          {
-            model: User,
-            attributes: ["first_name", "last_name"],
-          },
-        ],
-        message: req.body.message,
-        imageUrl: image,
-        UserId: req.token.UserId,
-      });
+      Post.create(post);
       res.status(201).json({ post: post, message: "Message have been send" });
     } else {
       res.status(400).send({ error: "User is null " });

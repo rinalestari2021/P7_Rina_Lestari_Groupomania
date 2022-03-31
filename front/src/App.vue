@@ -36,10 +36,10 @@ export default {
 #app {
   background: #011f48;
   flex-direction: column;
-  position: relative;
+
   display: flex;
   justify-content: center;
-  height: auto;
+  height: 100vh;
 }
 
 .openinglogo {

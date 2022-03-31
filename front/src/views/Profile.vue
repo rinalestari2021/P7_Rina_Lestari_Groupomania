@@ -29,11 +29,8 @@ export default {
     };
   },
 
-  created() {
-    this.user = localStorage.getItem("user");
-    console.log(this.user);
-  },
   beforeMount() {
+    console.log("test");
     this.fetchUser();
   },
   mounted() {
@@ -52,18 +49,19 @@ export default {
       }
     },
     //update user
-    updateUser() {
-      axios
-        .put("http://localhost:3000/api/auth/accounts/" + this.user.id, {
-          headers: {
-            Authorization: "Bearer" + localStorage.getItem("token"),
-          },
-        })
-        .then((res) => {
-          localStorage.setItem("user", JSON.stringify(res));
-        })
-        .catch(error);
-    },
+    //updateUser() {
+    //  console.log(this.selectedFile);
+    // axios
+    //   .put("http://localhost:3000/api/auth/accounts/" + this.user.id, {
+    //     headers: {
+    //       Authorization: "Bearer" + localStorage.getItem("token"),
+    //     },
+    //    })
+    //   .then((res) => {
+    //     localStorage.setItem("user", JSON.stringify(res));
+    //   })
+    //   .catch(error);
+    //},
 
     //delete user
     deleteUser() {
@@ -73,8 +71,10 @@ export default {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
-        .then((res) => {
-          this.result.splice(id, 1);
+        .then(() => {
+          localStorage.removeItem("user");
+          localStorage.removeItem("token");
+          this.$router.push("/signup");
         });
     },
 
@@ -100,13 +100,13 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          this.fetchUser();
         });
     },
 
     goToHome() {
-      let route = this.$router.resolve({ path: "/home" });
-      window.open("/home", "_self");
+      this.$router.push("/home");
     },
     changeFontSize: function (event) {
       this.fontSize = event.target.value + "px";
@@ -127,6 +127,7 @@ export default {
   <div class="container">
     <div class="frameprofile">
       <div :users="users">
+        <img v-if="user.avatar != null" :src="user.avatar" class="imagep" />
         <input
           style="display: none"
           type="file"
@@ -161,7 +162,7 @@ export default {
       Home
     </button>
 
-    <button id="turnoff" @click="deleteUser()">Deactivate</button>
+    <button id="turnoff" @click="deleteUser()">Desactivate</button>
     <button @click.prevent="logout()" id="exit">LogOut</button>
   </div>
 </template>
@@ -179,6 +180,12 @@ export default {
 }
 button:hover {
   cursor: pointer;
+}
+
+.imagep {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 .profname,
