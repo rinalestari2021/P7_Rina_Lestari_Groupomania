@@ -193,17 +193,15 @@ export default {
 
 <template>
   <div class="newfeedblock">
-    <h1 class="wall" @click="getPost()">Newsfeed</h1>
-
-    <div v-for="post in posts" :key="posts.id" class="f-post">
-      <p>{{ post.message }}</p>
+    <div v-for="post in posts" :key="post.id" class="f-post">
       <img :src="post.imageUrl" />
-      <button @click="createComment()" class="addComm">Comment</button>
-      <button @click="updatePost()" class="b-edit">Edit</button>
-      <button @click="deletePost()" class="btndelete">Delete</button>
+      <p>{{ post.message }}</p>
+      <div class="buttons">
+        <button @click="createComment()" class="addComm">Comment</button>
+        <button @click="deletePost()" class="btndelete">Delete</button>
+      </div>
     </div>
-
-    <div>
+    <div class="creation">
       <h2>Create New</h2>
       <form>
         <input
@@ -222,8 +220,6 @@ export default {
       <button @click="$refs.fileInput.click()">Choose Image</button>
       <button type="submit" @click="createPost()" class="btnsend">Send</button>
     </div>
-
-    <button @click="prevPage" class="prev">Previous</button>
   </div>
 
   <div class="sidebar">
@@ -254,9 +250,9 @@ export default {
 <style lang="scss">
 .newfeedblock {
   display: flex;
+  gap: 2rem;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
+  align-items: center;
   background-color: #5adfe2;
   width: 100%;
   height: 100%;
@@ -271,38 +267,9 @@ p {
   color: black;
 }
 
-.framefeed {
+.buttons {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  background-color: white;
-  width: 100%;
-  height: auto;
-  line-height: 20px;
-}
-button:hover {
-  cursor: pointer;
-}
-
-h2 {
-  top: 5px;
-}
-
-.framefeed {
-  font-size: 12pt;
-  color: black;
-  text-align: left;
-  width: 50vw;
-  height: 35vh;
-  bottom: 80px;
-}
-
-.imagefeed {
-  justify-items: center;
-  align-items: center;
-  text-align: center;
 }
 
 div.sidebar {
@@ -335,11 +302,16 @@ div.sidebar {
   box-shadow: 0 10px 6px -6px #777;
 }
 .f-post {
+  width: 60%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
   box-shadow: 3px 3px 5px #b86758;
+  img {
+    max-height: 5rem;
+  }
 }
 
 .contactlist,
@@ -389,17 +361,8 @@ div.sidebar {
 
 .b-edit,
 .btndelete,
-.addComm {
-  top: 15px;
-  position: relative;
-}
-
-.b-edit,
-.btndelete,
 .btnsend.btnsend {
   text-align: center;
-  align-items: center;
-  width: 50px;
   margin: 3px 5px 5px;
   border-radius: 8px;
   background-color: white;

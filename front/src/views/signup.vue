@@ -194,4 +194,8 @@ input[type="checkbox"] {
   background-color: #5adfe2;
   cursor: pointer;
 }
+
+label {
+  color: white;
+}
 </style>
