@@ -270,6 +270,7 @@ p {
 .buttons {
   display: flex;
   flex-direction: row;
+  border-radius: 8px;
 }
 
 div.sidebar {
@@ -359,9 +360,7 @@ div.sidebar {
   color: black;
 }
 
-.b-edit,
-.btndelete,
-.btnsend.btnsend {
+.btnsend {
   text-align: center;
   margin: 3px 5px 5px;
   border-radius: 8px;
@@ -369,15 +368,14 @@ div.sidebar {
   color: black;
 }
 
-.btnsend {
-  right: 75px;
-}
-.addComm {
+.addComm,
+.btndelete {
   text-align: center;
   width: 75px;
   border-radius: 8px;
   background-color: white;
   color: black;
+  margin-right: 10px;
 }
 
 .tumbnailupload {

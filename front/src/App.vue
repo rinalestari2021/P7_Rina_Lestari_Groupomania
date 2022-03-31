@@ -4,9 +4,7 @@ import axios from "axios";
 export default {
   name: "App",
   data() {
-    return {
-      message: "Groupomania Messenger",
-    };
+    return {};
   },
 };
 </script>
@@ -19,9 +17,6 @@ export default {
     />
     <div class="opening">
       <router-view />
-    </div>
-    <div class="greetings">
-      <h1>{{ message }}</h1>
     </div>
   </div>
 </template>
