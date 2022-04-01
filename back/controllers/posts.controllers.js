@@ -99,16 +99,16 @@ exports.updatePost = async (req, res, next) => {
 // Delete message
 exports.deletePost = async (req, res, next) => {
   try {
-    const postFound = await Post.findOne({ where: { id: req.params.id } });
-    if (postFound.UserId == req.token.UserId || req.token.isAdmin) {
+    const postFound = await Post.findByPk(req.params.id);
+    if (postFound.UserId == req.userId || req.isAdmin) {
       if (postFound.imageUrl != null) {
         const filename = postFound.imageUrl.split("/images/")[1];
         fs.unlink(`images/${filename}`, () => {
-          Post.destroy({ where: { id: req.params.id } });
+          postFound.destroy();
         });
         res.status(200).json({ message: "Your message has been deleted" });
       } else {
-        await Post.destroy({ where: { id: req.params.id } });
+        postFound.destroy();
         res.status(200).json({ message: "Your message has been deleted" });
       }
     } else {

@@ -6,6 +6,7 @@ module.exports = (req, res, next) => {
     const token = req.headers.authorization.split("Bearer")[1].split('"')[1];
     jwt.verify(token, process.env.JWT_TOKEN, (err, decoded) => {
       req.userId = decoded.UserId;
+      req.isAdmin = decoded.isAdmin; //add isAdmin configuration
       next();
     });
   } catch (error) {

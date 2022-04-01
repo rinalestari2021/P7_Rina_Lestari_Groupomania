@@ -143,15 +143,15 @@ export default {
         });
     },
     //Delete post
-    deletePost() {
+    deletePost(postId) {
       axios
-        .delete("http://localhost:3000/api/posts/" + this.post.id, {
+        .delete("http://localhost:3000/api/posts/" + postId, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
-        .then((res) => {
-          this.$emit("post", this.post);
+        .then(() => {
+          this.getAllPost();
         });
     },
 
@@ -198,7 +198,7 @@ export default {
       <p>{{ post.message }}</p>
       <div class="buttons">
         <button @click="createComment()" class="addComm">Comment</button>
-        <button @click="deletePost()" class="btndelete">Delete</button>
+        <button @click="deletePost(post.id)" class="btndelete">Delete</button>
       </div>
     </div>
     <div class="creation">
