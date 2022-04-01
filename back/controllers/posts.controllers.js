@@ -122,14 +122,14 @@ exports.deletePost = async (req, res, next) => {
 // Add new commentary
 exports.createComment = async (req, res, next) => {
   try {
-    const user = await User.findOne({ where: { id: req.token.UserId } });
-    const post = await Post.findOne({ where: { id: req.body.PostId } });
+    const user = await User.findByPk(req.userId);
+    const post = await Post.findByPk(req.body.PostId);
     const comment = new Comment({
-      UserId: req.token.UserId,
+      UserId: user.id,
       PostId: post.id,
       text: req.body.text,
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
+      first_name: user.first_name,
+      last_name: user.last_name,
     });
     comment.save();
     res.status(200).json({

@@ -25,8 +25,8 @@ export default {
       },
       comments: [],
       comment: {
-        imageUrl: "",
-        message: "",
+        PostId: "",
+        text: "",
       },
       selectFile: null,
     };
@@ -108,38 +108,29 @@ export default {
     },
 
     //create comments
-    createComment() {
-      let formData = new FormData();
-      formData.append("image", this.selectedFile, this.selectedFile.name);
+    createComment(postId) {
+      this.comment.PostId = postId;
       axios
-        .post("http://localhost:3000/api/posts/comment/", {
+        .post("http://localhost:3000/api/posts/comment/", this.comment, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
-          body: JSON.stringify({
-            title: "",
-            body: "",
-            userId: "",
-          }),
         })
-        .then((res) => {
-          localStorage.setItem("post", JSON.stringify(res));
+        .then(() => {
+          this.getAllPost();
         });
     },
+
     //delete comment
-    deleteComment() {
+    deleteComment(commentId) {
       axios
-        .delete("http://localhost:3000/api/posts/comment/" + this.comment.id, {
+        .delete("http://localhost:3000/api/posts/comment/" + commentId, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
-        .then((res) => {
-          this.comment.res.data;
-        })
-        .catch(error)
-        .then((res) => {
-          return response;
+        .then(() => {
+          this.getAllPost();
         });
     },
     //Delete post
