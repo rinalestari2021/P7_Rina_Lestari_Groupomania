@@ -303,7 +303,7 @@ div.sidebar {
   box-shadow: 0 10px 6px -6px #777;
 }
 .f-post {
-  top: 8px;
+  top: 20px;
   width: 60%;
   height: auto;
   display: flex;
@@ -332,7 +332,7 @@ div.sidebar {
   font-family: "Arial Narrow Bold";
   color: #011f48;
   box-shadow: 0 10px 6px -6px #777;
-  top: 0px;
+  top: 20px;
 }
 
 .b-del {
