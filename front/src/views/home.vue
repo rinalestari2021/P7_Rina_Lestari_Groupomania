@@ -40,7 +40,9 @@ export default {
         },
       })
 
-      .then((res) => (this.posts = res.data))
+      .then((res) => {
+        this.posts = res.data;
+      })
       .catch((err) => console.log(err.message));
   },
   methods: {
@@ -70,7 +72,9 @@ export default {
           },
         })
         .then((res) => res.posts)
-        .catch(error);
+        .catch((error) => {
+          console.error(error);
+        });
     },
 
     //edit or modified post
@@ -105,6 +109,9 @@ export default {
         })
         .then(() => {
           this.getAllPost();
+        })
+        .catch((err) => {
+          console.error(err);
         });
     },
 
@@ -212,7 +219,7 @@ export default {
         ref="fileInput"
       />
       <button @click="$refs.fileInput.click()">Choose Image</button>
-      <button type="submit" @click="createPost()" class="btnsend">Send</button>
+      <button type="button" @click="createPost()" class="btnsend">Send</button>
     </div>
   </div>
 

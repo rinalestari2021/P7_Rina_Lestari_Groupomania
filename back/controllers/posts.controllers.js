@@ -14,7 +14,10 @@ exports.getPost = async (req, res, next) => {
           attributes: ["id", "text", "first_name", "last_name", "UserId"],
         },
       ],
+      raw: true,
+      nest: true,
     });
+
     res.status(200).json(allPosts);
   } catch (error) {
     res.status(404).json({ error });
