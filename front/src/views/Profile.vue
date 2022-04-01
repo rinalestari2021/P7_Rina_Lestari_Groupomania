@@ -134,8 +134,10 @@ export default {
           @change="onFileSelected"
           ref="fileInput"
         />
-        <button @click="$refs.fileInput.click()">Choose Image</button>
-        <button @click="onUpload">Upload</button>
+        <button @click="$refs.fileInput.click()" class="c-image">
+          Choose Image
+        </button>
+        <button @click="onUpload" class="up-load">Upload</button>
 
         <div class="infoprof">
           <h3
@@ -144,7 +146,7 @@ export default {
           >
             Username: {{ user.first_name + " " + user.last_name }}
           </h3>
-          <p class="ident">ID {{ user.id }}</p>
+          <p class="ident">ID: {{ user.id }}</p>
           <p class="e-mail">Email: {{ user.email }}</p>
         </div>
       </div>
@@ -183,9 +185,19 @@ button:hover {
 }
 
 .imagep {
+  top: 10px;
   width: 150px;
   height: 150px;
   border-radius: 50%;
+}
+
+.up-load,
+.c-image {
+  top: 15px;
+}
+
+.infoprof {
+  top: 20px;
 }
 
 .profname,

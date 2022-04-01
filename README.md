@@ -1,7 +1,7 @@
 # P7_Rina_Lestari_Groupomania
 
 Routes API Backend
-To launch : node server
+To launch : nodemon server
 
 POST signup : http://localhost:3000/api/auth/signup
 
@@ -13,15 +13,13 @@ GET user : http://localhost:3000/api/auth/accounts/:id
 
 DELETE accounts :http://localhost:3000/api/auth/accounts/:id
 
-PUT modify accounts : http://localhost:3000/api/auth/accounts/:id
+PUT post(image/post) : http://localhost:3000/api/auth/accounts/
 
 POST create post : http://localhost:3000/api/posts
 
 GET all post : http://localhost:3000/api/posts
 
-GET 1 post : http://localhost:3000/api/posts/:id
-
-PUT modify post : http://localhost:3000/api/:id
+GET 1 post : http://localhost:3000/api/posts/
 
 DELETE post :http://localhost:3000/api/auth/:id
 
@@ -46,3 +44,6 @@ http://localhost:8080/home
 
 Profile
 http://localhost:8080/profile
+
+Admin Page
+http://localhost:8080/adminpage

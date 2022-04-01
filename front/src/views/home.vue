@@ -82,7 +82,7 @@ export default {
           body: JSON.stringify({
             id: this.post.id,
             title: this.post.title,
-            imageurl: this.post.imageurl,
+            imageUrl: this.post.imageUrl,
             message: this.post.message,
           }),
         })
@@ -151,7 +151,7 @@ export default {
           },
         })
         .then((res) => {
-          this.posts.res.data;
+          this.$emit("post", this.post);
         });
     },
 
@@ -166,8 +166,8 @@ export default {
     },
 
     //go to contact list as sample only
-    goToContact() {
-      this.$router.push("/contact");
+    goToAdminPage() {
+      this.$router.push("/adminpage");
     },
     changeFontSize: function (event) {
       this.fontSize = event.target.value + "px";
@@ -234,14 +234,14 @@ export default {
       Profile
     </button>
     <button
-      @click="goToContact()"
+      @click="goToAdminPage()"
       :style="{
         'font-size': fontSize,
         'font-weight': fontWeight,
       }"
-      class="profilepage"
+      class="adpage"
     >
-      Contacts
+      AdminPage
     </button>
     <button @click="logout()" id="exit">LogOut</button>
   </div>
@@ -303,6 +303,7 @@ div.sidebar {
   box-shadow: 0 10px 6px -6px #777;
 }
 .f-post {
+  top: 8px;
   width: 60%;
   height: auto;
   display: flex;
@@ -315,7 +316,7 @@ div.sidebar {
   }
 }
 
-.contactlist,
+.adpage,
 .profilepage {
   width: 100px;
   left: 10%;
@@ -358,6 +359,10 @@ div.sidebar {
 .prev:hover {
   background-color: #b86758;
   color: black;
+}
+
+.adpage:hover {
+  background-color: #5adfe2;
 }
 
 .btnsend {
