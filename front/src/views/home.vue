@@ -29,6 +29,9 @@ export default {
         text: "",
       },
       selectFile: null,
+      commentClick: 0,
+      updateClick: 0,
+      postId: null,
     };
   },
 
@@ -78,21 +81,20 @@ export default {
     },
 
     //edit or modified post
-    updatePost() {
+    updatePost(postId) {
+      //this.post.message =
+      let formData = new FormData();
+      formData.append("image", this.selectedFile, this.selectedFile.name);
+      formData.append("message", this.post.message);
       axios
-        .put("http://localhost:3000/api/posts/" + this.post.id, {
+        .put("http://localhost:3000/api/posts/" + postId, formData, {
           headers: {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
-          body: JSON.stringify({
-            id: this.post.id,
-            title: this.post.title,
-            imageUrl: this.post.imageUrl,
-            message: this.post.message,
-          }),
         })
-        .then((res) => {
-          localStorage.setItem("posts", JSON.stringify(res));
+        .then(() => {
+          this.$router.go();
+          this.updateClick == 0;
         });
     },
 
@@ -125,7 +127,8 @@ export default {
           },
         })
         .then(() => {
-          this.getAllPost();
+          this.$router.go();
+          this.commentClick == 0;
         });
     },
 
@@ -138,10 +141,10 @@ export default {
           },
         })
         .then(() => {
-          this.getAllPost();
           this.$router.go();
         });
     },
+
     //Delete post
     deletePost(postId) {
       axios
@@ -151,9 +154,26 @@ export default {
           },
         })
         .then(() => {
-          this.getAllPost();
           this.$router.go();
         });
+    },
+
+    //Add comment
+    addCommentClick(postId) {
+      if (this.commentClick == 1) {
+        this.commentClick--;
+      } else {
+        this.commentClick++;
+      }
+      this.postId = postId;
+    },
+    addUpdateClick(postId) {
+      if (this.updateClick == 1) {
+        this.updateClick--;
+      } else {
+        this.updateClick++;
+      }
+      this.postId = postId;
     },
 
     //Upload image

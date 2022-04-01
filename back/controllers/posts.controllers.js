@@ -66,27 +66,26 @@ exports.createPost = async (req, res, next) => {
 // Modify message
 exports.updatePost = async (req, res, next) => {
   try {
-    let newImage;
-    let post = await Post.findOne({ where: { id: req.params.id } });
-    if (post.UserId == req.token.UserId || req.token.isAdmin) {
+    let post = await Post.findByPk(req.params.id);
+    if (post.UserId == req.userId || req.isAdmin) {
       if (req.file) {
-        newImage = `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`;
         if (post.imageUrl) {
           const filename = post.imageUrl.split("/images/")[1];
           fs.unlink(`images/${filename}`, (err) => {
-            if (err) console.log(err);
-            else {
+            if (err) {
+              console.log(err);
+            } else {
               console.log(`Deleted file: images/${filename}`);
             }
           });
         }
+        post.imageUrl = `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`;
       }
       if (req.body.message) {
         post.message = req.body.message;
       }
-      post.imageUrl = newImage;
       const newPost = await post.save({
         fields: ["message", "imageUrl"],
       });
@@ -148,9 +147,9 @@ exports.createComment = async (req, res, next) => {
 // Delete commentary
 exports.deleteComment = async (req, res, next) => {
   try {
-    const postFound = await Comment.findOne({ where: { id: req.params.id } });
-    if (postFound.UserId == req.token.UserId || req.token.isAdmin) {
-      Comment.destroy({ where: { id: req.params.id } });
+    const commentFound = await Comment.findByPk(req.params.id);
+    if (commentFound.UserId == req.userId || req.isAdmin) {
+      commentFound.destroy();
       res.status(200).json({ message: "Comment has been deleted" });
     } else {
       return res.status(403).send({ message: "Not authorized ... " });
