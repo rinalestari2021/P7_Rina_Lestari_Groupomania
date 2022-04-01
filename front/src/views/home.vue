@@ -53,6 +53,7 @@ export default {
         })
 
         .then((res) => (this.posts = res.data))
+
         .catch((err) => console.log(err.message));
     },
 
@@ -131,6 +132,7 @@ export default {
         })
         .then(() => {
           this.getAllPost();
+          this.$router.go();
         });
     },
     //Delete post
@@ -143,6 +145,7 @@ export default {
         })
         .then(() => {
           this.getAllPost();
+          this.$router.go();
         });
     },
 
