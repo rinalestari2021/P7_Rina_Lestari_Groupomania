@@ -3,13 +3,43 @@ export default {
   name: "adminpage",
   data() {
     return {
-      user: "",
-      users: [],
+      isAdmin: true,
     };
   },
 
-  created() {},
   methods: {
+    //retrieve all post
+    getAllPost() {
+      axios
+        .get("http://localhost:3000/api/posts", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+
+        .then((res) => (this.posts = res.data))
+        .catch((err) => console.log(err.message));
+    },
+
+    //retrieve all users
+    getUser() {
+      this.user = JSON.parse(localStorage.getItem("user"));
+    },
+
+    deleteByAdmin() {
+      axios
+        .delete("http://localhost:3000/api/auth/accounts/" + this.user.id, {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("token"),
+          },
+        })
+        .then(() => {
+          localStorage.removeItem("user");
+          localStorage.removeItem("token");
+        });
+    },
+
+    //return to page home
     backtohome() {
       this.$router.push("/home");
     },
@@ -20,8 +50,11 @@ export default {
   <div class="adminset">
     <h1>Admin</h1>
     <p>Page can be access by the administrator only</p>
-    <button @click="entryadmin()" class="btn-ad">Entry</button>
-
+    <button v-if="(isAdmin = true)" class="btn-ad">Entry</button>
+    <div v-for="user in users" :key="isAdmin" class="adminboard">
+      <p>{{ posts.message }}</p>
+      <button @click="deleteByAdmin()" class="btndelete">Delete</button>
+    </div>
     <button @click="backtohome()" class="return">Home</button>
   </div>
 </template>
