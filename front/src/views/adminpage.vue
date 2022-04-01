@@ -19,10 +19,9 @@ export default {
 <template>
   <div class="adminset">
     <h1>Admin</h1>
-    <router-link :to="{ name: 'home' }">
-      <button class="btn-ad">Admin Post</button>
-    </router-link>
     <p>Page can be access by the administrator only</p>
+    <button @click="entryadmin()" class="btn-ad">Entry</button>
+
     <button @click="backtohome()" class="return">Home</button>
   </div>
 </template>
@@ -36,8 +35,13 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .btn-ad {
   border-radius: 10px;
+}
+
+h1 {
+  top: 20px;
 }
 .btn-ad:hover {
   font-weight: bold;
