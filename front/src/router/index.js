@@ -5,7 +5,7 @@ import home from "../views/home.vue";
 import homepage from "../views/homepage.vue";
 import profile from "../views/profile.vue";
 import contact from "../views/contact.vue";
-import forum from "../views/forum.vue";
+import forum from "../views/Forum.vue";
 import notfound from "../views/notfound.vue";
 import adminpage from "../views/adminpage.vue";
 
