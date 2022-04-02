@@ -141,7 +141,7 @@ form.insc {
 input[type="text"],
 select {
   font-size: inherit;
-  width: 400px;
+  width: 300px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;

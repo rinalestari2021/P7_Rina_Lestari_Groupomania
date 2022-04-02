@@ -217,9 +217,70 @@ export default {
     <div v-for="post in posts" :key="post.id" class="f-post">
       <img :src="post.imageUrl" />
       <p>{{ post.message }}</p>
+      <div v-if="updateClick == 1 && postId == post.id">
+        <form>
+          <input
+            type="text"
+            v-model="this.post.message"
+            ref="input"
+            placeholder="Write here"
+          />
+        </form>
+        <button @click="$refs.fileInput.click()">Choose Image</button>
+        <button type="submit" @click="updatePost(post.id)" class="btnsend">
+          Update
+        </button>
+        <input
+          style="display: none"
+          type="file"
+          @change="onFileSelected"
+          ref="fileInput"
+        />
+      </div>
+      <div v-if="commentClick == 1 && postId == post.id">
+        <form>
+          <input
+            type="text"
+            v-model="comment.text"
+            ref="input"
+            placeholder="Write here"
+          />
+          <button @click="addCommentClick()" class="addComm">Back</button>
+          <button @click="createComment(post.id)" class="addComm">Send</button>
+        </form>
+      </div>
       <div class="buttons">
-        <button @click="createComment()" class="addComm">Comment</button>
-        <button @click="deletePost(post.id)" class="btndelete">Delete</button>
+        <button
+          @click="addCommentClick(post.id)"
+          v-if="commentClick == 0"
+          class="addComm"
+        >
+          Comment
+        </button>
+        <button
+          v-if="post.UserId == user.id"
+          @click="addUpdateClick(post.id)"
+          class="btndelete"
+        >
+          Modify
+        </button>
+        <button
+          v-if="post.UserId == user.id"
+          @click="deletePost(post.id)"
+          class="btndelete"
+        >
+          Delete
+        </button>
+      </div>
+      <div v-for="comment in post.Comments" :key="comment.id" class="">
+        <p>{{ comment.text }}</p>
+        <button
+          v-if="comment.UserId == user.id"
+          @click="deleteComment(comment.id)"
+          class="btndelete"
+        >
+          Delete
+        </button>
       </div>
     </div>
     <div class="creation">
@@ -239,7 +300,7 @@ export default {
         ref="fileInput"
       />
       <button @click="$refs.fileInput.click()">Choose Image</button>
-      <button type="button" @click="createPost()" class="btnsend">Send</button>
+      <button type="submit" @click="createPost()" class="btnsend">Send</button>
     </div>
   </div>
 
@@ -277,6 +338,7 @@ export default {
   background-color: #5adfe2;
   width: 100%;
   height: 100%;
+  top: 3rem;
 }
 
 .wall {
@@ -302,6 +364,7 @@ div.sidebar {
   background-color: #5adfe2;
   width: 150px;
   height: 600px;
+  top: 3rem;
 }
 
 #exit {

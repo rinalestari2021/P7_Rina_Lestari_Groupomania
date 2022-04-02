@@ -126,7 +126,7 @@ export default {
 <template>
   <div class="container">
     <div class="frameprofile">
-      <div :users="users">
+      <div :users="users" class="bgprofile">
         <img v-if="user.avatar != null" :src="user.avatar" class="imagep" />
         <input
           style="display: none"
@@ -172,16 +172,21 @@ export default {
 <style lang="scss">
 .container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
   background-color: #5adfe2;
   width: 100%;
-  height: auto;
-  line-height: 20px;
+  height: 100%;
+  top: 3rem;
+  top: 3rem;
 }
 button:hover {
   cursor: pointer;
+}
+
+.bgprofile {
+  height: auto;
 }
 
 .imagep {
@@ -197,6 +202,7 @@ button:hover {
 }
 
 .infoprof {
+  position: relative;
   top: 20px;
 }
 
@@ -205,6 +211,7 @@ button:hover {
   font-size: 16px;
   color: black;
   font-weight: bold;
+  align-items: center;
 }
 
 .profpic {
@@ -219,7 +226,6 @@ p {
 
 .profname,
 .ident {
-  top: 10px;
   font-size: 16px;
   font-weight: bold;
   line-height: 30px;
@@ -277,12 +283,13 @@ div.sidebar {
 }
 
 .frameprofile {
-  margin-top: 80px;
+  position: relative;
+  top: 20px;
   background-image: linear-gradient(#b86758, rgb(179, 29, 29));
   border-radius: 20px;
   box-shadow: grey 5px 5px 6px 1px;
   width: 40vw;
-  height: 50vh;
+  height: 65vh;
   align-items: center;
 }
 
@@ -293,7 +300,6 @@ div.sidebar {
 .e-mail {
   color: black;
   font-size: 12pt;
-  top: 50px;
   text-align: center;
 }
 </style>

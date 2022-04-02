@@ -38,7 +38,8 @@ export default {
 }
 
 .openinglogo {
-  margin-top: 2%;
+  position: relative;
+  top: 30px;
   width: 30%;
   outline: none;
   align-items: center;
