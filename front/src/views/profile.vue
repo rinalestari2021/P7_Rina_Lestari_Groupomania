@@ -48,20 +48,6 @@ export default {
         console.log("File Corrupt");
       }
     },
-    //update user
-    //updateUser() {
-    //  console.log(this.selectedFile);
-    // axios
-    //   .put("http://localhost:3000/api/auth/accounts/" + this.user.id, {
-    //     headers: {
-    //       Authorization: "Bearer" + localStorage.getItem("token"),
-    //     },
-    //    })
-    //   .then((res) => {
-    //     localStorage.setItem("user", JSON.stringify(res));
-    //   })
-    //   .catch(error);
-    //},
 
     //delete user
     deleteUser() {
@@ -219,9 +205,6 @@ button:hover {
   margin-top: 30px;
   width: 200px;
   height: 200px;
-}
-p {
-  font-size: 16px;
 }
 
 .profname,

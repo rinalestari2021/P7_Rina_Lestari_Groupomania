@@ -31,9 +31,11 @@ export default {
     };
   },
 
+  beforeMount() {
+    this.getUser();
+  },
   mounted() {
     this.getAllPost();
-    this.getUser();
   },
 
   methods: {
@@ -44,12 +46,10 @@ export default {
             Authorization: "Bearer" + localStorage.getItem("token"),
           },
         })
-
         .then((res) => (this.posts = res.data))
 
         .catch((err) => console.log(err.message));
     },
-
     getUser() {
       this.user = JSON.parse(localStorage.getItem("user"));
     },
@@ -202,8 +202,17 @@ export default {
 <template>
   <div class="newfeedblock">
     <div v-for="post in posts" :key="post.id" class="f-post">
+      <p>{{ post.User.first_name }}</p>
       <img :src="post.imageUrl" />
-      <p>{{ post.message }}</p>
+      <p class="datecreated">
+        le
+        {{
+          post.createdAt.split("T")[0].split("-").reverse().join("/") +
+          ", à " +
+          post.createdAt.split("T")[1].split(":").slice(0, -1).join(":")
+        }}
+      </p>
+      <p class="msgpostfield">{{ post.message }}</p>
       <div v-if="updateClick == 1 && postId == post.id">
         <form>
           <input
@@ -252,7 +261,7 @@ export default {
           Modify
         </button>
         <button
-          v-if="post.UserId == user.id"
+          v-if="post.UserId == user.id || user.isAdmin == 1"
           @click="deletePost(post.id)"
           class="btndelete"
         >
@@ -260,10 +269,24 @@ export default {
         </button>
       </div>
       <div v-if="post.Comments.length > 0">
-        <div v-for="comment in post.Comments" :key="comment.id" class="">
-          <p>{{ comment.text }}</p>
+        <div
+          v-for="comment in post.Comments"
+          :key="comment.id"
+          class="containercomment"
+        >
+          <p class="usercomment">{{ comment.first_name }}</p>
+          <p class="commentfield">{{ comment.text }}</p>
+          <p class="comcreated">
+            le
+            {{
+              comment.createdAt.split("T")[0].split("-").reverse().join("/") +
+              ", à " +
+              comment.createdAt.split("T")[1].split(":").slice(0, -1).join(":")
+            }}
+          </p>
+
           <button
-            v-if="comment.UserId == user.id"
+            v-if="comment.UserId == user.id || user.isAdmin == 1"
             @click="deleteComment(comment.id)"
             class="btndelete"
           >
@@ -305,6 +328,7 @@ export default {
       Profile
     </button>
     <button
+      v-if="user.isAdmin == true"
       @click="goToAdminPage()"
       :style="{
         'font-size': fontSize,
@@ -379,7 +403,6 @@ div.sidebar {
   top: 20px;
   width: 60%;
   border-radius: 25px;
-  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -388,6 +411,42 @@ div.sidebar {
   img {
     max-height: 5rem;
   }
+}
+
+.msgpostfield {
+  width: 180px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  border: solid 2px #5adfe2;
+  border-radius: 5px;
+}
+
+.comcreated,
+.datecreated {
+  font-size: 10px;
+}
+
+.commentfield {
+  width: 180px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  border: solid 2px #5adfe2;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.containercomment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  padding: 10px;
+}
+
+.usercomment {
+  top: 5px;
 }
 
 .adpage,
@@ -446,15 +505,26 @@ div.sidebar {
   background-color: white;
   color: black;
 }
-
-.addComm,
 .btndelete {
+  background-color: white;
+  color: black;
+  margin-right: 10px;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  margin-right: 10px;
+  height: 20px;
+  top: 5px;
+}
+
+.addComm {
   text-align: center;
   width: 75px;
   border-radius: 8px;
   background-color: white;
   color: black;
   margin-right: 10px;
+  top: 5px;
 }
 
 .tumbnailupload {
