@@ -4,10 +4,6 @@ import axios from "axios";
 export default {
   name: "home",
 
-  created() {
-    this.user = localStorage.getItem("user");
-    console.log(this.user);
-  },
   data() {
     return {
       fontSize: "12pt",
@@ -36,18 +32,10 @@ export default {
   },
 
   mounted() {
-    axios
-      .get("http://localhost:3000/api/posts", {
-        headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
-        },
-      })
-
-      .then((res) => {
-        this.posts = res.data;
-      })
-      .catch((err) => console.log(err.message));
+    this.getAllPost();
+    this.getUser();
   },
+
   methods: {
     getAllPost() {
       axios
@@ -82,7 +70,6 @@ export default {
 
     //edit or modified post
     updatePost(postId) {
-      //this.post.message =
       let formData = new FormData();
       formData.append("image", this.selectedFile, this.selectedFile.name);
       formData.append("message", this.post.message);
@@ -110,7 +97,7 @@ export default {
           },
         })
         .then(() => {
-          this.getAllPost();
+          this.$router.go();
         })
         .catch((err) => {
           console.error(err);
@@ -272,15 +259,17 @@ export default {
           Delete
         </button>
       </div>
-      <div v-for="comment in post.Comments" :key="comment.id" class="">
-        <p>{{ comment.text }}</p>
-        <button
-          v-if="comment.UserId == user.id"
-          @click="deleteComment(comment.id)"
-          class="btndelete"
-        >
-          Delete
-        </button>
+      <div v-if="post.Comments.length > 0">
+        <div v-for="comment in post.Comments" :key="comment.id" class="">
+          <p>{{ comment.text }}</p>
+          <button
+            v-if="comment.UserId == user.id"
+            @click="deleteComment(comment.id)"
+            class="btndelete"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
     <div class="creation">
@@ -389,6 +378,7 @@ div.sidebar {
 .f-post {
   top: 20px;
   width: 60%;
+  border-radius: 25px;
   height: auto;
   display: flex;
   flex-direction: column;

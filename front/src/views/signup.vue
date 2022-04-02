@@ -23,7 +23,6 @@ export default {
   },
   methods: {
     handleSignUp() {
-      console.log("form submitted");
       //validate password
       this.passwordError =
         this.password.length > 6
@@ -141,7 +140,7 @@ form.insc {
 input[type="text"],
 select {
   font-size: inherit;
-  width: 300px;
+  width: 400px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;

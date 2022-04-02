@@ -70,4 +70,12 @@ export default {
   font-size: 9pt;
   text-align: center;
 }
+
+@media screen and (min-width: 480px) {
+  body {
+    background: #011f48;
+    margin: 0;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+}
 </style>
