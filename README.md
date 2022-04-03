@@ -1,6 +1,20 @@
 # P7_Rina_Lestari_Groupomania
 
+DB:
+To connect as Admin please use:
+use : email: admin@test.com
+with password : Beta1234$
+
+By Terminal:
+First in MySQL :
+mysql> CREATE DATABASE groupomania;
+mysql> USE groupomania;
+mysql> INSERT INTO Users (first_name, last_name, email, password, isAdmin, createdAt, updatedAt)
+mysql> VALUES
+mysql> ('admin', 'admin', 'admin@test.com', '$2b$06$FROc61M8cAB/kNCZmMOSTON01ncCBlNP603P43BkRoxObupekRJeC', '1', '2022-04-02 14:00:00', '2022-04-02 14:00:00');
+
 Routes API Backend
+npm install
 To launch : nodemon server
 
 POST signup : http://localhost:3000/api/auth/signup
@@ -28,6 +42,7 @@ POST comment : http://localhost:3000/api/auth/comment
 DELETE comment :http://localhost:3000/api/auth/comment/:id
 
 ROUTES FRONT
+npm install
 To launch : npm run dev
 
 App Homepage
