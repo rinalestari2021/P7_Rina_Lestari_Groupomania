@@ -354,6 +354,9 @@ export default {
   top: 3rem;
 }
 
+.creation {
+  top: 1.5rem;
+}
 .wall {
   color: black;
   margin: auto;
@@ -514,7 +517,7 @@ div.sidebar {
   color: black;
   margin-right: 10px;
   height: 20px;
-  top: 5px;
+  top: 1.5rem;
 }
 
 .addComm {
@@ -524,7 +527,7 @@ div.sidebar {
   background-color: white;
   color: black;
   margin-right: 10px;
-  top: 5px;
+  top: 1.5rem;
 }
 
 .tumbnailupload {

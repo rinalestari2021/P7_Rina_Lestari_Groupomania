@@ -54,7 +54,7 @@ export default {
   <div class="adminset">
     <h1>Admin</h1>
     <div v-for="user in users" :key="user.id" class="adminboard">
-      <ul>
+      <ul class="dtuser">
         <li><span>ID: </span>{{ user.id }}</li>
         <li><span>Nom: </span>{{ user.last_name }}</li>
         <li><span>Prénom: </span>{{ user.first_name }}</li>
@@ -67,6 +67,7 @@ export default {
 </template>
 <style lang="scss">
 .adminset {
+  top: 20px;
   display: flex;
   gap: 2rem;
   flex-direction: column;
@@ -76,12 +77,21 @@ export default {
   height: 100%;
 }
 
+.dtuser {
+  text-align: center;
+  color: black;
+  background: #b86758;
+  border: solid 2px black;
+  padding: 15px;
+}
+
 .btn-ad {
   border-radius: 10px;
 }
 
 h1 {
   top: 20px;
+  color: black;
 }
 .btn-ad:hover {
   font-weight: bold;
