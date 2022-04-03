@@ -201,7 +201,7 @@ export default {
 
 <template>
   <div class="newfeedblock">
-    <div v-for="post in posts" :key="post.id" class="f-post">
+    <div v-for="post in posts.slice().reverse()" :key="post.id" class="f-post">
       <p>{{ post.User.first_name }}</p>
       <img :src="post.imageUrl" />
       <p class="datecreated">
@@ -406,6 +406,7 @@ div.sidebar {
   top: 20px;
   width: 60%;
   border-radius: 25px;
+  gap: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -517,7 +518,6 @@ div.sidebar {
   color: black;
   margin-right: 10px;
   height: 20px;
-  top: 1.5rem;
 }
 
 .addComm {
@@ -527,7 +527,6 @@ div.sidebar {
   background-color: white;
   color: black;
   margin-right: 10px;
-  top: 1.5rem;
 }
 
 .tumbnailupload {

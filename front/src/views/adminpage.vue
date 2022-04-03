@@ -77,6 +77,10 @@ export default {
   height: 100%;
 }
 
+li {
+  list-style: none;
+}
+
 .dtuser {
   text-align: center;
   color: black;

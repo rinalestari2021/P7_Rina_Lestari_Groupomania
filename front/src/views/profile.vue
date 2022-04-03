@@ -42,7 +42,6 @@ export default {
     fetchUser() {
       try {
         this.user = JSON.parse(localStorage.getItem("user"));
-        console.log(this.user);
       } catch (e) {
         localStorage.removeItem("user");
         console.log("File Corrupt");

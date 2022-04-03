@@ -31,10 +31,8 @@ export default {
 #app {
   background: #011f48;
   flex-direction: column;
-
   display: flex;
   justify-content: center;
-  height: 100vh;
 }
 
 .openinglogo {
